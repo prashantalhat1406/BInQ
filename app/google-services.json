@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "575188806245",
+    "firebase_url": "https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "binq-1171a",
+    "storage_bucket": "binq-1171a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:575188806245:android:e55b232154f29b1e8d348c",
+        "android_client_info": {
+          "package_name": "com.sinprl.binq"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "575188806245-t77ksptl4et45ttr6cq4jn8ugdc27cd7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBodmlteivVvkTy84Y8aOadSftlhcwmLJs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "575188806245-t77ksptl4et45ttr6cq4jn8ugdc27cd7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

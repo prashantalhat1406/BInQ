@@ -12,9 +12,9 @@
         android:theme="@style/Theme.BInQ"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".pages.UserListDisplay"
             android:exported="true"
-            android:label="@string/app_name"
+            android:label="@string/title_activity_user_list_display"
             android:theme="@style/Theme.BInQ.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
