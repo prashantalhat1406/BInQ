@@ -37,7 +37,7 @@ public class FruitListAdaptor extends RecyclerView.Adapter<FruitListAdaptor.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Fruits fruit = fruits.get(position);
         holder.fruitname.setText(fruit.getName());
-        holder.fruitinformation.setText(fruit.getInformation());
+        holder.fruitinformation.setText(fruit.getInfo());
     }
 
     @Override

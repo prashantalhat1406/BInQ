@@ -1,27 +1,30 @@
 package com.sinprl.binq.dataclasses;
 
 public class Fruits {
-    String name;
-    String information;
+    String Name;
+    String Info;
 
-    public void setName(String name) {
-        this.name = name;
+    public Fruits() {
     }
 
-    public void setInformation(String information) {
-        this.information = information;
+    public Fruits(String Name, String Info) {
+        this.Name = Name;
+        this.Info = Info;
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
-    public String getInformation() {
-        return information;
+    public void setName(String Name) {
+        this.Name = Name;
     }
 
-    public Fruits(String name, String information) {
-        this.name = name;
-        this.information = information;
+    public String getInfo() {
+        return Info;
+    }
+
+    public void setInfo(String Info) {
+        this.Info = Info;
     }
 }
