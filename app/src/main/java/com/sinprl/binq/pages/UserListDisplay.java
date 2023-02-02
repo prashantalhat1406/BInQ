@@ -23,11 +23,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.sinprl.binq.adaptors.AppointmentListAdaptor;
 import com.sinprl.binq.adaptors.FruitListAdaptor;
-import com.sinprl.binq.databinding.ActivityUserListDisplayBinding;
-//import com.sinprl.binq.pages.databinding.ActivityUserListDisplayBinding;
+
 
 import com.sinprl.binq.R;
+import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.dataclasses.Fruits;
 
 import java.util.ArrayList;
@@ -39,51 +40,50 @@ import java.util.ListIterator;
 public class UserListDisplay extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
-    private ActivityUserListDisplayBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list_display);
 
-        final RecyclerView recyclerFruit = (RecyclerView) findViewById(R.id.list_fruits);
-        final LinearLayoutManager fruitsLayoutManager = new LinearLayoutManager(this);
-        recyclerFruit.setLayoutManager(fruitsLayoutManager);
-
-        List<Fruits> allFruits = new ArrayList<Fruits>();
-        allFruits.add(new Fruits("Kiwi", "Rajstan"));
-        /*allFruits.add(new Fruits("Peru", "Kerala"));
-        allFruits.add(new Fruits("Kaju", "Goa"));*/
 
 
+        populateAppointments();
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
-        DatabaseReference databaseReference = database.getReference("Fruits");
+//        List<Fruits> allFruits = new ArrayList<Fruits>();
+//        allFruits.add(new Fruits("Kiwi", "Rajstan"));
+//        /*allFruits.add(new Fruits("Peru", "Kerala"));
+//        allFruits.add(new Fruits("Kaju", "Goa"));*/
+//
+//
+//
+//        FirebaseDatabase database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
+//        DatabaseReference databaseReference = database.getReference("Fruits");
 
         //databaseReference.child("Fruits23").setValue(new Fruits("Wangi", "Mizoram"));
         /*databaseReference.child("Fruits5").setValue(new Fruits("Chikoo","Tamilnadu"));
         databaseReference.child("Fruits6").setValue(new Fruits("Lemon","Bangal"));
         databaseReference.child("Fruits7").setValue(new Fruits("Gwar","Gujraat"));*/
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot s : snapshot.getChildren()){
-                    Fruits f = s.getValue(Fruits.class);
-                    allFruits.add(f);
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        FruitListAdaptor fla = new FruitListAdaptor(this,allFruits);
-        recyclerFruit.setAdapter(fla);
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for (DataSnapshot s : snapshot.getChildren()){
+//                    Fruits f = s.getValue(Fruits.class);
+//                    allFruits.add(f);
+//                }
+//
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//
+//        FruitListAdaptor fla = new FruitListAdaptor(this,allFruits);
+//        recyclerFruit.setAdapter(fla);
 
         //https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app/Fruits.json
 
@@ -107,6 +107,38 @@ public class UserListDisplay extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
+    }
+
+    private void populateAppointments() {
+
+        final RecyclerView appointment_recycle_view = (RecyclerView) findViewById(R.id.list_fruits);
+        final LinearLayoutManager appointmentLayoutManager = new LinearLayoutManager(this);
+        appointment_recycle_view.setLayoutManager(appointmentLayoutManager);
+
+        List<Appointment> appointments = new ArrayList<Appointment>();
+        appointments.add(new Appointment("21", "Pra A", "07:90 pm", "Pain", "1234567895"));
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
+        DatabaseReference databaseReference = database.getReference("Appointment");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot s : snapshot.getChildren()){
+                    Log.d("Test", s.toString());
+                    //Log.d("Test", s.getValue().get("time"));
+                    Appointment f = s.getValue(Appointment.class);
+                    appointments.add(f);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        AppointmentListAdaptor appointmentListAdaptor = new AppointmentListAdaptor(this,appointments);
+        appointment_recycle_view.setAdapter(appointmentListAdaptor);
+
+
     }
 
 //    @Override

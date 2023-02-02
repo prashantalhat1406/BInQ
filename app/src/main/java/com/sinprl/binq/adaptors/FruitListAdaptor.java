@@ -29,7 +29,7 @@ public class FruitListAdaptor extends RecyclerView.Adapter<FruitListAdaptor.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = layoutInflater.inflate(R.layout.listitem, parent, false);
+        View itemView = layoutInflater.inflate(R.layout.item_appointment_queue, parent, false);
         return new ViewHolder(itemView);
     }
 
@@ -52,8 +52,8 @@ public class FruitListAdaptor extends RecyclerView.Adapter<FruitListAdaptor.View
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            fruitname = (TextView) itemView.findViewById(R.id.txtname);
-            fruitinformation = (TextView) itemView.findViewById(R.id.txtinfo);
+            fruitname = (TextView) itemView.findViewById(R.id.txt_apt_item_user_name);
+            fruitinformation = (TextView) itemView.findViewById(R.id.txt_apt_item_time);
         }
     }
 

@@ -1,0 +1,2 @@
+PS D:\sinprl_android_apps\BInQ> emulator -list-avds
+PS D:\sinprl_android_apps\BInQ> emulator -avd ASM_v30 -feature -Vulkan
