@@ -12,7 +12,10 @@
         android:theme="@style/Theme.BInQ"
         tools:targetApi="31">
         <activity
-            android:name=".pages.UserListDisplay"
+            android:name=".pages.Appointment_Add"
+            android:exported="false" />
+        <activity
+            android:name=".pages.Appointment_Display"
             android:exported="true"
             android:label="@string/title_activity_user_list_display"
             android:theme="@style/Theme.BInQ.NoActionBar">

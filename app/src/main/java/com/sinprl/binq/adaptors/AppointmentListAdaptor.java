@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sinprl.binq.R;
 import com.sinprl.binq.dataclasses.Appointment;
-import com.sinprl.binq.dataclasses.Fruits;
 
 import java.util.List;
 
