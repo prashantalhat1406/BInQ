@@ -38,6 +38,14 @@ public class Appointment_Add extends AppCompatActivity {
                 finish();
             }
         });
+
+        Button but_cancel_appointment = findViewById(R.id.but_appt_add_cancel);
+        but_cancel_appointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void add_appointment_to_database() {

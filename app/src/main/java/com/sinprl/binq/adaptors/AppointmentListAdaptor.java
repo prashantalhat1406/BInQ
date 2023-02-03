@@ -40,7 +40,7 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
         holder.user_name.setText(appointment.getUser_name());
         holder.time.setText(appointment.getTime());
         holder.reason.setText(appointment.getReason());
-        holder.phone.setText(appointment.getPhone().toString());
+        holder.phone.setText(appointment.getPhone());
 
     }
 
@@ -59,11 +59,11 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            token = (TextView) itemView.findViewById(R.id.txt_apt_item_token);
-            user_name = (TextView) itemView.findViewById(R.id.txt_apt_item_user_name);
-            time = (TextView) itemView.findViewById(R.id.txt_apt_item_time);
-            reason = (TextView) itemView.findViewById(R.id.txt_apt_item_reason);
-            phone = (TextView) itemView.findViewById(R.id.txt_apt_item_phone);
+            token =  itemView.findViewById(R.id.txt_apt_item_token);
+            user_name =  itemView.findViewById(R.id.txt_apt_item_user_name);
+            time =  itemView.findViewById(R.id.txt_apt_item_time);
+            reason =  itemView.findViewById(R.id.txt_apt_item_reason);
+            phone =  itemView.findViewById(R.id.txt_apt_item_phone);
         }
     }
 
