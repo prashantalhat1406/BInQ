@@ -5,7 +5,6 @@ public class Appointment {
     String user_name;
     String time;
     String reason;
-
     String phone;
 
     public String getPhone() {
