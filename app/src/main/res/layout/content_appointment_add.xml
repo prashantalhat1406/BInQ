@@ -27,11 +27,11 @@
             android:layout_marginBottom="8dp"
             android:text="Name"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             />
 
         <EditText
-            android:id="@+id/edt_appt_user_name"
+            android:id="@+id/edt_appt_add_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -66,11 +66,11 @@
             android:layout_marginBottom="8dp"
             android:text="Phone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             />
 
         <EditText
-            android:id="@+id/edt_appt_phone"
+            android:id="@+id/edt_appt_add_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -105,7 +105,7 @@
             android:layout_marginBottom="8dp"
             android:text="Reason"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             />
 
         <EditText
@@ -144,7 +144,7 @@
             android:layout_marginBottom="8dp"
             android:text="Time"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             />
 
         <EditText
@@ -175,7 +175,7 @@
 
 
         <Button
-            android:id="@+id/but_appt_add"
+            android:id="@+id/but_appt_add_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add Appointment"
@@ -184,7 +184,7 @@
             />
 
         <Button
-            android:id="@+id/but_appt_cancel"
+            android:id="@+id/but_appt_add_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancel"

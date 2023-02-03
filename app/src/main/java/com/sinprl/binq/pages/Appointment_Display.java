@@ -66,22 +66,20 @@ public class Appointment_Display extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                appointments.clear();
                 for (DataSnapshot s : snapshot.getChildren()){
                     Log.d("Test", s.toString());
                     Appointment f = s.getValue(Appointment.class);
                     appointments.add(f);
                 }
+                AppointmentListAdaptor appointmentListAdaptor = new AppointmentListAdaptor(Appointment_Display.this,appointments);
+                appointment_recycle_view.setAdapter(appointmentListAdaptor);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-
-        AppointmentListAdaptor appointmentListAdaptor = new AppointmentListAdaptor(this,appointments);
-        appointment_recycle_view.setAdapter(appointmentListAdaptor);
-
-
     }
 
 }
