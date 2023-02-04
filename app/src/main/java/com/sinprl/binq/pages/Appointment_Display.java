@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 
 
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +29,7 @@ import java.util.List;
 
 import com.sinprl.binq.adaptors.AppointmentListAdaptor;
 import com.sinprl.binq.R;
+import com.sinprl.binq.adaptors.ReasonGridAdaptor;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.utils.Utils;
 
@@ -43,17 +45,23 @@ public class Appointment_Display extends AppCompatActivity {
 
         Log.d("DATE", "" + Utils.get_current_date_ddmmyy());
 
-        populateAppointments();
+        //populateAppointments();
+        //showreason();
 
         FloatingActionButton addAppointment = findViewById(R.id.fab_add_appointment);
         addAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Appointment_Display.this, Appointment_Add.class);
+                //Intent intent = new Intent(Appointment_Display.this, Appointment_Add.class);
+                //startActivity(intent);
+
+                Intent intent = new Intent(Appointment_Display.this, Reason_Display_Add.class);
                 startActivity(intent);
             }
         });
     }
+
+
 
     private void populateAppointments() {
 
