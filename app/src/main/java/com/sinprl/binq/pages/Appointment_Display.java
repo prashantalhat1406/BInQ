@@ -29,7 +29,7 @@ import java.util.List;
 import com.sinprl.binq.adaptors.AppointmentListAdaptor;
 import com.sinprl.binq.R;
 import com.sinprl.binq.dataclasses.Appointment;
-
+import com.sinprl.binq.utils.Utils;
 
 
 public class Appointment_Display extends AppCompatActivity {
@@ -40,6 +40,8 @@ public class Appointment_Display extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointment_display);
+
+        Log.d("DATE", "" + Utils.get_current_date_ddmmyy());
 
         populateAppointments();
 
@@ -62,7 +64,7 @@ public class Appointment_Display extends AppCompatActivity {
         List<Appointment> appointments = new ArrayList<>();
         appointments.add(new Appointment("21", "Pra A", "07:90 pm", "Pain", "1234567895"));
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
-        DatabaseReference databaseReference = database.getReference("Appointment");
+        DatabaseReference databaseReference = database.getReference("Appointment/" + Utils.get_current_date_ddmmyy());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

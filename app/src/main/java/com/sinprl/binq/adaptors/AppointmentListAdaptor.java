@@ -1,12 +1,15 @@
 package com.sinprl.binq.adaptors;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sinprl.binq.R;
@@ -35,6 +38,7 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         Appointment appointment = appointments.get(position);
         holder.token.setText(appointment.getToken());
         holder.user_name.setText(appointment.getUser_name());
@@ -57,6 +61,8 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
         public final TextView reason;
         public final TextView phone;
 
+        public final CardView card;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             token =  itemView.findViewById(R.id.txt_apt_item_token);
@@ -64,6 +70,7 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
             time =  itemView.findViewById(R.id.txt_apt_item_time);
             reason =  itemView.findViewById(R.id.txt_apt_item_reason);
             phone =  itemView.findViewById(R.id.txt_apt_item_phone);
+            card = itemView.findViewById(R.id.lay_appt_list_item);
         }
     }
 

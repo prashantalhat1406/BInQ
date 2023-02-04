@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sinprl.binq.R;
 import com.sinprl.binq.dataclasses.Appointment;
+import com.sinprl.binq.utils.Utils;
 
 public class Appointment_Add extends AppCompatActivity {
 
@@ -62,7 +63,7 @@ public class Appointment_Add extends AppCompatActivity {
                 edt_time.getText().toString(),
                 edt_reason.getText().toString(), edt_phone.getText().toString());
 
-        DatabaseReference databaseReference = database.getReference("Appointment");
+        DatabaseReference databaseReference = database.getReference("Appointment/" + Utils.get_current_date_ddmmyy() );
         databaseReference.child(databaseReference.push().getKey()).setValue(appointment);
         database.getReference("TokenNumber").setValue(Integer.valueOf(token_number)+1);
 
