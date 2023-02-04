@@ -45,17 +45,14 @@ public class Appointment_Display extends AppCompatActivity {
 
         Log.d("DATE", "" + Utils.get_current_date_ddmmyy());
 
-        //populateAppointments();
+        populateAppointments();
         //showreason();
 
         FloatingActionButton addAppointment = findViewById(R.id.fab_add_appointment);
         addAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(Appointment_Display.this, Appointment_Add.class);
-                //startActivity(intent);
-
-                Intent intent = new Intent(Appointment_Display.this, Reason_Display_Add.class);
+                Intent intent = new Intent(Appointment_Display.this, Appointment_Add.class);
                 startActivity(intent);
             }
         });

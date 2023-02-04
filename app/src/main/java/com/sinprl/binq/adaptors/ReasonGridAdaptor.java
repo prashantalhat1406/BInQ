@@ -35,6 +35,7 @@ public class ReasonGridAdaptor extends RecyclerView.Adapter<ReasonGridAdaptor.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.reason.setText(reasons.get(position));
+
     }
 
     @Override

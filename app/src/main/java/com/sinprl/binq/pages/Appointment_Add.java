@@ -3,10 +3,12 @@ package com.sinprl.binq.pages;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -21,6 +23,11 @@ public class Appointment_Add extends AppCompatActivity {
 
     String token_number = "";
     FirebaseDatabase database;
+
+    EditText edt_user_name;
+    EditText edt_reason;
+    EditText edt_time;
+    EditText edt_phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +54,26 @@ public class Appointment_Add extends AppCompatActivity {
                 finish();
             }
         });
+
+        edt_reason = findViewById(R.id.edt_appt_add_reason);
+
+        edt_reason.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Appointment_Add.this, Reason_Display_Add.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     private void add_appointment_to_database() {
 
-        EditText edt_user_name = findViewById(R.id.edt_appt_add_user_name);
-        EditText edt_reason = findViewById(R.id.edt_appt_add_reason);
-        EditText edt_time = findViewById(R.id.edt_appt_add_time);
-        EditText edt_phone = findViewById(R.id.edt_appt_add_phone);
+        edt_user_name = findViewById(R.id.edt_appt_add_user_name);
+
+        edt_time = findViewById(R.id.edt_appt_add_time);
+        edt_phone = findViewById(R.id.edt_appt_add_phone);
 
         get_token_number();
 

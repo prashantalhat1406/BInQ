@@ -1,11 +1,14 @@
 package com.sinprl.binq.pages;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.sinprl.binq.R;
 import com.sinprl.binq.adaptors.ReasonGridAdaptor;
@@ -15,12 +18,20 @@ import java.util.List;
 
 public class Reason_Display_Add extends AppCompatActivity {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reason_display_add);
+
+
+
         showreason();
+
     }
+
+
 
     private void showreason() {
 
@@ -40,5 +51,8 @@ public class Reason_Display_Add extends AppCompatActivity {
 
         ReasonGridAdaptor reasonGridAdaptor = new ReasonGridAdaptor(Reason_Display_Add.this,reasons);
         reason_recycle_view.setAdapter(reasonGridAdaptor);
+
     }
+
+
 }
