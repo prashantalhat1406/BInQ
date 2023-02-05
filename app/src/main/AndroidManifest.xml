@@ -13,16 +13,16 @@
         android:theme="@style/Theme.BInQ"
         tools:targetApi="31">
         <activity
-            android:name=".pages.TimeSlot_Display_Add"
+            android:name=".pages.common.TimeSlot_Display_Add"
             android:exported="false" />
         <activity
-            android:name=".pages.Reason_Display_Add"
+            android:name=".pages.common.Reason_Display_Add"
             android:exported="false" />
         <activity
-            android:name=".pages.Appointment_Add"
+            android:name=".pages.appointment_admin.Appointment_Add"
             android:exported="false" />
         <activity
-            android:name=".pages.Appointment_Display"
+            android:name=".pages.appointment_admin.Appointment_Display"
             android:exported="true"
             android:label="@string/title_activity_user_list_display"
             android:theme="@style/Theme.BInQ.NoActionBar">

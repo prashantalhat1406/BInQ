@@ -1,4 +1,4 @@
-package com.sinprl.binq.pages;
+package com.sinprl.binq.pages.appointment_admin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.Toast;
 
 
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,7 +29,6 @@ import java.util.List;
 
 import com.sinprl.binq.adaptors.AppointmentListAdaptor;
 import com.sinprl.binq.R;
-import com.sinprl.binq.adaptors.ReasonGridAdaptor;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.intefaces.OnItemClickListener;
 import com.sinprl.binq.utils.Utils;
@@ -96,5 +94,6 @@ public class Appointment_Display extends AppCompatActivity implements OnItemClic
     public void onItemClick(View view, int position) {
         //code to handle appointment display list click
         Toast.makeText(view.getContext(), position + "", Toast.LENGTH_SHORT).show();
+        //view.setBackground(ContextCompat.getDrawable(Appointment_Display.this, R.drawable.green_border_rectangle));
     }
 }

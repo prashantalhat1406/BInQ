@@ -1,15 +1,12 @@
-package com.sinprl.binq.pages;
+package com.sinprl.binq.pages.common;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import com.sinprl.binq.R;
 import com.sinprl.binq.adaptors.ReasonGridAdaptor;

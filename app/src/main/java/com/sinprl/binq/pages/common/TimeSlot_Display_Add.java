@@ -1,4 +1,4 @@
-package com.sinprl.binq.pages;
+package com.sinprl.binq.pages.common;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
