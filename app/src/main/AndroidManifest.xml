@@ -13,6 +13,9 @@
         android:theme="@style/Theme.BInQ"
         tools:targetApi="31">
         <activity
+            android:name=".pages.TimeSlot_Display_Add"
+            android:exported="false" />
+        <activity
             android:name=".pages.Reason_Display_Add"
             android:exported="false" />
         <activity

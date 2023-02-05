@@ -27,7 +27,7 @@ public class Appointment_Add extends AppCompatActivity {
 
     EditText edt_user_name;
     EditText edt_reason;
-    EditText edt_time;
+    EditText edt_timeslot;
     EditText edt_phone;
 
     @Override
@@ -67,6 +67,17 @@ public class Appointment_Add extends AppCompatActivity {
             }
         });
 
+        edt_timeslot = findViewById(R.id.edt_appt_add_time);
+
+        edt_timeslot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Appointment_Add.this, TimeSlot_Display_Add.class);
+                //startActivity(intent);
+                startActivityForResult(intent,200);
+            }
+        });
+
 
     }
 
@@ -74,14 +85,14 @@ public class Appointment_Add extends AppCompatActivity {
 
         edt_user_name = findViewById(R.id.edt_appt_add_user_name);
 
-        edt_time = findViewById(R.id.edt_appt_add_time);
+        edt_timeslot = findViewById(R.id.edt_appt_add_time);
         edt_phone = findViewById(R.id.edt_appt_add_phone);
 
         get_token_number();
 
         Appointment appointment = new Appointment(token_number,
                 edt_user_name.getText().toString(),
-                edt_time.getText().toString(),
+                edt_timeslot.getText().toString(),
                 edt_reason.getText().toString(), edt_phone.getText().toString());
 
         DatabaseReference databaseReference = database.getReference("Appointment/" + Utils.get_current_date_ddmmyy() );
@@ -106,6 +117,12 @@ public class Appointment_Add extends AppCompatActivity {
             case (100) : {
                 if (resultCode == Reason_Display_Add.RESULT_OK) {
                     edt_reason.setText(data.getStringExtra("reason"));
+                }
+                break;
+            }
+            case (200) : {
+                if (resultCode == TimeSlot_Display_Add.RESULT_OK) {
+                    edt_timeslot.setText(data.getStringExtra("timeslot"));
                 }
                 break;
             }

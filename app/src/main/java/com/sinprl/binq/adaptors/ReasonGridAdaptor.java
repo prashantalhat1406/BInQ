@@ -1,5 +1,6 @@
 package com.sinprl.binq.adaptors;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +39,7 @@ public class ReasonGridAdaptor extends RecyclerView.Adapter<ReasonGridAdaptor.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.reason.setText(reasons.get(position));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
