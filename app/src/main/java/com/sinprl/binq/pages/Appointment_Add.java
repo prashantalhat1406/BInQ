@@ -1,6 +1,7 @@
 package com.sinprl.binq.pages;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -61,7 +62,8 @@ public class Appointment_Add extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Appointment_Add.this, Reason_Display_Add.class);
-                startActivity(intent);
+                //startActivity(intent);
+                startActivityForResult(intent,100);
             }
         });
 
@@ -95,5 +97,18 @@ public class Appointment_Add extends AppCompatActivity {
                 token_number = String.valueOf(task.getResult().getValue());
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode) {
+            case (100) : {
+                if (resultCode == Reason_Display_Add.RESULT_OK) {
+                    edt_reason.setText(data.getStringExtra("reason"));
+                }
+                break;
+            }
+        }
     }
 }

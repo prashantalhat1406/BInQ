@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sinprl.binq.R;
 import com.sinprl.binq.dataclasses.Appointment;
+import com.sinprl.binq.intefaces.OnItemClickListener;
 
 import java.util.List;
 
@@ -23,10 +25,13 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
     private final LayoutInflater layoutInflater;
     private final List<Appointment> appointments;
 
-    public AppointmentListAdaptor(Context mContext, List<Appointment> appointments) {
+    private OnItemClickListener mOnItemClickListener;
+
+    public AppointmentListAdaptor(Context mContext, List<Appointment> appointments, OnItemClickListener mOnItemClickListener) {
         this.mContext = mContext;
         layoutInflater = LayoutInflater.from(mContext);
         this.appointments = appointments;
+        this.mOnItemClickListener = mOnItemClickListener;
     }
 
     @NonNull
@@ -45,6 +50,15 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
         holder.time.setText(appointment.getTime());
         holder.reason.setText(appointment.getReason());
         holder.phone.setText(appointment.getPhone());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mOnItemClickListener.onItemClick(view,position);
+            }
+        });
+
+
 
     }
 

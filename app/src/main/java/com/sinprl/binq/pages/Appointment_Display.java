@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -31,10 +32,11 @@ import com.sinprl.binq.adaptors.AppointmentListAdaptor;
 import com.sinprl.binq.R;
 import com.sinprl.binq.adaptors.ReasonGridAdaptor;
 import com.sinprl.binq.dataclasses.Appointment;
+import com.sinprl.binq.intefaces.OnItemClickListener;
 import com.sinprl.binq.utils.Utils;
 
 
-public class Appointment_Display extends AppCompatActivity {
+public class Appointment_Display extends AppCompatActivity implements OnItemClickListener {
 
 
 
@@ -60,6 +62,7 @@ public class Appointment_Display extends AppCompatActivity {
 
 
 
+
     private void populateAppointments() {
 
         final RecyclerView appointment_recycle_view = findViewById(R.id.list_appointments);
@@ -79,7 +82,7 @@ public class Appointment_Display extends AppCompatActivity {
                     Appointment f = s.getValue(Appointment.class);
                     appointments.add(f);
                 }
-                AppointmentListAdaptor appointmentListAdaptor = new AppointmentListAdaptor(Appointment_Display.this,appointments);
+                AppointmentListAdaptor appointmentListAdaptor = new AppointmentListAdaptor(Appointment_Display.this,appointments, Appointment_Display.this);
                 appointment_recycle_view.setAdapter(appointmentListAdaptor);
             }
             @Override
@@ -89,4 +92,9 @@ public class Appointment_Display extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onItemClick(View view, int position) {
+        //code to handle appointment display list click
+        Toast.makeText(view.getContext(), position + "", Toast.LENGTH_SHORT).show();
+    }
 }

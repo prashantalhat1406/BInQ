@@ -40,7 +40,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:inputType="textPersonName"
-            android:text="Vikas Kumar Singh"
+            android:hint="Vikas Kumar Singh"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
@@ -79,7 +79,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:inputType="text|phone"
-            android:text="9823958569"
+            android:hint="9823958569"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
@@ -118,7 +118,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:inputType="textCapWords"
-            android:text="High Feaver"
+            android:hint="High Feaver"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
@@ -157,7 +157,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:inputType="time|text"
-            android:text="09:15 pm"
+            android:hint="09:15 pm"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
