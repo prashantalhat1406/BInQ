@@ -47,9 +47,12 @@ public class TimeSlotGridAdaptor extends RecyclerView.Adapter<TimeSlotGridAdapto
 
         if (!timeSlots.get(position).getAvailable()){
             holder.timeslot_card.setBackground(ContextCompat.getDrawable(mcContext, R.drawable.red_border_rectangle));
+            /*holder.timeslot_card.setCardElevation(4);
+            holder.timeslot_card.setRadius(4);*/
             holder.timeslot_card.setEnabled(false);
 
         }else {
+            holder.timeslot_card.setBackground(ContextCompat.getDrawable(mcContext, R.drawable.green_border_rectangle));
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
