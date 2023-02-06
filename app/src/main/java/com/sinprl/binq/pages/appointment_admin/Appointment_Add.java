@@ -76,6 +76,7 @@ public class Appointment_Add extends AppCompatActivity {
                 Intent intent = new Intent(Appointment_Add.this, TimeSlot_Display_Add.class);
                 //startActivity(intent);
                 startActivityForResult(intent,200);
+
             }
         });
 
