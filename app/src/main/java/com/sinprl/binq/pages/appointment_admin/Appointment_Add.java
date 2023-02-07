@@ -97,8 +97,9 @@ public class Appointment_Add extends AppCompatActivity {
                 edt_timeslot.getText().toString(),
                 edt_reason.getText().toString(), edt_phone.getText().toString());
 
-        DatabaseReference databaseReference = database.getReference("Appointment/" + Utils.get_current_date_ddmmyy() );
-        databaseReference.child(databaseReference.push().getKey()).setValue(appointment);
+        /*DatabaseReference databaseReference = database.getReference("Appointment/" + Utils.get_current_date_ddmmyy() );
+        databaseReference.child(databaseReference.push().getKey()).setValue(appointment);*/
+        Utils.add_appointment_to_database(appointment,"Appointment/" );
         database.getReference("TokenNumber").setValue(Integer.valueOf(token_number)+1);
 
     }

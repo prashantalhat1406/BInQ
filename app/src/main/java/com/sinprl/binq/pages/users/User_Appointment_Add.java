@@ -88,11 +88,14 @@ public class User_Appointment_Add extends AppCompatActivity {
                 edt_timeslot.getText().toString(),
                 edt_reason.getText().toString(), edt_phone.getText().toString());
 
-        DatabaseReference databaseReference = database.getReference("Appointment/" + Utils.get_current_date_ddmmyy() );
+        Utils.add_appointment_to_database(appointment, "Appointment/");
+        Utils.add_appointment_to_database(appointment, "Users/"+userID+"/Appointments/");
+
+        /*DatabaseReference databaseReference = database.getReference("Appointment/" + Utils.get_current_date_ddmmyy() );
         databaseReference.child(databaseReference.push().getKey()).setValue(appointment);
 
         DatabaseReference userdatabaseReference = database.getReference("Users/"+userID+"/Appointments/" + Utils.get_current_date_ddmmyy() );
-        userdatabaseReference.child(userdatabaseReference.push().getKey()).setValue(appointment);
+        userdatabaseReference.child(userdatabaseReference.push().getKey()).setValue(appointment);*/
 
         database.getReference("TokenNumber").setValue(Integer.valueOf(token_number)+1);
 
