@@ -1,2 +1,5 @@
 PS D:\sinprl_android_apps\BInQ> emulator -list-avds
 PS D:\sinprl_android_apps\BInQ> emulator -avd ASM_v30 -feature -Vulkan
+
+privacy policy
+https://www.freeprivacypolicy.com/live/b681ee42-fed4-4077-a2ea-06559c6343d9
