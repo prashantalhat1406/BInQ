@@ -2,6 +2,7 @@ package com.sinprl.binq.pages.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.sinprl.binq.R;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.dataclasses.User;
+import com.sinprl.binq.pages.appointment_admin.Appointment_Add;
+import com.sinprl.binq.pages.appointment_admin.Appointment_Display;
+import com.sinprl.binq.pages.users.User_Appointment_Display;
 import com.sinprl.binq.utils.Utils;
 
 public class NewUser extends AppCompatActivity {
@@ -32,6 +36,8 @@ public class NewUser extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 add_user_details_to_database();
+                Intent intent = new Intent(NewUser.this, User_Appointment_Display.class);
+                startActivity(intent);
             }
         });
         but_cancel = findViewById(R.id.but_new_user_cancel);
