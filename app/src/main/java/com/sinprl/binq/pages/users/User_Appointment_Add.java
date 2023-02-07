@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,6 +43,8 @@ public class User_Appointment_Add extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
         get_token_number();
+
+
 
         Button but_add_appointment = findViewById(R.id.but_user_appt_add_add);
         but_add_appointment.setOnClickListener(view -> {
