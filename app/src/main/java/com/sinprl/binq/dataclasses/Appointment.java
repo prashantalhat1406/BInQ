@@ -58,4 +58,14 @@ public class Appointment {
         this.reason = reason;
     }
 
+    public boolean is_blank_appointment(){
+        boolean blank_appointment = true;
+
+        if(this.user_name.length() == 0 || this.user_name.length() == 0 || this.user_name.length() == 0 || this.user_name.length() == 0)
+            blank_appointment = false;
+
+        return blank_appointment;
+
+    }
+
 }

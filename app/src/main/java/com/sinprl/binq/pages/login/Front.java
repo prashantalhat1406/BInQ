@@ -4,12 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 import com.sinprl.binq.R;
-import com.sinprl.binq.pages.appointment_admin.Appointment_Add;
-import com.sinprl.binq.pages.appointment_admin.Appointment_Display;
+import com.sinprl.binq.pages.appointment_admin.Admin_Appointment_Display;
 
 public class Front extends AppCompatActivity {
 
@@ -33,7 +31,7 @@ public class Front extends AppCompatActivity {
 
         Button but_admin = findViewById(R.id.but_front_admin);
         but_admin.setOnClickListener(view -> {
-            Intent intent = new Intent(Front.this, Appointment_Display.class);
+            Intent intent = new Intent(Front.this, Admin_Appointment_Display.class);
             startActivity(intent);
         });
     }

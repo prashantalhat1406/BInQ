@@ -11,18 +11,16 @@ import android.widget.EditText;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sinprl.binq.R;
-import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.dataclasses.User;
-import com.sinprl.binq.pages.appointment_admin.Appointment_Add;
-import com.sinprl.binq.pages.appointment_admin.Appointment_Display;
 import com.sinprl.binq.pages.users.User_Appointment_Display;
-import com.sinprl.binq.utils.Utils;
 
 public class NewUser extends AppCompatActivity {
 
     Button but_register, but_cancel;
     FirebaseDatabase database;
-    EditText edt_user_name,edt_phone;
+
+    EditText edt_phone;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +49,13 @@ public class NewUser extends AppCompatActivity {
     }
 
     private void add_user_details_to_database() {
-        edt_user_name = findViewById(R.id.edt_new_user_name);
+        EditText edt_user_name = findViewById(R.id.edt_new_user_name);
         edt_phone = findViewById(R.id.edt_new_user_phone);
+        EditText edt_password = findViewById(R.id.edt_new_user_password);
 
         User user = new User(edt_user_name.getText().toString(),
-                edt_phone.getText().toString());
+                edt_phone.getText().toString(),
+                edt_password.getText().toString());
 
         DatabaseReference databaseReference = database.getReference("Users/");
         databaseReference.child(edt_phone.getText().toString()).setValue(user);

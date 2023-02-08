@@ -34,7 +34,7 @@ import com.sinprl.binq.intefaces.OnItemClickListener;
 import com.sinprl.binq.utils.Utils;
 
 
-public class Appointment_Display extends AppCompatActivity implements OnItemClickListener {
+public class Admin_Appointment_Display extends AppCompatActivity implements OnItemClickListener {
 
 
 
@@ -52,7 +52,7 @@ public class Appointment_Display extends AppCompatActivity implements OnItemClic
         addAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Appointment_Display.this, Appointment_Add.class);
+                Intent intent = new Intent(Admin_Appointment_Display.this, Admin_Appointment_Add.class);
                 startActivity(intent);
             }
         });
@@ -80,7 +80,7 @@ public class Appointment_Display extends AppCompatActivity implements OnItemClic
                     Appointment f = s.getValue(Appointment.class);
                     appointments.add(f);
                 }
-                AppointmentListAdaptor appointmentListAdaptor = new AppointmentListAdaptor(Appointment_Display.this,appointments, Appointment_Display.this);
+                AppointmentListAdaptor appointmentListAdaptor = new AppointmentListAdaptor(Admin_Appointment_Display.this,appointments, Admin_Appointment_Display.this);
                 appointment_recycle_view.setAdapter(appointmentListAdaptor);
             }
             @Override

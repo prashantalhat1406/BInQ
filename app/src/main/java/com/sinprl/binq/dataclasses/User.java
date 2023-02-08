@@ -3,6 +3,21 @@ package com.sinprl.binq.dataclasses;
 public class User {
     String name;
     String phone;
+    String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public User(String name, String phone, String password) {
+        this.name = name;
+        this.phone = phone;
+        this.password = password;
+    }
 
     public User() {
     }

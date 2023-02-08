@@ -6,19 +6,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sinprl.binq.R;
 import com.sinprl.binq.dataclasses.Appointment;
-import com.sinprl.binq.pages.appointment_admin.Appointment_Add;
 import com.sinprl.binq.pages.common.Reason_Display_Add;
 import com.sinprl.binq.pages.common.TimeSlot_Display_Add;
 import com.sinprl.binq.utils.Utils;
@@ -49,7 +47,7 @@ public class User_Appointment_Add extends AppCompatActivity {
         Button but_add_appointment = findViewById(R.id.but_user_appt_add_add);
         but_add_appointment.setOnClickListener(view -> {
             add_appointment_to_database();
-            finish();
+
         });
 
         Button but_cancel_appointment = findViewById(R.id.but_user_appt_add_cancel);
@@ -89,18 +87,17 @@ public class User_Appointment_Add extends AppCompatActivity {
         Appointment appointment = new Appointment(token_number,
                 edt_user_name.getText().toString(),
                 edt_timeslot.getText().toString(),
-                edt_reason.getText().toString(), edt_phone.getText().toString());
+                edt_reason.getText().toString(),
+                edt_phone.getText().toString());
 
-        Utils.add_appointment_to_database(appointment, "Appointment/");
-        Utils.add_appointment_to_database(appointment, "Users/"+userID+"/Appointments/");
-
-        /*DatabaseReference databaseReference = database.getReference("Appointment/" + Utils.get_current_date_ddmmyy() );
-        databaseReference.child(databaseReference.push().getKey()).setValue(appointment);
-
-        DatabaseReference userdatabaseReference = database.getReference("Users/"+userID+"/Appointments/" + Utils.get_current_date_ddmmyy() );
-        userdatabaseReference.child(userdatabaseReference.push().getKey()).setValue(appointment);*/
-
-        database.getReference("TokenNumber").setValue(Integer.valueOf(token_number)+1);
+        if(appointment.is_blank_appointment()) {
+            Utils.add_appointment_to_database(appointment, "Appointment/");
+            Utils.add_appointment_to_database(appointment, "Users/" + userID + "/Appointments/");
+            database.getReference("TokenNumber").setValue(Integer.valueOf(token_number) + 1);
+            finish();
+        }else {
+            Toast.makeText(this, "Empty field found", Toast.LENGTH_SHORT).show();
+        }
 
     }
 

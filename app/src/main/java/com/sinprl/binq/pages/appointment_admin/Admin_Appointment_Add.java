@@ -14,16 +14,14 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sinprl.binq.R;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.pages.common.Reason_Display_Add;
 import com.sinprl.binq.pages.common.TimeSlot_Display_Add;
 import com.sinprl.binq.utils.Utils;
-import com.sinprl.binq.utils.Validations;
 
-public class Appointment_Add extends AppCompatActivity {
+public class Admin_Appointment_Add extends AppCompatActivity {
 
     String token_number = "";
     FirebaseDatabase database;
@@ -64,7 +62,7 @@ public class Appointment_Add extends AppCompatActivity {
         edt_reason.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Appointment_Add.this, Reason_Display_Add.class);
+                Intent intent = new Intent(Admin_Appointment_Add.this, Reason_Display_Add.class);
                 //startActivity(intent);
                 startActivityForResult(intent,100);
             }
@@ -75,7 +73,7 @@ public class Appointment_Add extends AppCompatActivity {
         edt_timeslot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Appointment_Add.this, TimeSlot_Display_Add.class);
+                Intent intent = new Intent(Admin_Appointment_Add.this, TimeSlot_Display_Add.class);
                 //startActivity(intent);
                 startActivityForResult(intent,200);
 
@@ -92,21 +90,20 @@ public class Appointment_Add extends AppCompatActivity {
         edt_timeslot = findViewById(R.id.edt_appt_add_time);
         edt_phone = findViewById(R.id.edt_appt_add_phone);
 
-        String name = edt_user_name.getText().toString();
-        String phone = edt_phone.getText().toString();
+        get_token_number();
+        Appointment appointment = new Appointment(token_number,
+                edt_user_name.getText().toString(),
+                edt_timeslot.getText().toString(),
+                edt_reason.getText().toString(), edt_phone.getText().toString());
 
-        if(Validations.is_valid_phone_number(phone) && Validations.is_valid_name(name)){
-            get_token_number();
-            Appointment appointment = new Appointment(token_number,
-                    edt_user_name.getText().toString(),
-                    edt_timeslot.getText().toString(),
-                    edt_reason.getText().toString(), edt_phone.getText().toString());
-            Utils.add_appointment_to_database(appointment,"Appointment/" );
-            database.getReference("TokenNumber").setValue(Integer.valueOf(token_number)+1);
+        if(appointment.is_blank_appointment()) {
+            Utils.add_appointment_to_database(appointment, "Appointment/");
+            database.getReference("TokenNumber").setValue(Integer.valueOf(token_number) + 1);
             finish();
         }else {
-            Toast.makeText(this, "Enter Valid Data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Empty field found", Toast.LENGTH_SHORT).show();
         }
+
 
 
     }
