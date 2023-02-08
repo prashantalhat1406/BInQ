@@ -58,14 +58,13 @@ public class Appointment {
         this.reason = reason;
     }
 
-    public boolean is_blank_appointment(){
+    public boolean is_not_blank_appointment(){
         boolean blank_appointment = true;
 
-        if(this.user_name.length() == 0 || this.user_name.length() == 0 || this.user_name.length() == 0 || this.user_name.length() == 0)
+        if(this.user_name.length() == 0 || this.reason.length() == 0 || this.time.length() == 0 || this.phone.length() == 0)
             blank_appointment = false;
 
         return blank_appointment;
-
     }
 
 }

@@ -90,7 +90,7 @@ public class User_Appointment_Add extends AppCompatActivity {
                 edt_reason.getText().toString(),
                 edt_phone.getText().toString());
 
-        if(appointment.is_blank_appointment()) {
+        if(appointment.is_not_blank_appointment()) {
             Utils.add_appointment_to_database(appointment, "Appointment/");
             Utils.add_appointment_to_database(appointment, "Users/" + userID + "/Appointments/");
             database.getReference("TokenNumber").setValue(Integer.valueOf(token_number) + 1);
