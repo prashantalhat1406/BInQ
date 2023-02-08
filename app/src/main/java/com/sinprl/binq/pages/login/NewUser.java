@@ -37,6 +37,7 @@ public class NewUser extends AppCompatActivity {
             public void onClick(View view) {
                 add_user_details_to_database();
                 Intent intent = new Intent(NewUser.this, User_Appointment_Display.class);
+                intent.putExtra("userID", edt_phone.getText().toString());
                 startActivity(intent);
             }
         });
