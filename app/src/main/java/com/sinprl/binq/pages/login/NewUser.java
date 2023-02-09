@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sinprl.binq.R;
 import com.sinprl.binq.dataclasses.User;
 import com.sinprl.binq.pages.users.User_Appointment_Display;
+import com.sinprl.binq.utils.Validations;
 
 public class NewUser extends AppCompatActivity {
 
@@ -34,9 +36,7 @@ public class NewUser extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 add_user_details_to_database();
-                Intent intent = new Intent(NewUser.this, User_Appointment_Display.class);
-                intent.putExtra("userID", edt_phone.getText().toString());
-                startActivity(intent);
+
             }
         });
         but_cancel = findViewById(R.id.but_new_user_cancel);
@@ -57,7 +57,14 @@ public class NewUser extends AppCompatActivity {
                 edt_phone.getText().toString(),
                 edt_password.getText().toString());
 
-        DatabaseReference databaseReference = database.getReference("Users/");
-        databaseReference.child(edt_phone.getText().toString()).setValue(user);
+        if(Validations.is_not_blank_user(user)) {
+            DatabaseReference databaseReference = database.getReference("Users/");
+            databaseReference.child(edt_phone.getText().toString()).setValue(user);
+            Intent intent = new Intent(NewUser.this, User_Appointment_Display.class);
+            intent.putExtra("userID", edt_phone.getText().toString());
+            startActivity(intent);
+        }else {
+            Toast.makeText(this, "Empty field found", Toast.LENGTH_SHORT).show();
+        }
     }
 }

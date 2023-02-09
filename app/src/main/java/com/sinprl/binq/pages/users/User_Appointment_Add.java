@@ -20,6 +20,7 @@ import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.pages.common.Reason_Display_Add;
 import com.sinprl.binq.pages.common.TimeSlot_Display_Add;
 import com.sinprl.binq.utils.Utils;
+import com.sinprl.binq.utils.Validations;
 
 public class User_Appointment_Add extends AppCompatActivity {
 
@@ -90,7 +91,7 @@ public class User_Appointment_Add extends AppCompatActivity {
                 edt_reason.getText().toString(),
                 edt_phone.getText().toString());
 
-        if(appointment.is_not_blank_appointment()) {
+        if(Validations.is_not_blank_appointment(appointment)) {
             Utils.add_appointment_to_database(appointment, "Appointment/");
             Utils.add_appointment_to_database(appointment, "Users/" + userID + "/Appointments/");
             database.getReference("TokenNumber").setValue(Integer.valueOf(token_number) + 1);
