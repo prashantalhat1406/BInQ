@@ -28,6 +28,8 @@ public class User_Appointment_Add extends AppCompatActivity {
     FirebaseDatabase database;
     String userID;
 
+    int no_of_available_appointments;
+
     EditText edt_user_name;
     EditText edt_reason;
     EditText edt_timeslot;
@@ -82,9 +84,9 @@ public class User_Appointment_Add extends AppCompatActivity {
                 edt_reason.getText().toString(),
                 edt_phone.getText().toString());
 
-        if(Validations.is_not_blank_appointment(appointment)) {
-            Utils.add_appointment_to_database(appointment, "Appointment/");
-            Utils.add_appointment_to_database(appointment, "Users/" + userID + "/Appointments/");
+        if(Validations.is_not_blank_appointment(appointment) && no_of_available_appointments > 0) {
+            Utils.add_appointment_to_database(appointment, "Appointment/",no_of_available_appointments);
+            Utils.add_appointment_to_database(appointment, "Users/" + userID + "/Appointments/",no_of_available_appointments);
             database.getReference("TokenNumber").setValue(Integer.parseInt(token_number) + 1);
             finish();
         }else {
@@ -109,6 +111,7 @@ public class User_Appointment_Add extends AppCompatActivity {
             case (200) : {
                 if (resultCode == TimeSlot_Display_Add.RESULT_OK) {
                     edt_timeslot.setText(data.getStringExtra("timeslot"));
+                    no_of_available_appointments = data.getIntExtra("no_available_appointments",3);
                 }
                 break;
             }

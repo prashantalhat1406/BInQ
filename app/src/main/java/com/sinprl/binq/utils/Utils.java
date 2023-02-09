@@ -22,10 +22,13 @@ public class Utils {
         return date_ddmmyy;
     }
 
-    public static void add_appointment_to_database(Appointment appointment, String databaseReference){
+    public static void add_appointment_to_database(Appointment appointment, String databaseReference, int no_of_available_appointments){
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
         DatabaseReference dbReference = database.getReference(databaseReference + Utils.get_current_date_ddmmyy() );
         dbReference.child(dbReference.push().getKey()).setValue(appointment);
+
+        DatabaseReference timeslot_no_of_available_appointment_ref = database.getReference("Timeslots/" + appointment.getTime() + "/" );
+        timeslot_no_of_available_appointment_ref.child("no_of_appointments/").setValue(no_of_available_appointments - 1);
     }
 
 }

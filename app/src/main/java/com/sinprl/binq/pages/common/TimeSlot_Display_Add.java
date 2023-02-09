@@ -34,25 +34,7 @@ public class TimeSlot_Display_Add extends AppCompatActivity implements OnItemCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_display_add);
 
-        /*timeslots = new ArrayList<>();
-        timeslots.add(new TimeSlots("10:00 am", true));
-        timeslots.add(new TimeSlots("11:00 am", false));
-        timeslots.add(new TimeSlots("12:00 am", true));
-
-        showtimeslots();*/
         populateTimeslots();
-    }
-
-    private void showtimeslots() {
-
-        final RecyclerView timeslot_recycle_view = findViewById(R.id.list_timeslots);
-        final GridLayoutManager timeslotLayoutManager = new GridLayoutManager(this,3);
-        timeslot_recycle_view.setLayoutManager(timeslotLayoutManager);
-
-
-
-        TimeSlotGridAdaptor timeslotGridAdaptor = new TimeSlotGridAdaptor(TimeSlot_Display_Add.this,timeslots, TimeSlot_Display_Add.this);
-        timeslot_recycle_view.setAdapter(timeslotGridAdaptor);
     }
 
     @Override
@@ -61,6 +43,7 @@ public class TimeSlot_Display_Add extends AppCompatActivity implements OnItemCli
 
         Intent reasonIntent = new Intent();
         reasonIntent.putExtra("timeslot", timeslots.get(position).getTimeslot());
+        reasonIntent.putExtra("no_available_appointments", timeslots.get(position).getNo_of_appointments());
         setResult(Reason_Display_Add.RESULT_OK, reasonIntent);
         finish();
     }
