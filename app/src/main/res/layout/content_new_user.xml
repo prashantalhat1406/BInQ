@@ -97,6 +97,7 @@
         >
 
         <TextView
+            android:id="@+id/txt_new_user_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -112,7 +113,7 @@
             android:id="@+id/edt_new_user_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="4"
+            android:ems="10"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
