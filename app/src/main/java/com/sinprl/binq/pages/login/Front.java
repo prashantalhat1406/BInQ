@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-
 import com.sinprl.binq.R;
 import com.sinprl.binq.pages.appointment_admin.Admin_Appointment_Display;
 
@@ -17,6 +16,11 @@ public class Front extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_front);
+
+
+
+
+
 
         Button but_newuser = findViewById(R.id.but_front_new_user);
         but_newuser.setOnClickListener(view -> {

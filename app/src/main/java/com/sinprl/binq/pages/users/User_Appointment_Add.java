@@ -46,33 +46,24 @@ public class User_Appointment_Add extends AppCompatActivity {
 
 
         Button but_add_appointment = findViewById(R.id.but_user_appt_add_add);
-        but_add_appointment.setOnClickListener(view -> {
-            add_appointment_to_database();
-
-        });
+        but_add_appointment.setOnClickListener(view -> add_appointment_to_database());
 
         Button but_cancel_appointment = findViewById(R.id.but_user_appt_add_cancel);
         but_cancel_appointment.setOnClickListener(view -> finish());
 
         edt_reason = findViewById(R.id.edt_user_appt_add_reason);
 
-        edt_reason.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(User_Appointment_Add.this, Reason_Display_Add.class);
-                startActivityForResult(intent,100);
-            }
+        edt_reason.setOnClickListener(view -> {
+            Intent intent = new Intent(User_Appointment_Add.this, Reason_Display_Add.class);
+            startActivityForResult(intent,100);
         });
 
         edt_timeslot = findViewById(R.id.edt_user_appt_add_time);
 
-        edt_timeslot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(User_Appointment_Add.this, TimeSlot_Display_Add.class);
-                startActivityForResult(intent,200);
+        edt_timeslot.setOnClickListener(view -> {
+            Intent intent = new Intent(User_Appointment_Add.this, TimeSlot_Display_Add.class);
+            startActivityForResult(intent,200);
 
-            }
         });
     }
 
@@ -94,7 +85,7 @@ public class User_Appointment_Add extends AppCompatActivity {
         if(Validations.is_not_blank_appointment(appointment)) {
             Utils.add_appointment_to_database(appointment, "Appointment/");
             Utils.add_appointment_to_database(appointment, "Users/" + userID + "/Appointments/");
-            database.getReference("TokenNumber").setValue(Integer.valueOf(token_number) + 1);
+            database.getReference("TokenNumber").setValue(Integer.parseInt(token_number) + 1);
             finish();
         }else {
             Toast.makeText(this, "Empty field found", Toast.LENGTH_SHORT).show();
@@ -103,12 +94,7 @@ public class User_Appointment_Add extends AppCompatActivity {
     }
 
     private void get_token_number() {
-        database.getReference("TokenNumber").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                token_number = String.valueOf(task.getResult().getValue());
-            }
-        });
+        database.getReference("TokenNumber").get().addOnCompleteListener(task -> token_number = String.valueOf(task.getResult().getValue()));
     }
 
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

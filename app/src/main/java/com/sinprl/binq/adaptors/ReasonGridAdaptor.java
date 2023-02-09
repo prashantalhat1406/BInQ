@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sinprl.binq.R;
+import com.sinprl.binq.dataclasses.Reason;
 import com.sinprl.binq.intefaces.OnItemClickListener;
 
 import java.util.List;
@@ -20,11 +21,11 @@ public class ReasonGridAdaptor extends RecyclerView.Adapter<ReasonGridAdaptor.Vi
 
     private final Context mcContext;
     private final LayoutInflater layoutInflater;
-    private final List<String> reasons;
+    private final List<Reason> reasons;
 
     private OnItemClickListener mOnItemClickListener;
 
-    public ReasonGridAdaptor(Context mcContext, List<String> reasons,OnItemClickListener mOnItemClickListener) {
+    public ReasonGridAdaptor(Context mcContext, List<Reason> reasons,OnItemClickListener mOnItemClickListener) {
         this.mcContext = mcContext;
         this.layoutInflater = LayoutInflater.from(mcContext);
         this.reasons = reasons;
@@ -40,7 +41,7 @@ public class ReasonGridAdaptor extends RecyclerView.Adapter<ReasonGridAdaptor.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.reason.setText(reasons.get(position));
+        holder.reason.setText(reasons.get(position).getReason_text());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

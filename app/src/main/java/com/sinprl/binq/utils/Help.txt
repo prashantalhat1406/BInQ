@@ -3,3 +3,24 @@ PS D:\sinprl_android_apps\BInQ> emulator -avd ASM_v30 -feature -Vulkan
 
 privacy policy
 https://www.freeprivacypolicy.com/live/b681ee42-fed4-4077-a2ea-06559c6343d9
+
+FirebaseDatabase database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
+            DatabaseReference dbReference = database.getReference("Reasons/");
+
+            List<Reason> reasons = new ArrayList<>();
+
+            reasons.add(new Reason("Weakness"));
+            reasons.add(new Reason("High Feaver"));
+            reasons.add(new Reason("Cough"));
+            reasons.add(new Reason("Temperature"));
+            reasons.add(new Reason("Dizzeness"));
+            reasons.add(new Reason("Vomitting"));
+            reasons.add(new Reason("Dry Eyes"));
+            reasons.add(new Reason("Tooth ace"));
+            reasons.add(new Reason("Skin Issue"));
+            reasons.add(new Reason("Other"));
+
+
+            for(Reason r: reasons){
+                dbReference.child(dbReference.push().getKey()).setValue(r);
+            }
