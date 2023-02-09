@@ -45,20 +45,13 @@ public class TimeSlotGridAdaptor extends RecyclerView.Adapter<TimeSlotGridAdapto
         holder.timeslot.setText(timeSlots.get(position).getTimeslot());
 
 
-        if (!timeSlots.get(position).getAvailable()){
+        if (timeSlots.get(position).getNo_of_appointments() == 0 ){
             holder.timeslot_card.setBackground(ContextCompat.getDrawable(mcContext, R.drawable.red_border_rectangle));
-            /*holder.timeslot_card.setCardElevation(4);
-            holder.timeslot_card.setRadius(4);*/
             holder.timeslot_card.setEnabled(false);
 
         }else {
             holder.timeslot_card.setBackground(ContextCompat.getDrawable(mcContext, R.drawable.green_border_rectangle));
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mOnItemClickListener.onItemClick(view,position);
-                }
-            });
+            holder.itemView.setOnClickListener(view -> mOnItemClickListener.onItemClick(view,position));
         }
 
     }

@@ -6,6 +6,11 @@ public class TimeSlots {
 
     int no_of_appointments;
 
+    public TimeSlots(String timeslot, int no_of_appointments) {
+        this.timeslot = timeslot;
+        this.no_of_appointments = no_of_appointments;
+    }
+
     public int getNo_of_appointments() {
         return no_of_appointments;
     }
