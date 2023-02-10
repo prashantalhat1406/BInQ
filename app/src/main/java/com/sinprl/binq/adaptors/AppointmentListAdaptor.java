@@ -1,7 +1,9 @@
 package com.sinprl.binq.adaptors;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sinprl.binq.R;
 import com.sinprl.binq.dataclasses.Appointment;
+import com.sinprl.binq.enums.AppointmentStatus;
 import com.sinprl.binq.intefaces.OnItemClickListener;
 
 import java.util.List;
@@ -42,7 +45,7 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         Appointment appointment = appointments.get(position);
         holder.token.setText(appointment.getToken());
@@ -50,6 +53,12 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
         holder.time.setText(appointment.getTime());
         holder.reason.setText(appointment.getReason());
         holder.phone.setText(appointment.getPhone());
+
+        switch (appointment.getActive()){
+            case 1 : holder.status.setText("active");holder.status.setTextColor(Color.BLUE);break;
+            case 0 : holder.status.setText("cancelled");holder.status.setTextColor(Color.RED);break;
+            case 2 : holder.status.setText("done");holder.status.setTextColor(Color.GREEN);break;
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +77,8 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public final TextView token;
+
+        public final TextView status;
         public final TextView user_name;
         public final TextView time;
         public final TextView reason;
@@ -78,6 +89,7 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             token =  itemView.findViewById(R.id.txt_apt_item_token);
+            status =  itemView.findViewById(R.id.txt_appointment_item_status);
             user_name =  itemView.findViewById(R.id.txt_apt_item_user_name);
             time =  itemView.findViewById(R.id.txt_apt_item_time);
             reason =  itemView.findViewById(R.id.txt_apt_item_reason);

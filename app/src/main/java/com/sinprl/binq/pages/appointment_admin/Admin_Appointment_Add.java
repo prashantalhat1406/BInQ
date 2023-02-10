@@ -37,7 +37,7 @@ public class Admin_Appointment_Add extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_appointment_add);
+        setContentView(R.layout.activity_admin_appointment_add);
 
 
         database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");

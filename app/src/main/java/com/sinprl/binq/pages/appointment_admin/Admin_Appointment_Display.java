@@ -43,7 +43,7 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_appointment_display);
+        setContentView(R.layout.activity_admin_appointment_display);
 
         Log.d("DATE", "" + Utils.get_current_date_ddmmyy());
 

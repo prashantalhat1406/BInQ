@@ -20,7 +20,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_appointment_display" />
+    <include layout="@layout/content_admin_appointment_display" />
 
 
 

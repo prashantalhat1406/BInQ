@@ -23,6 +23,7 @@ import com.sinprl.binq.dataclasses.TimeSlots;
 import com.sinprl.binq.intefaces.OnItemClickListener;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class TimeSlot_Display_Add extends AppCompatActivity implements OnItemClickListener {
@@ -68,6 +69,7 @@ public class TimeSlot_Display_Add extends AppCompatActivity implements OnItemCli
                     TimeSlots f = s.getValue(TimeSlots.class);
                     timeslots.add(f);
                 }
+
                 TimeSlotGridAdaptor timeslotGridAdaptor = new TimeSlotGridAdaptor(TimeSlot_Display_Add.this, timeslots, TimeSlot_Display_Add.this);
                 timeslot_recycle_view.setAdapter(timeslotGridAdaptor);
             }
