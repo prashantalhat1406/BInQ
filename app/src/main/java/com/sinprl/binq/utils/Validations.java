@@ -24,7 +24,7 @@ public class Validations {
     public static boolean is_not_blank_user(User user){
         boolean blank_user = true;
 
-        if(user.getName().length() == 0 || user.getPhone().length() == 0 ||  user.getPassword().length() == 0)
+        if(user.getName().trim().length() == 0 || user.getPhone().trim().length() == 0 ||  user.getPassword().trim().length() == 0)
             blank_user = false;
 
         return blank_user;
@@ -33,10 +33,10 @@ public class Validations {
     public static boolean is_not_blank_appointment(Appointment appointment){
         boolean blank_appointment = true;
 
-        if( appointment.getUser_name().length() == 0 ||
-                appointment.getPhone().length() == 0 ||
-                appointment.getReason().length() == 0 ||
-                appointment.getTime().length() == 0 )
+        if( appointment.getUser_name().trim().length() == 0 ||
+                appointment.getPhone().trim().length() == 0 ||
+                appointment.getReason().trim().length() == 0 ||
+                appointment.getTime().trim().length() == 0 )
             blank_appointment = false;
 
         return blank_appointment;

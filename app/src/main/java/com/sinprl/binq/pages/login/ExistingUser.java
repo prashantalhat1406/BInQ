@@ -29,13 +29,13 @@ public class ExistingUser extends AppCompatActivity {
             public void onClick(View view) {
                 EditText edtuserID = findViewById(R.id.edt_existing_user_name);
                 String userID = edtuserID.getText().toString();
-                if( Validations.is_valid_phone_number(userID) ) {
+                /*if( Validations.is_valid_phone_number(userID) ) {*/
                     Intent intent = new Intent(ExistingUser.this, User_Appointment_Display.class);
                     intent.putExtra("userID", userID);
                     startActivity(intent);
-                }else {
+               /* }else {
                     Toast.makeText(view.getContext(), "Enter Valid Phone Number", Toast.LENGTH_SHORT).show();
-                }
+                }*/
             }
         });
 

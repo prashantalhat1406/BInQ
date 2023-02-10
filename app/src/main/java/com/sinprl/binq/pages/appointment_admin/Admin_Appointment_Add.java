@@ -100,7 +100,8 @@ public class Admin_Appointment_Add extends AppCompatActivity {
                 edt_reason.getText().toString(), edt_phone.getText().toString());
 
         if(Validations.is_not_blank_appointment(appointment) && no_of_available_appointments > 0) {
-            Utils.add_appointment_to_database(appointment, "Appointment/", no_of_available_appointments);
+            appointment.setUserID("");
+            Utils.add_appointment_to_database(appointment,  no_of_available_appointments);
             database.getReference("TokenNumber").setValue(Integer.valueOf(token_number) + 1);
             finish();
         }else {

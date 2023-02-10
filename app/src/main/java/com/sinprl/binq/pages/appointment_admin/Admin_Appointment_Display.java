@@ -1,5 +1,6 @@
 package com.sinprl.binq.pages.appointment_admin;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 
@@ -36,7 +38,7 @@ import com.sinprl.binq.utils.Utils;
 
 public class Admin_Appointment_Display extends AppCompatActivity implements OnItemClickListener {
 
-
+    List<Appointment> appointments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +51,9 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
         //showreason();
 
         FloatingActionButton addAppointment = findViewById(R.id.fab_add_appointment);
-        addAppointment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Admin_Appointment_Display.this, Admin_Appointment_Add.class);
-                startActivity(intent);
-            }
+        addAppointment.setOnClickListener(view -> {
+            Intent intent = new Intent(Admin_Appointment_Display.this, Admin_Appointment_Add.class);
+            startActivity(intent);
         });
     }
 
@@ -67,7 +66,7 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
         final LinearLayoutManager appointmentLayoutManager = new LinearLayoutManager(this);
         appointment_recycle_view.setLayoutManager(appointmentLayoutManager);
 
-        List<Appointment> appointments = new ArrayList<>();
+        appointments = new ArrayList<>();
         appointments.add(new Appointment("21", "Pra A", "07:90 pm", "Pain", "1234567895"));
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
         DatabaseReference databaseReference = database.getReference("Appointment/" + Utils.get_current_date_ddmmyy());
@@ -78,6 +77,7 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
                 for (DataSnapshot s : snapshot.getChildren()){
                     Log.d("Test", s.toString());
                     Appointment f = s.getValue(Appointment.class);
+                    f.setId(s.getKey());
                     appointments.add(f);
                 }
                 AppointmentListAdaptor appointmentListAdaptor = new AppointmentListAdaptor(Admin_Appointment_Display.this,appointments, Admin_Appointment_Display.this);
@@ -90,10 +90,30 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
         });
     }
 
+
     @Override
     public void onItemClick(View view, int position) {
         //code to handle appointment display list click
-        Toast.makeText(view.getContext(), position + "", Toast.LENGTH_SHORT).show();
-        //view.setBackground(ContextCompat.getDrawable(Appointment_Display.this, R.drawable.green_border_rectangle));
+        Toast.makeText(view.getContext(), appointments.get(position).getId() + "", Toast.LENGTH_SHORT).show();
+
+        final Dialog dialog = new Dialog(Admin_Appointment_Display.this);
+        dialog.setContentView(R.layout.dialog_appointment_action);
+        dialog.setCancelable(false);
+
+        dialog.getWindow().setLayout(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT);
+
+
+        Button cancel = dialog.findViewById(R.id.appointment_cancel);
+        cancel.setOnClickListener(v -> {
+            Utils.cancel_appointment(appointments.get(position).getId(), appointments.get(position).getUserID());
+            dialog.dismiss();
+        });
+
+        Button done = dialog.findViewById(R.id.appointment_done);
+        done.setOnClickListener(v -> {
+            Utils.mark_appointment_done(appointments.get(position).getId(), appointments.get(position).getUserID());
+            dialog.dismiss();
+        });
+        dialog.show();
     }
 }

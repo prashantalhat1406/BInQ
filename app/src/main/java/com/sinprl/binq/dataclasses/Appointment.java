@@ -7,6 +7,19 @@ public class Appointment {
     String reason;
     String phone;
 
+    String id;
+
+    String userID;
+    int active;
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
     public String getPhone() {
         return phone;
     }
@@ -16,6 +29,31 @@ public class Appointment {
     }
 
     public Appointment() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
+    }
+
+    public Appointment(String token, String user_name, String time, String reason, String phone, int active) {
+        this.token = token;
+        this.user_name = user_name;
+        this.time = time;
+        this.reason = reason;
+        this.phone = phone;
+        this.active = active;
     }
 
     public Appointment(String token, String user_name, String time, String reason, String phone) {
@@ -57,7 +95,5 @@ public class Appointment {
     public void setReason(String reason) {
         this.reason = reason;
     }
-
-
 
 }

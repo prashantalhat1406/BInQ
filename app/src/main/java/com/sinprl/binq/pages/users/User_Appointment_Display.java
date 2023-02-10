@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -21,6 +23,7 @@ import com.sinprl.binq.R;
 import com.sinprl.binq.adaptors.AppointmentListAdaptor;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.intefaces.OnItemClickListener;
+import com.sinprl.binq.pages.appointment_admin.Admin_Appointment_Display;
 import com.sinprl.binq.utils.Utils;
 
 import java.util.ArrayList;
@@ -31,6 +34,8 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
 
     FirebaseDatabase database;
     String userID;
+
+    List<Appointment> userappointments;
 
 
     @Override
@@ -63,19 +68,20 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
         final LinearLayoutManager appointmentLayoutManager = new LinearLayoutManager(this);
         appointment_recycle_view.setLayoutManager(appointmentLayoutManager);
 
-        List<Appointment> appointments = new ArrayList<>();
-        appointments.add(new Appointment("21", "Pra A", "07:90 pm", "Pain", "1234567895"));
+        userappointments = new ArrayList<>();
+        userappointments.add(new Appointment("21", "Pra A", "07:90 pm", "Pain", "1234567895"));
         DatabaseReference databaseReference = database.getReference("Users/"+userID+"/Appointments/" + Utils.get_current_date_ddmmyy());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                appointments.clear();
+                userappointments.clear();
                 for (DataSnapshot s : snapshot.getChildren()){
                     Log.d("Test", s.toString());
                     Appointment f = s.getValue(Appointment.class);
-                    appointments.add(f);
+                    f.setId(s.getKey());
+                    userappointments.add(f);
                 }
-                AppointmentListAdaptor appointmentListAdaptor = new AppointmentListAdaptor(User_Appointment_Display.this,appointments, User_Appointment_Display.this);
+                AppointmentListAdaptor appointmentListAdaptor = new AppointmentListAdaptor(User_Appointment_Display.this,userappointments, User_Appointment_Display.this);
                 appointment_recycle_view.setAdapter(appointmentListAdaptor);
             }
             @Override
@@ -88,8 +94,27 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
     @Override
     public void onItemClick(View view, int position) {
         //code to handle appointment display list click
-        Toast.makeText(view.getContext(), position + "", Toast.LENGTH_SHORT).show();
-        //view.setBackground(ContextCompat.getDrawable(Appointment_Display.this, R.drawable.green_border_rectangle));
+        Toast.makeText(view.getContext(), userappointments.get(position).getId() + "", Toast.LENGTH_SHORT).show();
+
+        final Dialog dialog = new Dialog(User_Appointment_Display.this);
+        dialog.setContentView(R.layout.dialog_appointment_action);
+        dialog.setCancelable(false);
+
+        dialog.getWindow().setLayout(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT);
+
+
+        Button cancel = dialog.findViewById(R.id.appointment_cancel);
+        cancel.setOnClickListener(v -> {
+            Utils.cancel_appointment(userappointments.get(position).getId(), userappointments.get(position).getUserID());
+            dialog.dismiss();
+        });
+
+        Button done = dialog.findViewById(R.id.appointment_done);
+        done.setOnClickListener(v -> {
+            Utils.mark_appointment_done(userappointments.get(position).getId(), userappointments.get(position).getUserID());
+            dialog.dismiss();
+        });
+        dialog.show();
     }
 
 }
