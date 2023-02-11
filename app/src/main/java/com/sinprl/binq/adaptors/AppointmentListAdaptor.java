@@ -8,18 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.sinprl.binq.R;
 import com.sinprl.binq.dataclasses.Appointment;
-import com.sinprl.binq.enums.AppointmentStatus;
 import com.sinprl.binq.intefaces.OnItemClickListener;
-
 import java.util.List;
 
 public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentListAdaptor.ViewHolder> {
@@ -28,7 +22,7 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
     private final LayoutInflater layoutInflater;
     private final List<Appointment> appointments;
 
-    private OnItemClickListener mOnItemClickListener;
+    private final OnItemClickListener mOnItemClickListener;
 
     public AppointmentListAdaptor(Context mContext, List<Appointment> appointments, OnItemClickListener mOnItemClickListener) {
         this.mContext = mContext;
@@ -55,17 +49,12 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
         holder.phone.setText(appointment.getPhone());
 
         switch (appointment.getActive()){
-            case 1 : holder.status.setText("active");holder.status.setTextColor(Color.BLUE);break;
-            case 0 : holder.status.setText("cancelled");holder.status.setTextColor(Color.RED);break;
-            case 2 : holder.status.setText("done");holder.status.setTextColor(Color.GREEN);break;
+            case 1 : holder.status.setText(R.string.appointment_active);holder.status.setTextColor(Color.BLUE);break;
+            case 0 : holder.status.setText(R.string.appointment_cancel);holder.status.setTextColor(Color.RED);break;
+            case 2 : holder.status.setText(R.string.appointment_done);holder.status.setTextColor(Color.GREEN);break;
         }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mOnItemClickListener.onItemClick(view,position);
-            }
-        });
+        holder.itemView.setOnClickListener(view -> mOnItemClickListener.onItemClick(view,position));
 
     }
 
@@ -74,7 +63,7 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
         return appointments.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
 
         public final TextView token;
 

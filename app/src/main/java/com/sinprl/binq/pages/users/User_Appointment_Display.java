@@ -11,8 +11,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,9 +21,7 @@ import com.sinprl.binq.R;
 import com.sinprl.binq.adaptors.AppointmentListAdaptor;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.intefaces.OnItemClickListener;
-import com.sinprl.binq.pages.appointment_admin.Admin_Appointment_Display;
 import com.sinprl.binq.utils.Utils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,13 +47,10 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
         populateAppointments();
 
         FloatingActionButton addAppointment = findViewById(R.id.fab_user_add_appointment);
-        addAppointment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(User_Appointment_Display.this, User_Appointment_Add.class);
-                intent.putExtra("userID", userID);
-                startActivity(intent);
-            }
+        addAppointment.setOnClickListener(view -> {
+            Intent intent = new Intent(User_Appointment_Display.this, User_Appointment_Add.class);
+            intent.putExtra("userID", userID);
+            startActivity(intent);
         });
 
 
@@ -94,27 +87,29 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
     @Override
     public void onItemClick(View view, int position) {
         //code to handle appointment display list click
-        Toast.makeText(view.getContext(), userappointments.get(position).getId() + "", Toast.LENGTH_SHORT).show();
 
-        final Dialog dialog = new Dialog(User_Appointment_Display.this);
-        dialog.setContentView(R.layout.dialog_appointment_action);
-        dialog.setCancelable(false);
+        if(userappointments.get(position).getActive() == 1)
+        {
+            final Dialog dialog = new Dialog(User_Appointment_Display.this);
+            dialog.setContentView(R.layout.dialog_appointment_action);
+            dialog.setCancelable(false);
 
-        dialog.getWindow().setLayout(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT);
+            dialog.getWindow().setLayout(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT);
 
 
-        Button cancel = dialog.findViewById(R.id.appointment_cancel);
-        cancel.setOnClickListener(v -> {
-            Utils.cancel_appointment(userappointments.get(position).getId(), userappointments.get(position).getUserID());
-            dialog.dismiss();
-        });
+            Button cancel = dialog.findViewById(R.id.appointment_cancel);
+            cancel.setOnClickListener(v -> {
+                Utils.cancel_appointment(userappointments.get(position).getId(), userappointments.get(position).getUserID());
+                dialog.dismiss();
+            });
 
-        Button done = dialog.findViewById(R.id.appointment_done);
-        done.setOnClickListener(v -> {
-            Utils.mark_appointment_done(userappointments.get(position).getId(), userappointments.get(position).getUserID());
-            dialog.dismiss();
-        });
-        dialog.show();
+            Button done = dialog.findViewById(R.id.appointment_done);
+            done.setOnClickListener(v -> {
+                Utils.mark_appointment_done(userappointments.get(position).getId(), userappointments.get(position).getUserID());
+                dialog.dismiss();
+            });
+            dialog.show();
+        }
     }
 
 }

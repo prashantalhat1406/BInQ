@@ -94,26 +94,28 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
     @Override
     public void onItemClick(View view, int position) {
         //code to handle appointment display list click
-        Toast.makeText(view.getContext(), appointments.get(position).getId() + "", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(view.getContext(), appointments.get(position).getId() + "", Toast.LENGTH_SHORT).show();
+        if(appointments.get(position).getActive() == 1) {
 
-        final Dialog dialog = new Dialog(Admin_Appointment_Display.this);
-        dialog.setContentView(R.layout.dialog_appointment_action);
-        dialog.setCancelable(false);
+            final Dialog dialog = new Dialog(Admin_Appointment_Display.this);
+            dialog.setContentView(R.layout.dialog_appointment_action);
+            dialog.setCancelable(false);
 
-        dialog.getWindow().setLayout(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT);
+            dialog.getWindow().setLayout(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT);
 
 
-        Button cancel = dialog.findViewById(R.id.appointment_cancel);
-        cancel.setOnClickListener(v -> {
-            Utils.cancel_appointment(appointments.get(position).getId(), appointments.get(position).getUserID());
-            dialog.dismiss();
-        });
+            Button cancel = dialog.findViewById(R.id.appointment_cancel);
+            cancel.setOnClickListener(v -> {
+                Utils.cancel_appointment(appointments.get(position).getId(), appointments.get(position).getUserID());
+                dialog.dismiss();
+            });
 
-        Button done = dialog.findViewById(R.id.appointment_done);
-        done.setOnClickListener(v -> {
-            Utils.mark_appointment_done(appointments.get(position).getId(), appointments.get(position).getUserID());
-            dialog.dismiss();
-        });
-        dialog.show();
+            Button done = dialog.findViewById(R.id.appointment_done);
+            done.setOnClickListener(v -> {
+                Utils.mark_appointment_done(appointments.get(position).getId(), appointments.get(position).getUserID());
+                dialog.dismiss();
+            });
+            dialog.show();
+        }
     }
 }
