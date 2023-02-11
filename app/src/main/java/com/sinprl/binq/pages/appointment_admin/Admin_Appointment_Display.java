@@ -99,7 +99,7 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
 
             final Dialog dialog = new Dialog(Admin_Appointment_Display.this);
             dialog.setContentView(R.layout.dialog_appointment_action);
-            dialog.setCancelable(false);
+            dialog.setCancelable(true);
 
             dialog.getWindow().setLayout(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT);
 
