@@ -22,4 +22,5 @@
     <string name="appointment_cancel">"Cancel"</string>
     <string name="appointment_active">"Active"</string>
     <string name="appointment_done">"Done"</string>
+    <string name="admin_menu_reset">"Reset Token"</string>
 </resources>

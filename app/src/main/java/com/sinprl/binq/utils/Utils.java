@@ -1,19 +1,10 @@
 package com.sinprl.binq.utils;
 
-import android.app.Dialog;
-import android.widget.Button;
-
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.sinprl.binq.R;
 import com.sinprl.binq.dataclasses.Appointment;
-import com.sinprl.binq.pages.appointment_admin.Admin_Appointment_Display;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

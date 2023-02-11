@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pages.appointment_admin.Admin_Appointment_Add">
+    tools:context=".pages.admin.Admin_Appointment_Add">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

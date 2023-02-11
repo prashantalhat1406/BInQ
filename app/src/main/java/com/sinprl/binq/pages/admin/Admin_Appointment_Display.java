@@ -1,4 +1,4 @@
-package com.sinprl.binq.pages.appointment_admin;
+package com.sinprl.binq.pages.admin;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -11,6 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -39,11 +42,13 @@ import com.sinprl.binq.utils.Utils;
 public class Admin_Appointment_Display extends AppCompatActivity implements OnItemClickListener {
 
     List<Appointment> appointments;
+    FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_appointment_display);
+        database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
 
         Log.d("DATE", "" + Utils.get_current_date_ddmmyy());
 
@@ -68,7 +73,6 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
 
         appointments = new ArrayList<>();
         appointments.add(new Appointment("21", "Pra A", "07:90 pm", "Pain", "1234567895"));
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
         DatabaseReference databaseReference = database.getReference("Appointment/" + Utils.get_current_date_ddmmyy());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -90,6 +94,20 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.admin_appointment_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId()==R.id.menu_admin_reset_count){
+            database.getReference("TokenNumber").setValue(1);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onItemClick(View view, int position) {

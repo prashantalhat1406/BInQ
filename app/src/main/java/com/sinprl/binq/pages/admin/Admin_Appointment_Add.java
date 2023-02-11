@@ -1,4 +1,4 @@
-package com.sinprl.binq.pages.appointment_admin;
+package com.sinprl.binq.pages.admin;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

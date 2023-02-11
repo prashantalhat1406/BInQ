@@ -10,7 +10,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sinprl.binq.R;
 import com.sinprl.binq.dataclasses.TimeSlots;
-import com.sinprl.binq.pages.appointment_admin.Admin_Appointment_Display;
+import com.sinprl.binq.pages.admin.Admin_Appointment_Display;
 
 import java.util.ArrayList;
 import java.util.List;
