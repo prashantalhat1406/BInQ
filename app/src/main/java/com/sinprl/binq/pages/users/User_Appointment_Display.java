@@ -43,7 +43,6 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
 
         userID = getIntent().getExtras().getString("userID","");
 
-
         populateAppointments();
 
         FloatingActionButton addAppointment = findViewById(R.id.fab_user_add_appointment);
