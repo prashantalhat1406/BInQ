@@ -21,8 +21,17 @@ import com.sinprl.binq.dataclasses.TimeSlots;
 import com.sinprl.binq.intefaces.OnItemClickListener;
 import com.sinprl.binq.utils.comparators.TimeComparator;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class TimeSlot_Display_Add extends AppCompatActivity implements OnItemClickListener {
 
@@ -47,6 +56,17 @@ public class TimeSlot_Display_Add extends AppCompatActivity implements OnItemCli
         finish();
     }
 
+    private Date parseDate(String date) {
+
+        final String inputFormat = "hh:mm a";
+        SimpleDateFormat inputParser = new SimpleDateFormat(inputFormat, Locale.US);
+        try {
+            return inputParser.parse(date);
+        } catch (java.text.ParseException e) {
+            return new Date(0);
+        }
+    }
+
     private void populateTimeslots() {
 
         final RecyclerView timeslot_recycle_view = findViewById(R.id.list_timeslots);
@@ -69,6 +89,15 @@ public class TimeSlot_Display_Add extends AppCompatActivity implements OnItemCli
                 }
                 timeslots.sort(new TimeComparator());
 
+
+                String currentTime = new SimpleDateFormat("hh:mm a").format(new Date());
+
+                Date dateCurrent = parseDate(currentTime);
+                for (TimeSlots t : timeslots) {
+                    Date dateActual = parseDate(t.getTimeslot());
+                    if (dateActual.before(dateCurrent))
+                        t.setNo_of_appointments(0);
+                }
                 TimeSlotGridAdaptor timeslotGridAdaptor = new TimeSlotGridAdaptor(TimeSlot_Display_Add.this, timeslots, TimeSlot_Display_Add.this);
                 timeslot_recycle_view.setAdapter(timeslotGridAdaptor);
             }

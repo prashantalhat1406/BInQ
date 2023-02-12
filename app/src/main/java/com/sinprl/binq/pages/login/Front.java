@@ -55,12 +55,20 @@ public class Front extends AppCompatActivity {
 
         List<TimeSlots> timeSlots = new ArrayList<>();
 
+        timeSlots.add(new TimeSlots("09:00 AM", 3));
         timeSlots.add(new TimeSlots("10:00 AM", 3));
         timeSlots.add(new TimeSlots("11:00 AM", 3));
         timeSlots.add(new TimeSlots("12:00 PM", 3));
         timeSlots.add(new TimeSlots("01:00 PM", 3));
         timeSlots.add(new TimeSlots("02:00 PM", 3));
         timeSlots.add(new TimeSlots("03:00 PM", 3));
+        timeSlots.add(new TimeSlots("04:00 PM", 3));
+        timeSlots.add(new TimeSlots("05:00 PM", 3));
+        timeSlots.add(new TimeSlots("06:00 PM", 3));
+        timeSlots.add(new TimeSlots("07:00 PM", 3));
+        timeSlots.add(new TimeSlots("08:00 PM", 3));
+        timeSlots.add(new TimeSlots("09:00 PM", 3));
+        timeSlots.add(new TimeSlots("10:00 PM", 3));
 
         for(TimeSlots r: timeSlots){
             //dbReference.child(dbReference.push().getKey()).setValue(r);
