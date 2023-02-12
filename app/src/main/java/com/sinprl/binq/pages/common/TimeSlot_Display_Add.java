@@ -10,28 +10,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.google.android.material.timepicker.TimeFormat;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sinprl.binq.R;
-import com.sinprl.binq.adaptors.ReasonGridAdaptor;
 import com.sinprl.binq.adaptors.TimeSlotGridAdaptor;
-import com.sinprl.binq.dataclasses.Reason;
 import com.sinprl.binq.dataclasses.TimeSlots;
 import com.sinprl.binq.intefaces.OnItemClickListener;
-import com.sinprl.binq.utils.TimeComparator;
+import com.sinprl.binq.utils.comparators.TimeComparator;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 
 public class TimeSlot_Display_Add extends AppCompatActivity implements OnItemClickListener {
 

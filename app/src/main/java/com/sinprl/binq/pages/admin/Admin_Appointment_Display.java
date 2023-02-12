@@ -16,7 +16,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,6 +35,7 @@ import com.sinprl.binq.adaptors.AppointmentListAdaptor;
 import com.sinprl.binq.R;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.intefaces.OnItemClickListener;
+import com.sinprl.binq.utils.comparators.AppointmentComparator;
 import com.sinprl.binq.utils.Utils;
 
 
@@ -84,6 +84,8 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
                     f.setId(s.getKey());
                     appointments.add(f);
                 }
+
+                appointments.sort(new AppointmentComparator());
                 AppointmentListAdaptor appointmentListAdaptor = new AppointmentListAdaptor(Admin_Appointment_Display.this,appointments, Admin_Appointment_Display.this);
                 appointment_recycle_view.setAdapter(appointmentListAdaptor);
             }
