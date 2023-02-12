@@ -33,15 +33,20 @@ import java.util.List;
 
 import com.sinprl.binq.adaptors.AppointmentListAdaptor;
 import com.sinprl.binq.R;
+import com.sinprl.binq.adaptors.TimeSlotGridAdaptor;
 import com.sinprl.binq.dataclasses.Appointment;
+import com.sinprl.binq.dataclasses.TimeSlots;
 import com.sinprl.binq.intefaces.OnItemClickListener;
+import com.sinprl.binq.pages.common.TimeSlot_Display_Add;
 import com.sinprl.binq.utils.comparators.AppointmentComparator;
 import com.sinprl.binq.utils.Utils;
+import com.sinprl.binq.utils.comparators.TimeComparator;
 
 
 public class Admin_Appointment_Display extends AppCompatActivity implements OnItemClickListener {
 
     List<Appointment> appointments;
+    List<TimeSlots> timeslots;
     FirebaseDatabase database;
 
     @Override
@@ -53,6 +58,7 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
         Log.d("DATE", "" + Utils.get_current_date_ddmmyy());
 
         populateAppointments();
+        fetch_timeslots_from_database();
         //showreason();
 
         FloatingActionButton addAppointment = findViewById(R.id.fab_add_appointment);
@@ -105,10 +111,45 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId()==R.id.menu_admin_reset_count){
+        if (item.getItemId()==R.id.menu_admin_reset_token){
             database.getReference("TokenNumber").setValue(1);
         }
+        if (item.getItemId()==R.id.menu_admin_reset_timeslot){
+            reset_appointment_slots();
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void reset_appointment_slots() {
+
+        for (TimeSlots timeslot: timeslots) {
+            DatabaseReference timeslot_ref = database.getReference("Timeslots/" + timeslot.getId() + "/" );
+            timeslot_ref.child("no_of_appointments/").setValue(3);
+        }
+    }
+
+    private void fetch_timeslots_from_database() {
+
+        timeslots = new ArrayList<>();
+        //timeslots.add(new TimeSlots("09:00AM", 3));
+
+        DatabaseReference databaseReference = database.getReference("Timeslots/");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                timeslots.clear();
+                for (DataSnapshot s : snapshot.getChildren()) {
+                    Log.d("Test", s.toString());
+                    TimeSlots f = s.getValue(TimeSlots.class);
+                    f.setId(s.getKey());
+                    timeslots.add(f);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override

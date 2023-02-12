@@ -3,8 +3,18 @@ package com.sinprl.binq.dataclasses;
 public class TimeSlots {
     String timeslot;
     Boolean available;
-
+    String id;
     int no_of_appointments;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
 
     public TimeSlots(String timeslot, int no_of_appointments) {
         this.timeslot = timeslot;
