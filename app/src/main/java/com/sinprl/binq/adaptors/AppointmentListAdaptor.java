@@ -44,6 +44,9 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
         Appointment appointment = appointments.get(position);
         holder.token.setText(appointment.getToken());
         holder.user_name.setText(appointment.getUser_name());
+        /*if(appointment.getDate_of_appointment() != null)
+            holder.time.setText(appointment.getDate_of_appointment() + " / " + appointment.getTime());
+        else*/
         holder.time.setText(appointment.getTime());
         holder.reason.setText(appointment.getReason());
         holder.phone.setText(appointment.getPhone());

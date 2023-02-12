@@ -4,6 +4,8 @@ public class Appointment {
     String token;
     String user_name;
     String time;
+
+    String date_of_appointment;
     String reason;
     String phone;
 
@@ -11,6 +13,15 @@ public class Appointment {
 
     String userID;
     int active;
+
+
+    public String getDate_of_appointment() {
+        return date_of_appointment;
+    }
+
+    public void setDate_of_appointment(String date_of_appointment) {
+        this.date_of_appointment = date_of_appointment;
+    }
 
     public String getUserID() {
         return userID;

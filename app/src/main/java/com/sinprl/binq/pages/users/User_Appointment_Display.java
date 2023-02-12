@@ -9,6 +9,9 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,10 +26,8 @@ import com.sinprl.binq.R;
 import com.sinprl.binq.adaptors.AppointmentListAdaptor;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.intefaces.OnItemClickListener;
-import com.sinprl.binq.pages.admin.Admin_Appointment_Display;
-import com.sinprl.binq.utils.FirebaseUtils;
 import com.sinprl.binq.utils.Utils;
-import com.sinprl.binq.utils.comparators.AppointmentComparator;
+import com.sinprl.binq.utils.comparators.Appointment_Comparator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,11 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
 
     List<Appointment> userappointments;
     List<Appointment> all_day_appointments;
+
+    List<Appointment> user_history_list;
     Button status;
+
+    RecyclerView appointment_recycle_view;
 
 
     @Override
@@ -51,11 +56,14 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
 
         userID = getIntent().getExtras().getString("userID","");
 
+        appointment_recycle_view = findViewById(R.id.list_user_appointments);
+
         populateAppointments();
         populate_allDay_Appointments();
 
         FloatingActionButton addAppointment = findViewById(R.id.fab_user_add_appointment);
         addAppointment.setOnClickListener(view -> {
+
             Intent intent = new Intent(User_Appointment_Display.this, User_Appointment_Add.class);
             intent.putExtra("userID", userID);
             startActivity(intent);
@@ -99,7 +107,7 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
                     appointment.setId(s.getKey());
                     all_day_appointments.add(appointment);
                 }
-                all_day_appointments.sort(new AppointmentComparator());
+                all_day_appointments.sort(new Appointment_Comparator());
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -110,8 +118,54 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.user_appointment_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId()==R.id.menu_user_show_history){
+            //show_history_for_user();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    /*private void show_history_for_user() {
+        DatabaseReference databaseReference = database.getReference("Users/"+userID+"/Appointments/");
+
+        user_history_list = new ArrayList<>();
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                user_history_list.clear();
+                for (DataSnapshot datewise_appointment_collection : snapshot.getChildren()){
+                    String appointment_date = datewise_appointment_collection.getKey();
+                    for (DataSnapshot appointment_snapshot: datewise_appointment_collection.getChildren())
+                    {
+                        //Log.d("UserHistory", "" + appointment_snapshot.getValue(Appointment.class));
+                        //Log.d("reason", "" + appointment_snapshot.child("reason").getValue());
+                        Appointment appointment = appointment_snapshot.getValue(Appointment.class);
+                        appointment.setId(appointment_snapshot.getKey());
+                        appointment.setDate_of_appointment(appointment_date);
+                        user_history_list.add(appointment);
+                    }
+                }
+                user_history_list.sort(new Appointment_Comparator());
+                status.setEnabled(false);
+                AppointmentListAdaptor appointmentListAdaptor = new AppointmentListAdaptor(User_Appointment_Display.this,user_history_list, User_Appointment_Display.this);
+                appointment_recycle_view.setAdapter(appointmentListAdaptor);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }*/
+
     private void populateAppointments() {
-        final RecyclerView appointment_recycle_view = findViewById(R.id.list_user_appointments);
+
         final LinearLayoutManager appointmentLayoutManager = new LinearLayoutManager(this);
         appointment_recycle_view.setLayoutManager(appointmentLayoutManager);
 
@@ -123,11 +177,12 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 userappointments.clear();
                 for (DataSnapshot s : snapshot.getChildren()){
+                    Log.d("Regular", "" + s.getValue());
                     Appointment appointment = s.getValue(Appointment.class);
                     appointment.setId(s.getKey());
                     userappointments.add(appointment);
                 }
-                userappointments.sort(new AppointmentComparator());
+                userappointments.sort(new Appointment_Comparator());
                 boolean enable_status_button = false;
                 for (Appointment a: userappointments) {
                     if(a.getActive() == 1)

@@ -1,7 +1,5 @@
 package com.sinprl.binq.utils;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
@@ -9,10 +7,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.sinprl.binq.adaptors.AppointmentListAdaptor;
 import com.sinprl.binq.dataclasses.Appointment;
-import com.sinprl.binq.pages.admin.Admin_Appointment_Display;
-import com.sinprl.binq.utils.comparators.AppointmentComparator;
+import com.sinprl.binq.utils.comparators.Appointment_Comparator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +34,7 @@ public class FirebaseUtils {
                     appointment.setId(s.getKey());
                     appointments.add(appointment);
                 }
-                appointments.sort(new AppointmentComparator());
+                appointments.sort(new Appointment_Comparator());
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

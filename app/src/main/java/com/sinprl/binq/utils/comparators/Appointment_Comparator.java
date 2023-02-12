@@ -8,7 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-public class AppointmentComparator implements Comparator<Appointment> {
+public class Appointment_Comparator implements Comparator<Appointment> {
 
     DateFormat fmt = new SimpleDateFormat("hh:mm a", Locale.US);
 

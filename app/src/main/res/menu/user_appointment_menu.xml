@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.sinprl.binq.pages.admin.Admin_Appointment_Display">
+
+    <item
+        android:id="@+id/menu_user_show_history"
+        android:title="@string/user_menu_show_history"
+        app:showAsAction="never" />
+
+</menu>

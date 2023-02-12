@@ -33,14 +33,11 @@ import java.util.List;
 
 import com.sinprl.binq.adaptors.AppointmentListAdaptor;
 import com.sinprl.binq.R;
-import com.sinprl.binq.adaptors.TimeSlotGridAdaptor;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.dataclasses.TimeSlots;
 import com.sinprl.binq.intefaces.OnItemClickListener;
-import com.sinprl.binq.pages.common.TimeSlot_Display_Add;
-import com.sinprl.binq.utils.comparators.AppointmentComparator;
+import com.sinprl.binq.utils.comparators.Appointment_Comparator;
 import com.sinprl.binq.utils.Utils;
-import com.sinprl.binq.utils.comparators.TimeComparator;
 
 
 public class Admin_Appointment_Display extends AppCompatActivity implements OnItemClickListener {
@@ -90,7 +87,7 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
                     appointments.add(appointment);
                 }
 
-                appointments.sort(new AppointmentComparator());
+                appointments.sort(new Appointment_Comparator());
                 AppointmentListAdaptor appointmentListAdaptor = new AppointmentListAdaptor(Admin_Appointment_Display.this,appointments, Admin_Appointment_Display.this);
                 appointment_recycle_view.setAdapter(appointmentListAdaptor);
             }
@@ -138,10 +135,9 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 timeslots.clear();
                 for (DataSnapshot s : snapshot.getChildren()) {
-                    Log.d("Test", s.toString());
-                    TimeSlots f = s.getValue(TimeSlots.class);
-                    f.setId(s.getKey());
-                    timeslots.add(f);
+                    TimeSlots timeslot = s.getValue(TimeSlots.class);
+                    timeslot.setId(s.getKey());
+                    timeslots.add(timeslot);
                 }
             }
             @Override
@@ -154,7 +150,6 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
     @Override
     public void onItemClick(View view, int position) {
         //code to handle appointment display list click
-        //Toast.makeText(view.getContext(), appointments.get(position).getId() + "", Toast.LENGTH_SHORT).show();
         if(appointments.get(position).getActive() == 1) {
 
             final Dialog dialog = new Dialog(Admin_Appointment_Display.this);
