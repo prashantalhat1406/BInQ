@@ -39,6 +39,7 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
 
     List<Appointment> userappointments;
     List<Appointment> all_day_appointments;
+    Button status;
 
 
     @Override
@@ -60,7 +61,7 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
             startActivity(intent);
         });
 
-        Button status = findViewById(R.id.button_status_of_appointment);
+        status = findViewById(R.id.button_status_of_appointment);
         status.setOnClickListener(view -> calalculate_current_status());
 
 
@@ -73,8 +74,10 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
                 if (appointment.getActive() == 1)
                     counter++;
             }
-            else
-                break;
+            else {
+                if(appointment.getActive() == 1)
+                    break;
+            }
         }
 
         TextView status_text = findViewById(R.id.txt_appointment_display_status);
@@ -120,11 +123,20 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 userappointments.clear();
                 for (DataSnapshot s : snapshot.getChildren()){
-                    Log.d("Test", s.toString());
-                    Appointment f = s.getValue(Appointment.class);
-                    f.setId(s.getKey());
-                    userappointments.add(f);
+                    Appointment appointment = s.getValue(Appointment.class);
+                    appointment.setId(s.getKey());
+                    userappointments.add(appointment);
                 }
+                userappointments.sort(new AppointmentComparator());
+                boolean enable_status_button = false;
+                for (Appointment a: userappointments) {
+                    if(a.getActive() == 1)
+                    {
+                        enable_status_button = true;
+                        break;
+                    }
+                }
+                status.setEnabled(enable_status_button);
                 AppointmentListAdaptor appointmentListAdaptor = new AppointmentListAdaptor(User_Appointment_Display.this,userappointments, User_Appointment_Display.this);
                 appointment_recycle_view.setAdapter(appointmentListAdaptor);
             }
