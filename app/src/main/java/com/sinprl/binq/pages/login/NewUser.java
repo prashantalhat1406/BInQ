@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -32,20 +31,9 @@ public class NewUser extends AppCompatActivity {
         database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
 
         but_register = findViewById(R.id.but_new_user_register);
-        but_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                add_user_details_to_database();
-
-            }
-        });
+        but_register.setOnClickListener(view -> add_user_details_to_database());
         but_cancel = findViewById(R.id.but_new_user_cancel);
-        but_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        but_cancel.setOnClickListener(view -> finish());
     }
 
     private void add_user_details_to_database() {

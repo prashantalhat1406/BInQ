@@ -14,4 +14,9 @@
         android:title="@string/admin_menu_reset_timeslot"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/menu_admin_logout"
+        android:title="@string/logout"
+        app:showAsAction="never" />
+
 </menu>

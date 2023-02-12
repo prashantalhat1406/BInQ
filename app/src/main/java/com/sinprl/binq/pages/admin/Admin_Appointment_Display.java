@@ -99,6 +99,12 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
     }
 
     @Override
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
         inflater.inflate(R.menu.admin_appointment_menu,menu);
@@ -112,6 +118,9 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
         }
         if (item.getItemId()==R.id.menu_admin_reset_timeslot){
             reset_appointment_slots();
+        }
+        if (item.getItemId()==R.id.menu_admin_logout){
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

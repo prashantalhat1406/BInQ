@@ -14,10 +14,7 @@ import java.util.Locale;
 public class Utils {
 
     public static String get_current_date_ddmmyy(){
-        String date_ddmmyy = "";
-        DateFormat dateFormat = new SimpleDateFormat("yyyyddMM");
-        date_ddmmyy = dateFormat.format(new Date());
-        return date_ddmmyy;
+        return new SimpleDateFormat("yyyyddMM").format(new Date());
     }
 
     public static Date parseDate(String date) {

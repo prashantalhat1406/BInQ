@@ -37,13 +37,9 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
 
     FirebaseDatabase database;
     String userID;
-
     List<Appointment> userappointments;
     List<Appointment> all_day_appointments;
-
-    List<Appointment> user_history_list;
     Button status;
-
     RecyclerView appointment_recycle_view;
 
 
@@ -102,7 +98,6 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 all_day_appointments.clear();
                 for (DataSnapshot s : snapshot.getChildren()){
-
                     Appointment appointment = s.getValue(Appointment.class);
                     appointment.setId(s.getKey());
                     all_day_appointments.add(appointment);
@@ -119,6 +114,12 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
     }
 
     @Override
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
         inflater.inflate(R.menu.user_appointment_menu,menu);
@@ -127,42 +128,13 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId()==R.id.menu_user_show_history){
-            //show_history_for_user();
+
+        if (item.getItemId()==R.id.menu_user_logout){
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    /*private void show_history_for_user() {
-        DatabaseReference databaseReference = database.getReference("Users/"+userID+"/Appointments/");
-
-        user_history_list = new ArrayList<>();
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                user_history_list.clear();
-                for (DataSnapshot datewise_appointment_collection : snapshot.getChildren()){
-                    String appointment_date = datewise_appointment_collection.getKey();
-                    for (DataSnapshot appointment_snapshot: datewise_appointment_collection.getChildren())
-                    {
-                        //Log.d("UserHistory", "" + appointment_snapshot.getValue(Appointment.class));
-                        //Log.d("reason", "" + appointment_snapshot.child("reason").getValue());
-                        Appointment appointment = appointment_snapshot.getValue(Appointment.class);
-                        appointment.setId(appointment_snapshot.getKey());
-                        appointment.setDate_of_appointment(appointment_date);
-                        user_history_list.add(appointment);
-                    }
-                }
-                user_history_list.sort(new Appointment_Comparator());
-                status.setEnabled(false);
-                AppointmentListAdaptor appointmentListAdaptor = new AppointmentListAdaptor(User_Appointment_Display.this,user_history_list, User_Appointment_Display.this);
-                appointment_recycle_view.setAdapter(appointmentListAdaptor);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-    }*/
 
     private void populateAppointments() {
 

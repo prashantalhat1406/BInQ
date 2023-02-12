@@ -9,4 +9,9 @@
         android:title="@string/user_menu_show_history"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/menu_user_logout"
+        android:title="@string/logout"
+        app:showAsAction="never" />
+
 </menu>
