@@ -85,10 +85,9 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 appointments.clear();
                 for (DataSnapshot s : snapshot.getChildren()){
-                    Log.d("Test", s.toString());
-                    Appointment f = s.getValue(Appointment.class);
-                    f.setId(s.getKey());
-                    appointments.add(f);
+                    Appointment appointment = s.getValue(Appointment.class);
+                    appointment.setId(s.getKey());
+                    appointments.add(appointment);
                 }
 
                 appointments.sort(new AppointmentComparator());

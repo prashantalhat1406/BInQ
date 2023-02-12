@@ -83,7 +83,6 @@ public class TimeSlot_Display_Add extends AppCompatActivity implements OnItemCli
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 timeslots.clear();
                 for (DataSnapshot s : snapshot.getChildren()) {
-                    Log.d("Test", s.toString());
                     TimeSlots f = s.getValue(TimeSlots.class);
                     timeslots.add(f);
                 }

@@ -61,9 +61,8 @@ public class Reason_Display_Add extends AppCompatActivity implements OnItemClick
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 reasons.clear();
                 for (DataSnapshot s : snapshot.getChildren()){
-                    Log.d("Test", s.toString());
-                    Reason f = s.getValue(Reason.class);
-                    reasons.add(f);
+                    Reason reason = s.getValue(Reason.class);
+                    reasons.add(reason);
                 }
                 ReasonGridAdaptor reasonGridAdaptor = new ReasonGridAdaptor(Reason_Display_Add.this,reasons, Reason_Display_Add.this);
                 reason_recycle_view.setAdapter(reasonGridAdaptor);
