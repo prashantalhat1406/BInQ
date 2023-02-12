@@ -24,4 +24,5 @@
     <string name="appointment_done">"Done"</string>
     <string name="admin_menu_reset_token">"Reset Token"</string>
     <string name="admin_menu_reset_timeslot">"Reset Timeslot"</string>
+    <string name="current_status">"Your Number is "</string>
 </resources>
