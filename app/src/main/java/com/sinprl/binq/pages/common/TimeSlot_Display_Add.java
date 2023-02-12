@@ -19,6 +19,7 @@ import com.sinprl.binq.R;
 import com.sinprl.binq.adaptors.TimeSlotGridAdaptor;
 import com.sinprl.binq.dataclasses.TimeSlots;
 import com.sinprl.binq.intefaces.OnItemClickListener;
+import com.sinprl.binq.utils.Utils;
 import com.sinprl.binq.utils.comparators.TimeComparator;
 
 import java.text.DateFormat;
@@ -56,16 +57,7 @@ public class TimeSlot_Display_Add extends AppCompatActivity implements OnItemCli
         finish();
     }
 
-    private Date parseDate(String date) {
 
-        final String inputFormat = "hh:mm a";
-        SimpleDateFormat inputParser = new SimpleDateFormat(inputFormat, Locale.US);
-        try {
-            return inputParser.parse(date);
-        } catch (java.text.ParseException e) {
-            return new Date(0);
-        }
-    }
 
     private void populateTimeslots() {
 
@@ -90,10 +82,9 @@ public class TimeSlot_Display_Add extends AppCompatActivity implements OnItemCli
 
 
                 String currentTime = new SimpleDateFormat("hh:mm a").format(new Date());
-
-                Date dateCurrent = parseDate(currentTime);
+                Date dateCurrent = Utils.parseDate(currentTime);
                 for (TimeSlots t : timeslots) {
-                    Date dateActual = parseDate(t.getTimeslot());
+                    Date dateActual = Utils.parseDate(t.getTimeslot());
                     if (dateActual.before(dateCurrent))
                         t.setNo_of_appointments(0);
                 }

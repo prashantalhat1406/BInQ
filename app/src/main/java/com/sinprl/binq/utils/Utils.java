@@ -9,6 +9,7 @@ import com.sinprl.binq.dataclasses.Appointment;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class Utils {
 
@@ -17,6 +18,17 @@ public class Utils {
         DateFormat dateFormat = new SimpleDateFormat("yyyyddMM");
         date_ddmmyy = dateFormat.format(new Date());
         return date_ddmmyy;
+    }
+
+    public static Date parseDate(String date) {
+
+        final String inputFormat = "hh:mm a";
+        SimpleDateFormat inputParser = new SimpleDateFormat(inputFormat, Locale.US);
+        try {
+            return inputParser.parse(date);
+        } catch (java.text.ParseException e) {
+            return new Date(0);
+        }
     }
 
     public static void add_appointment_to_database(@NonNull Appointment appointment, int no_of_available_appointments){
