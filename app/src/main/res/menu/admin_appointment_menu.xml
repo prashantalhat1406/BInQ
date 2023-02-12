@@ -5,6 +5,11 @@
     tools:context="com.sinprl.binq.pages.admin.Admin_Appointment_Display">
 
     <item
+        android:id="@+id/menu_admin_history"
+        android:title="@string/user_menu_show_history"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/menu_admin_reset_token"
         android:title="@string/admin_menu_reset_token"
         app:showAsAction="never" />

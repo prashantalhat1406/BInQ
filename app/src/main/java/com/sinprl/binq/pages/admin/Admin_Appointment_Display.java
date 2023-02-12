@@ -52,8 +52,6 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
         setContentView(R.layout.activity_admin_appointment_display);
         database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
 
-        Log.d("DATE", "" + Utils.get_current_date_ddmmyy());
-
         populateAppointments();
         fetch_timeslots_from_database();
         //showreason();
@@ -121,6 +119,10 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
         }
         if (item.getItemId()==R.id.menu_admin_logout){
             finish();
+        }
+        if(item.getItemId()==R.id.menu_admin_history){
+            Intent intent = new Intent(Admin_Appointment_Display.this, Admin_Appointment_History.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

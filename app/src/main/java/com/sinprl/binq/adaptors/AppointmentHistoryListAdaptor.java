@@ -2,21 +2,28 @@ package com.sinprl.binq.adaptors;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.resources.TextAppearance;
 import com.sinprl.binq.R;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.intefaces.OnItemClickListener;
-import java.util.List;
 
-public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentListAdaptor.ViewHolder> {
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Locale;
+
+public class AppointmentHistoryListAdaptor extends RecyclerView.Adapter<AppointmentHistoryListAdaptor.ViewHolder> {
 
     private final Context mContext;
     private final LayoutInflater layoutInflater;
@@ -24,7 +31,7 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
 
     private final OnItemClickListener mOnItemClickListener;
 
-    public AppointmentListAdaptor(Context mContext, List<Appointment> appointments, OnItemClickListener mOnItemClickListener) {
+    public AppointmentHistoryListAdaptor(Context mContext, List<Appointment> appointments, OnItemClickListener mOnItemClickListener) {
         this.mContext = mContext;
         layoutInflater = LayoutInflater.from(mContext);
         this.appointments = appointments;
@@ -44,7 +51,20 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
         Appointment appointment = appointments.get(position);
         holder.token.setText(appointment.getToken());
         holder.user_name.setText(appointment.getUser_name());
-        holder.time.setText(appointment.getTime());
+
+        DateFormat source_dateformat = new SimpleDateFormat("yyyyddMM", Locale.US);
+        DateFormat target_dateformat = new SimpleDateFormat("ddMMMyyyy", Locale.US);
+
+        try {
+            String d = target_dateformat.format(source_dateformat.parse(appointment.getDate_of_appointment()));
+            holder.time.setText(d + " / " + appointment.getTime());
+            holder.time.setTextAppearance(android.R.style.TextAppearance_Small);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        //holder.time.setText(d + " / " + appointment.getTime());
+
         holder.reason.setText(appointment.getReason());
         holder.phone.setText(appointment.getPhone());
 
