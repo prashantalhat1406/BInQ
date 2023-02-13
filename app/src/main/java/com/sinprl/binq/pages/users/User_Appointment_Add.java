@@ -1,19 +1,15 @@
 package com.sinprl.binq.pages.users;
 
-import androidx.annotation.NonNull;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sinprl.binq.R;
 import com.sinprl.binq.dataclasses.Appointment;
@@ -84,13 +80,18 @@ public class User_Appointment_Add extends AppCompatActivity {
                 edt_reason.getText().toString(),
                 edt_phone.getText().toString());
 
-        if(Validations.is_not_blank_appointment(appointment) && no_of_available_appointments > 0) {
-            appointment.setUserID(userID);
-            Utils.add_appointment_to_database(appointment, no_of_available_appointments);
-            database.getReference("TokenNumber").setValue(Integer.parseInt(token_number) + 1);
-            finish();
+        if(Validations.is_valid_phone_number(appointment.getPhone())) {
+
+            if (Validations.is_not_blank_appointment(appointment) && no_of_available_appointments > 0) {
+                appointment.setUserID(userID);
+                Utils.add_appointment_to_database(appointment, no_of_available_appointments);
+                database.getReference("TokenNumber").setValue(Integer.parseInt(token_number) + 1);
+                finish();
+            } else {
+                Toast.makeText(this, "Empty field found", Toast.LENGTH_SHORT).show();
+            }
         }else {
-            Toast.makeText(this, "Empty field found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "InValid Phone Number", Toast.LENGTH_SHORT).show();
         }
 
     }

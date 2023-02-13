@@ -1,19 +1,14 @@
 package com.sinprl.binq.pages.admin;
 
-import androidx.annotation.NonNull;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sinprl.binq.R;
 import com.sinprl.binq.dataclasses.Appointment;
@@ -44,43 +39,24 @@ public class Admin_Appointment_Add extends AppCompatActivity {
         get_token_number();
 
         Button but_add_appointment = findViewById(R.id.but_appt_add_add);
-        but_add_appointment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                add_appointment_to_database();
-
-            }
-        });
+        but_add_appointment.setOnClickListener(view -> add_appointment_to_database());
 
         Button but_cancel_appointment = findViewById(R.id.but_appt_add_cancel);
-        but_cancel_appointment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        but_cancel_appointment.setOnClickListener(view -> finish());
 
         edt_reason = findViewById(R.id.edt_appt_add_reason);
 
-        edt_reason.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Admin_Appointment_Add.this, Reason_Display_Add.class);
-                //startActivity(intent);
-                startActivityForResult(intent,100);
-            }
+        edt_reason.setOnClickListener(view -> {
+            Intent intent = new Intent(Admin_Appointment_Add.this, Reason_Display_Add.class);
+            startActivityForResult(intent,100);
         });
 
         edt_timeslot = findViewById(R.id.edt_appt_add_time);
 
-        edt_timeslot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Admin_Appointment_Add.this, TimeSlot_Display_Add.class);
-                //startActivity(intent);
-                startActivityForResult(intent,200);
+        edt_timeslot.setOnClickListener(view -> {
+            Intent intent = new Intent(Admin_Appointment_Add.this, TimeSlot_Display_Add.class);
+            startActivityForResult(intent,200);
 
-            }
         });
 
 
@@ -99,26 +75,28 @@ public class Admin_Appointment_Add extends AppCompatActivity {
                 edt_timeslot.getText().toString(),
                 edt_reason.getText().toString(), edt_phone.getText().toString());
 
-        if(Validations.is_not_blank_appointment(appointment) && no_of_available_appointments > 0) {
-            appointment.setUserID("");
-            Utils.add_appointment_to_database(appointment,  no_of_available_appointments);
-            database.getReference("TokenNumber").setValue(Integer.valueOf(token_number) + 1);
-            finish();
+        if(Validations.is_valid_phone_number(appointment.getPhone())){
+            if(Validations.is_not_blank_appointment(appointment) &&
+                    no_of_available_appointments > 0 ) {
+                appointment.setUserID("");
+                Utils.add_appointment_to_database(appointment,  no_of_available_appointments);
+                database.getReference("TokenNumber").setValue(Integer.parseInt(token_number) + 1);
+                finish();
+            }else {
+                Toast.makeText(this, "Empty field found", Toast.LENGTH_SHORT).show();
+            }
         }else {
-            Toast.makeText(this, "Empty field found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "InValid Phone Number", Toast.LENGTH_SHORT).show();
         }
+
+
 
 
 
     }
 
     private void get_token_number() {
-        database.getReference("TokenNumber").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                token_number = String.valueOf(task.getResult().getValue());
-            }
-        });
+        database.getReference("TokenNumber").get().addOnCompleteListener(task -> token_number = String.valueOf(task.getResult().getValue()));
     }
 
     @Override
