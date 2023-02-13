@@ -132,6 +132,11 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
         if (item.getItemId()==R.id.menu_user_logout){
             finish();
         }
+        if(item.getItemId() == R.id.menu_user_show_history){
+            Intent intent = new Intent(User_Appointment_Display.this, User_Appointment_History.class);
+            intent.putExtra("userID", userID);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 
