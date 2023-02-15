@@ -6,21 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".pages.admin.Admin_Appointment_Add">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <!--<com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/Theme.BInQ.AppBarOverlay">
 
-       <!-- <androidx.appcompat.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.BInQ.PopupOverlay" />-->
+            app:popupTheme="@style/Theme.BInQ.PopupOverlay" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout> -->
 
-    <include layout="@layout/content_admin_appointment_add" />
+    <!--<include layout="@layout/content_admin_appointment_add" />-->
+
+    <include layout="@layout/add_appointment" />
 
 
 

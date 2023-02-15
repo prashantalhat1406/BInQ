@@ -13,6 +13,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sinprl.binq.R;
 import com.sinprl.binq.dataclasses.TimeSlots;
+import com.sinprl.binq.pages.admin.Admin_Appointment_Display;
 import com.sinprl.binq.pages.users.User_Appointment_Display;
 
 import java.util.ArrayList;
@@ -33,9 +34,14 @@ public class Home extends AppCompatActivity {
             String userID = edtuserID.getText().toString();
             edtuserID.setText("");
             /*if( Validations.is_valid_phone_number(userID) ) {*/
-            Intent intent = new Intent(Home.this, User_Appointment_Display.class);
-            intent.putExtra("userID", userID);
-            startActivity(intent);
+            if (userID.equals("55")){
+                Intent intent = new Intent(Home.this, Admin_Appointment_Display.class);
+                startActivity(intent);
+            }else {
+                Intent intent = new Intent(Home.this, User_Appointment_Display.class);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
+            }
            /* }else {
                 Toast.makeText(view.getContext(), "Enter Valid Phone Number", Toast.LENGTH_SHORT).show();
             }*/

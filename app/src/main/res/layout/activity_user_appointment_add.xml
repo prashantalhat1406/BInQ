@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".pages.users.User_Appointment_Add">
 
-    <include layout="@layout/content_user_appointment_add" />
+    <!--<include layout="@layout/content_user_appointment_add" />-->
+
+    <include layout="@layout/add_appointment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

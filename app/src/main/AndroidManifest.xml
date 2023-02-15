@@ -25,9 +25,6 @@
             android:name=".pages.users.User_Appointment_Display"
             android:exported="false" />
         <activity
-            android:name=".pages.login.ExistingUser"
-            android:exported="false" />
-        <activity
             android:name=".pages.login.NewUser"
             android:exported="false" />
         <activity

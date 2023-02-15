@@ -8,12 +8,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sinprl.binq.R;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.pages.common.Reason_Display_Add;
 import com.sinprl.binq.pages.common.TimeSlot_Display_Add;
+import com.sinprl.binq.pages.users.User_Appointment_Add;
 import com.sinprl.binq.utils.Utils;
 import com.sinprl.binq.utils.Validations;
 
@@ -25,8 +28,8 @@ public class Admin_Appointment_Add extends AppCompatActivity {
     int no_of_available_appointments;
 
     EditText edt_user_name;
-    EditText edt_reason;
-    EditText edt_timeslot;
+    TextView edt_reason;
+    TextView edt_timeslot;
     EditText edt_phone;
 
     @Override
@@ -38,7 +41,29 @@ public class Admin_Appointment_Add extends AppCompatActivity {
         database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
         get_token_number();
 
-        Button but_add_appointment = findViewById(R.id.but_appt_add_add);
+        Button but_cancel_appointment = findViewById(R.id.add_appointment_cancel);
+        but_cancel_appointment.setOnClickListener(view -> finish());
+
+        Button but_add_appointment = findViewById(R.id.add_appointment_add);
+        but_add_appointment.setOnClickListener(view -> add_appointment_to_database());
+
+        ImageButton select_reason = findViewById(R.id.add_appointment_select_reason_button);
+        select_reason.setOnClickListener(view -> {
+            Intent intent = new Intent(Admin_Appointment_Add.this, Reason_Display_Add.class);
+            startActivityForResult(intent,100);
+        });
+
+        ImageButton select_timeslot = findViewById(R.id.add_appointment_select_timeslot_button);
+        select_timeslot.setOnClickListener(view -> {
+            Intent intent = new Intent(Admin_Appointment_Add.this, TimeSlot_Display_Add.class);
+            startActivityForResult(intent,200);
+
+        });
+
+        edt_reason = findViewById(R.id.add_appointment_reason_display);
+        edt_timeslot = findViewById(R.id.add_appointment_timeslot_display);
+
+        /*Button but_add_appointment = findViewById(R.id.but_appt_add_add);
         but_add_appointment.setOnClickListener(view -> add_appointment_to_database());
 
         Button but_cancel_appointment = findViewById(R.id.but_appt_add_cancel);
@@ -57,17 +82,16 @@ public class Admin_Appointment_Add extends AppCompatActivity {
             Intent intent = new Intent(Admin_Appointment_Add.this, TimeSlot_Display_Add.class);
             startActivityForResult(intent,200);
 
-        });
+        });*/
 
 
     }
 
     private void add_appointment_to_database() {
 
-        edt_user_name = findViewById(R.id.edt_appt_add_user_name);
-
-        edt_timeslot = findViewById(R.id.edt_appt_add_time);
-        edt_phone = findViewById(R.id.edt_appt_add_phone);
+        edt_user_name = findViewById(R.id.add_appointment_username);
+        edt_timeslot = findViewById(R.id.add_appointment_timeslot_display);
+        edt_phone = findViewById(R.id.add_appointment_phone);
 
         get_token_number();
         Appointment appointment = new Appointment(token_number,
