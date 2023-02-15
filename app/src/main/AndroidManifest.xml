@@ -31,7 +31,7 @@
             android:name=".pages.login.NewUser"
             android:exported="false" />
         <activity
-            android:name=".pages.login.Front"
+            android:name=".pages.login.Home"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

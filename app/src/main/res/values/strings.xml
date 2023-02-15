@@ -27,4 +27,6 @@
     <string name="user_menu_show_history">"Show History"</string>
     <string name="current_status">"Your Number is "</string>
     <string name="logout">"Logout"</string>
+    <string name="new_user"><u>Don\'t have account? Register!!</u></string>
+    <string name="forgot_password"><u>Forgot Password ?</u></string>
 </resources>
