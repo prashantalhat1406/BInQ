@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -30,16 +32,24 @@ public class NewUser extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
 
-        but_register = findViewById(R.id.but_new_user_register);
+        but_register = findViewById(R.id.but_register_register);
         but_register.setOnClickListener(view -> add_user_details_to_database());
-        but_cancel = findViewById(R.id.but_new_user_cancel);
-        but_cancel.setOnClickListener(view -> finish());
+
+        TextView txt_existinguser = findViewById(R.id.txt_register_existinguser);
+        txt_existinguser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NewUser.this, Home.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void add_user_details_to_database() {
-        EditText edt_user_name = findViewById(R.id.edt_new_user_name);
-        edt_phone = findViewById(R.id.edt_new_user_phone);
-        EditText edt_password = findViewById(R.id.edt_new_user_password);
+        EditText edt_user_name = findViewById(R.id.edt_register_username);
+        edt_phone = findViewById(R.id.edt_register_phone);
+        EditText edt_password = findViewById(R.id.edt_register_password);
 
         User user = new User(edt_user_name.getText().toString(),
                 edt_phone.getText().toString(),
@@ -51,6 +61,7 @@ public class NewUser extends AppCompatActivity {
             Intent intent = new Intent(NewUser.this, User_Appointment_Display.class);
             intent.putExtra("userID", edt_phone.getText().toString());
             startActivity(intent);
+            finish();
         }else {
             Toast.makeText(this, "Empty field found", Toast.LENGTH_SHORT).show();
         }

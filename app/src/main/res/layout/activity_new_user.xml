@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".pages.login.NewUser">
 
-    <include layout="@layout/content_new_user" />
+    <!--<include layout="@layout/content_new_user" />-->
+    <include layout="@layout/content_register" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

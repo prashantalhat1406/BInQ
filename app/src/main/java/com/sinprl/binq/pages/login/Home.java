@@ -47,6 +47,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Home.this, NewUser.class);
                 startActivity(intent);
+                finish();
             }
         });
 

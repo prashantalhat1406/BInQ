@@ -29,4 +29,5 @@
     <string name="logout">"Logout"</string>
     <string name="new_user"><u>Don\'t have account? Register!!</u></string>
     <string name="forgot_password"><u>Forgot Password ?</u></string>
+    <string name="existing_user"><u>Already have account? SignIn !!</u></string>
 </resources>
