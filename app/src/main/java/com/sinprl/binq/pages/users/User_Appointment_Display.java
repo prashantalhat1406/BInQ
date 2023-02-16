@@ -202,10 +202,7 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
             });
 
             Button done = dialog.findViewById(R.id.appointment_done);
-            done.setOnClickListener(v -> {
-                Utils.mark_appointment_done(userappointments.get(position).getId(), userappointments.get(position).getUserID());
-                dialog.dismiss();
-            });
+            done.setVisibility(View.GONE);
             dialog.show();
         }
     }
