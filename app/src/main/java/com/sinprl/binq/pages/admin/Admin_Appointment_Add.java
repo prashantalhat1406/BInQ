@@ -16,7 +16,6 @@ import com.sinprl.binq.R;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.pages.common.Reason_Display_Add;
 import com.sinprl.binq.pages.common.TimeSlot_Display_Add;
-import com.sinprl.binq.pages.users.User_Appointment_Add;
 import com.sinprl.binq.utils.Utils;
 import com.sinprl.binq.utils.Validations;
 

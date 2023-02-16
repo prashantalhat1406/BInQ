@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:backgroundTint="@color/teal_200"
+    android:background="@color/teal_200"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent" android:orientation="horizontal"
+        android:background="@drawable/round_corners"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_height="match_parent" android:layout_weight="0.9">
+
+        <TextView
+            android:id="@+id/txt_appointment_display_status"
+            android:layout_weight="0.3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/black"
+            android:text="Click Status"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_status_of_appointment"
+            android:background="@drawable/round_tealbutton"
+            android:backgroundTint="@color/teal_200"
+            android:layout_weight="0.7"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Q Status"
+
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent" android:orientation="vertical"
+        android:background="@drawable/round_corners"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_height="match_parent" android:layout_weight="0.1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_user_appointments"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_status_appointment"
+            tools:listitem="@layout/item_appointment_queue" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_user_add_appointment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@android:drawable/ic_menu_add"
+            app:layout_constraintBottom_toBottomOf="@id/list_user_appointments"
+            app:layout_constraintEnd_toEndOf="@id/list_user_appointments"
+            app:layout_constraintStart_toStartOf="@id/list_user_appointments" />
+
+    </LinearLayout>
+
+</LinearLayout>
