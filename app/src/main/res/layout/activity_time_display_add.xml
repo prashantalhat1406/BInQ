@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@color/teal_200"
+    android:background="@color/teal_200"
     tools:context=".pages.common.TimeSlot_Display_Add">
 
-    <include layout="@layout/content_time_display_add" />
+    <include layout="@layout/content_timeslot_add" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
