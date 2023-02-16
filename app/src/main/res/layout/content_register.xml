@@ -53,6 +53,8 @@
                 android:id="@+id/edt_register_username" android:hint="User Name e.g Rakesh Gupta"
                 android:textAlignment="center"
                 android:inputType="textPersonName"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
                 android:layout_width="match_parent" android:background="@drawable/round_corners"
                 android:layout_height="50dp"/>
 
@@ -75,6 +77,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_register_phone"
                 android:hint="Mobile Number"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
                 android:textAlignment="center"
                 android:ems="10"
                 android:inputType="phone"
@@ -101,6 +105,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_register_password"
                 android:hint="4 digit password"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
                 android:textAlignment="center"
                 android:ems="4"
                 android:inputType="numberPassword"
@@ -138,6 +144,7 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/black"
                 android:layout_below="@id/but_register_register"
                 android:layout_centerInParent="true"
                 android:text="@string/existing_user"

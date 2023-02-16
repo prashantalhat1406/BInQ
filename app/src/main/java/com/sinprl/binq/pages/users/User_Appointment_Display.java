@@ -38,6 +38,7 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
 
     FirebaseDatabase database;
     String userID;
+    TextView status_text;
     List<Appointment> userappointments;
     List<Appointment> all_day_appointments;
     Button status;
@@ -66,28 +67,36 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
             startActivity(intent);
         });
 
+        status_text = findViewById(R.id.txt_appointment_display_status);
+
         status = findViewById(R.id.button_status_of_appointment);
         status.setOnClickListener(view -> calalculate_current_status());
+
 
 
     }
 
     private void calalculate_current_status() {
         int counter = 0;
+        boolean active_appointment = false;
         for (Appointment appointment: all_day_appointments) {
             if(! appointment.getUserID().equals(userID) ) {
                 if (appointment.getActive() == 1)
                     counter++;
             }
             else {
-                if(appointment.getActive() == 1)
+                if(appointment.getActive() == 1){
+                    active_appointment = true;
                     break;
+                }
+
             }
         }
 
-        TextView status_text = findViewById(R.id.txt_appointment_display_status);
-        status_text.setText("Your Number is " + (counter + 1));
-
+        if(active_appointment)
+            status_text.setText("Your are " + (counter + 1) + " in Q");
+        else
+            status_text.setText(getResources().getString(R.string.no_active_appointment));
     }
 
     private void populate_allDay_Appointments() {
@@ -171,7 +180,10 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
                         break;
                     }
                 }
-                status.setEnabled(enable_status_button);
+                if(!enable_status_button)
+                    status_text.setText(getResources().getString(R.string.no_active_appointment));
+
+
                 AppointmentListAdaptor appointmentListAdaptor = new AppointmentListAdaptor(User_Appointment_Display.this,userappointments, User_Appointment_Display.this);
                 appointment_recycle_view.setAdapter(appointmentListAdaptor);
             }
