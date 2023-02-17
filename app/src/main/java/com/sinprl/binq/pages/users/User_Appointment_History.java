@@ -58,7 +58,7 @@ public class User_Appointment_History extends AppCompatActivity implements OnIte
         user_appointments_history = new ArrayList<>();
         user_appointments_history.add(new Appointment("21", "Pra A", "07:90 pm", "Pain", "1234567895"));
         //DatabaseReference databaseReference = database.getReference("Appointment/");
-        DatabaseReference databaseReference = database.getReference("Users/"+userID+"/Appointments/");
+        DatabaseReference databaseReference = database.getReference("Users/Appointments/"+userID+"/");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

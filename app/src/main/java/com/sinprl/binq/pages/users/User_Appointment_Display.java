@@ -84,7 +84,7 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
     }
 
     private void fetch_current_user_details(String userID) {
-        DatabaseReference databaseReference = database.getReference("Users/"+userID);
+        DatabaseReference databaseReference = database.getReference("Users/Profiles/"+userID);
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -146,6 +146,8 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
 
     @Override
     public void onBackPressed() {
+        Intent intent = new Intent(User_Appointment_Display.this, Home.class);
+        startActivity(intent);
         finish();
         super.onBackPressed();
     }
@@ -188,7 +190,7 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
 
         userappointments = new ArrayList<>();
         userappointments.add(new Appointment("21", "Pra A", "07:90 pm", "Pain", "1234567895"));
-        DatabaseReference databaseReference = database.getReference("Users/"+userID+"/Appointments/" + Utils.get_current_date_ddmmyy());
+        DatabaseReference databaseReference = database.getReference("Users/Appointments/"+userID+"/" + Utils.get_current_date_ddmmyy());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

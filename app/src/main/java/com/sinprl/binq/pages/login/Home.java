@@ -1,5 +1,6 @@
 package com.sinprl.binq.pages.login;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,18 +9,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.sinprl.binq.R;
 import com.sinprl.binq.dataclasses.TimeSlots;
+import com.sinprl.binq.dataclasses.User;
 import com.sinprl.binq.pages.admin.Admin_Appointment_Display;
 import com.sinprl.binq.pages.users.User_Appointment_Display;
+import com.sinprl.binq.utils.Validations;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Home extends AppCompatActivity {
+
+    List<User> all_users;
 
 
 
@@ -28,58 +37,65 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        all_users = new ArrayList<>();
+        get_all_users_from_database();
+
         Button but_login = findViewById(R.id.but_home_login);
         but_login.setOnClickListener(view -> {
             EditText edtuserID = findViewById(R.id.edt_home_username);
             String userID = edtuserID.getText().toString();
-            edtuserID.setText("");
-            /*if( Validations.is_valid_phone_number(userID) ) {*/
+            EditText edtpassword = findViewById(R.id.edt_home_password);
+            String password = edtpassword.getText().toString();
+
             if (userID.equals("55")){
                 Intent intent = new Intent(Home.this, Admin_Appointment_Display.class);
                 startActivity(intent);
-            }else {
-                Intent intent = new Intent(Home.this, User_Appointment_Display.class);
-                intent.putExtra("userID", userID);
-                startActivity(intent);
+                finish();
+            }else{
+                User user = new User("",userID,password);
+                Validations validations = Validations.is_valid_user(all_users, user);
+                if(validations.isValid()){
+                    Intent intent = new Intent(Home.this, User_Appointment_Display.class);
+                    intent.putExtra("userID", userID);
+                    startActivity(intent);
+                    finish();
+                }else {
+                    Toast.makeText(this, validations.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
-           /* }else {
-                Toast.makeText(view.getContext(), "Enter Valid Phone Number", Toast.LENGTH_SHORT).show();
-            }*/
+
+
         });
 
         TextView txt_new_user = findViewById(R.id.txt_home_register);
-        txt_new_user.setOnClickListener(new View.OnClickListener() {
+        txt_new_user.setOnClickListener(view -> {
+            Intent intent = new Intent(Home.this, NewUser.class);
+            startActivity(intent);
+            finish();
+        });
+
+
+
+
+
+    }
+
+    private void get_all_users_from_database() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
+        DatabaseReference databaseReference = database.getReference("Users/Profiles/");
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Home.this, NewUser.class);
-                startActivity(intent);
-                finish();
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                all_users.clear();
+                for (DataSnapshot s : snapshot.getChildren()){
+                    User user = s.getValue(User.class);
+                    all_users.add(user);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
-
-
-
-
-
-       /* Button but_newuser = findViewById(R.id.but_front_new_user);
-        but_newuser.setOnClickListener(view -> {
-            Intent intent = new Intent(Front.this, NewUser.class);
-            startActivity(intent);
-        });
-        Button but_existing_user = findViewById(R.id.but_front_existing_user);
-        but_existing_user.setOnClickListener(view -> {
-            Intent intent = new Intent(Front.this, ExistingUser.class);
-            startActivity(intent);
-        });
-
-        Button but_admin = findViewById(R.id.but_front_admin);
-        but_admin.setOnClickListener(view -> {
-
-            //add_sample_data();
-            Intent intent = new Intent(Front.this, Admin_Appointment_Display.class);
-            startActivity(intent);
-        });*/
     }
 
     private void add_sample_data() {

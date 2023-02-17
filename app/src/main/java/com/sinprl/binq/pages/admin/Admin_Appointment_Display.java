@@ -100,6 +100,8 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
 
     @Override
     public void onBackPressed() {
+        Intent intent = new Intent(Admin_Appointment_Display.this, Home.class);
+        startActivity(intent);
         finish();
         super.onBackPressed();
     }

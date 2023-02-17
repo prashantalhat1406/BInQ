@@ -42,7 +42,7 @@ public class Utils {
         }
         else{
             String admin_appointment_path = "Appointment/";
-            String user_appointment_path = "Users/" + userID + "/Appointments/";
+            String user_appointment_path = "Users/Appointments/" + userID + "/";
 
             DatabaseReference adminReference = database.getReference(admin_appointment_path + Utils.get_current_date_ddmmyy() );
             appointment.setActive(1);
@@ -59,7 +59,7 @@ public class Utils {
     public static void cancel_appointment(String appointmentID, String userID ){
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
         DatabaseReference admin_appointment_ref = database.getReference("Appointment/" + Utils.get_current_date_ddmmyy() );
-        DatabaseReference user_appointment_ref = database.getReference("Users/" + userID + "/Appointments/" + Utils.get_current_date_ddmmyy() );
+        DatabaseReference user_appointment_ref = database.getReference("Users/Appointments/" + userID + "/" + Utils.get_current_date_ddmmyy() );
 
         admin_appointment_ref.child(appointmentID + "/active/").setValue(0);
         if(userID.length() != 0)
@@ -69,7 +69,7 @@ public class Utils {
     public static void mark_appointment_done(String appointmentID, String userID ){
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
         DatabaseReference admin_appointment_ref = database.getReference("Appointment/" + Utils.get_current_date_ddmmyy() );
-        DatabaseReference user_appointment_ref = database.getReference("Users/" + userID + "/Appointments/" + Utils.get_current_date_ddmmyy() );
+        DatabaseReference user_appointment_ref = database.getReference("Users/Appointments/" + userID + "/" + Utils.get_current_date_ddmmyy() );
 
         admin_appointment_ref.child(appointmentID + "/active/").setValue(2);
         if(userID.length() != 0)
