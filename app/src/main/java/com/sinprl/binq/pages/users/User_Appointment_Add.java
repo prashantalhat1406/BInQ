@@ -24,7 +24,7 @@ public class User_Appointment_Add extends AppCompatActivity {
 
     String token_number = "";
     FirebaseDatabase database;
-    String userID;
+    String userID, userName, userPhone;
 
     int no_of_available_appointments;
 
@@ -39,6 +39,8 @@ public class User_Appointment_Add extends AppCompatActivity {
         setContentView(R.layout.activity_user_appointment_add);
 
         userID = getIntent().getExtras().getString("userID","");
+        userName = getIntent().getExtras().getString("userName","");
+        userPhone = getIntent().getExtras().getString("userPhone","");
 
         database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
         get_token_number();
@@ -64,36 +66,17 @@ public class User_Appointment_Add extends AppCompatActivity {
 
         edt_reason = findViewById(R.id.add_appointment_reason_display);
         edt_timeslot = findViewById(R.id.add_appointment_timeslot_display);
+        edt_user_name = findViewById(R.id.add_appointment_username);
+        edt_user_name.setText(userName);
+        edt_phone = findViewById(R.id.add_appointment_phone);
+        edt_phone.setText(userPhone);
 
-
-/*
-        Button but_add_appointment = findViewById(R.id.but_user_appt_add_add);
-        but_add_appointment.setOnClickListener(view -> add_appointment_to_database());
-
-        Button but_cancel_appointment = findViewById(R.id.but_user_appt_add_cancel);
-        but_cancel_appointment.setOnClickListener(view -> finish());
-
-        edt_reason = findViewById(R.id.edt_user_appt_add_reason);
-
-        edt_reason.setOnClickListener(view -> {
-            Intent intent = new Intent(User_Appointment_Add.this, Reason_Display_Add.class);
-            startActivityForResult(intent,100);
-        });
-
-        edt_timeslot = findViewById(R.id.edt_user_appt_add_time);
-
-        edt_timeslot.setOnClickListener(view -> {
-            Intent intent = new Intent(User_Appointment_Add.this, TimeSlot_Display_Add.class);
-            startActivityForResult(intent,200);
-
-        });*/
     }
 
     private void add_appointment_to_database() {
 
-        edt_user_name = findViewById(R.id.add_appointment_username);
+
         edt_timeslot = findViewById(R.id.add_appointment_timeslot_display);
-        edt_phone = findViewById(R.id.add_appointment_phone);
 
         get_token_number();
 

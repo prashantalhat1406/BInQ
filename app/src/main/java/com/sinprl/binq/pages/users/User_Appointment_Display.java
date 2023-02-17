@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.sinprl.binq.R;
 import com.sinprl.binq.adaptors.AppointmentListAdaptor;
 import com.sinprl.binq.dataclasses.Appointment;
+import com.sinprl.binq.dataclasses.User;
 import com.sinprl.binq.intefaces.OnItemClickListener;
 import com.sinprl.binq.pages.login.Home;
 import com.sinprl.binq.utils.Utils;
@@ -41,6 +43,8 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
     TextView status_text;
     List<Appointment> userappointments;
     List<Appointment> all_day_appointments;
+
+    User current_user;
     Button status;
     RecyclerView appointment_recycle_view;
 
@@ -56,6 +60,7 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
 
         appointment_recycle_view = findViewById(R.id.list_user_appointments);
 
+        fetch_current_user_details(userID);
         populateAppointments();
         populate_allDay_Appointments();
 
@@ -64,6 +69,8 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
 
             Intent intent = new Intent(User_Appointment_Display.this, User_Appointment_Add.class);
             intent.putExtra("userID", userID);
+            intent.putExtra("userName", current_user.getName());
+            intent.putExtra("userPhone", current_user.getPhone());
             startActivity(intent);
         });
 
@@ -73,6 +80,21 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
         status.setOnClickListener(view -> calalculate_current_status());
 
 
+
+    }
+
+    private void fetch_current_user_details(String userID) {
+        DatabaseReference databaseReference = database.getReference("Users/"+userID);
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                current_user = snapshot.getValue(User.class);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
 
     }
 
@@ -89,7 +111,6 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
                     active_appointment = true;
                     break;
                 }
-
             }
         }
 
@@ -127,6 +148,13 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
     public void onBackPressed() {
         finish();
         super.onBackPressed();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //Toast.makeText(this, "Activity Resumed", Toast.LENGTH_SHORT).show();
+        calalculate_current_status();
     }
 
     @Override
