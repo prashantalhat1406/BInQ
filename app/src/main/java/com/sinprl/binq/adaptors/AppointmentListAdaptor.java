@@ -61,6 +61,11 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
             case 2 : holder.status.setText(R.string.appointment_done);holder.status.setTextColor(Color.GREEN);break;
         }
 
+        if (appointment.getActive() != 1){
+            holder.action_done.setVisibility(View.GONE);
+            holder.action_cancel.setVisibility(View.GONE);
+        }
+
         holder.itemView.setOnClickListener(view -> mOnItemClickListener.onItemClick(view,position));
 
     }
@@ -81,6 +86,7 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
         public final TextView phone;
 
         public final TextView action_done;
+        public final TextView action_cancel;
 
         public final CardView card;
 
@@ -94,6 +100,7 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
             phone =  itemView.findViewById(R.id.txt_apt_item_phone);
             card = itemView.findViewById(R.id.lay_appt_list_item);
             action_done = itemView.findViewById(R.id.txt_appointment_item_done);
+            action_cancel = itemView.findViewById(R.id.txt_appointment_item_cancel);
         }
     }
 

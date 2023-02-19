@@ -10,12 +10,13 @@ import androidx.annotation.NonNull;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.util.Log;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
 
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -73,6 +74,8 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
         final RecyclerView appointment_recycle_view = findViewById(R.id.list_appointments);
         final LinearLayoutManager appointmentLayoutManager = new LinearLayoutManager(this);
         appointment_recycle_view.setLayoutManager(appointmentLayoutManager);
+
+
 
         appointments = new ArrayList<>();
         appointments.add(new Appointment("21", "Pra A", "07:90 pm", "Pain", "1234567895"));
