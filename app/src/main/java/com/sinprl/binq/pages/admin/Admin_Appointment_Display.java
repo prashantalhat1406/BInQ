@@ -88,7 +88,7 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
                 }
 
                 appointments.sort(new Appointment_Comparator());
-                AppointmentListAdaptor appointmentListAdaptor = new AppointmentListAdaptor(Admin_Appointment_Display.this,appointments, Admin_Appointment_Display.this);
+                AppointmentListAdaptor appointmentListAdaptor = new AppointmentListAdaptor(Admin_Appointment_Display.this,appointments, Admin_Appointment_Display.this,true);
                 appointment_recycle_view.setAdapter(appointmentListAdaptor);
             }
             @Override

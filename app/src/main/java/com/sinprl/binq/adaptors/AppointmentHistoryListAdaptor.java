@@ -41,7 +41,7 @@ public class AppointmentHistoryListAdaptor extends RecyclerView.Adapter<Appointm
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = layoutInflater.inflate(R.layout.item_appointment_queue, parent, false);
+        View itemView = layoutInflater.inflate(R.layout.item_appointment_queue_redesigned, parent, false);
         return new ViewHolder(itemView);
     }
 

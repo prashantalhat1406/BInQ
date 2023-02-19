@@ -214,7 +214,7 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
                     status_text.setText(getResources().getString(R.string.no_active_appointment));
 
 
-                AppointmentListAdaptor appointmentListAdaptor = new AppointmentListAdaptor(User_Appointment_Display.this,userappointments, User_Appointment_Display.this);
+                AppointmentListAdaptor appointmentListAdaptor = new AppointmentListAdaptor(User_Appointment_Display.this,userappointments, User_Appointment_Display.this,false);
                 appointment_recycle_view.setAdapter(appointmentListAdaptor);
             }
             @Override

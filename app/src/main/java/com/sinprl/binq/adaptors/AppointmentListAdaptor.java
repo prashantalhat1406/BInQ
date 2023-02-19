@@ -22,19 +22,23 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
     private final LayoutInflater layoutInflater;
     private final List<Appointment> appointments;
 
+    private boolean is_Admin;
+
     private final OnItemClickListener mOnItemClickListener;
 
-    public AppointmentListAdaptor(Context mContext, List<Appointment> appointments, OnItemClickListener mOnItemClickListener) {
+    public AppointmentListAdaptor(Context mContext, List<Appointment> appointments, OnItemClickListener mOnItemClickListener, boolean is_Admin) {
         this.mContext = mContext;
         layoutInflater = LayoutInflater.from(mContext);
         this.appointments = appointments;
         this.mOnItemClickListener = mOnItemClickListener;
+        this.is_Admin = is_Admin;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = layoutInflater.inflate(R.layout.item_appointment_queue, parent, false);
+        //View itemView = layoutInflater.inflate(R.layout.item_appointment_queue, parent, false);
+        View itemView = layoutInflater.inflate(R.layout.item_appointment_queue_redesigned, parent, false);
         return new ViewHolder(itemView);
     }
 
@@ -44,9 +48,12 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
         Appointment appointment = appointments.get(position);
         holder.token.setText(appointment.getToken());
         holder.user_name.setText(appointment.getUser_name());
-        holder.time.setText(appointment.getTime());
+        holder.time.setText("  " + appointment.getTime());
         holder.reason.setText(appointment.getReason());
-        holder.phone.setText(appointment.getPhone());
+        holder.phone.setText("  "+appointment.getPhone());
+
+        if(!is_Admin)
+            holder.action_done.setVisibility(View.GONE);
 
         switch (appointment.getActive()){
             case 1 : holder.status.setText(R.string.appointment_active);holder.status.setTextColor(Color.BLUE);break;
@@ -73,6 +80,8 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
         public final TextView reason;
         public final TextView phone;
 
+        public final TextView action_done;
+
         public final CardView card;
 
         public ViewHolder(@NonNull View itemView) {
@@ -84,6 +93,7 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
             reason =  itemView.findViewById(R.id.txt_apt_item_reason);
             phone =  itemView.findViewById(R.id.txt_apt_item_phone);
             card = itemView.findViewById(R.id.lay_appt_list_item);
+            action_done = itemView.findViewById(R.id.txt_appointment_item_done);
         }
     }
 
