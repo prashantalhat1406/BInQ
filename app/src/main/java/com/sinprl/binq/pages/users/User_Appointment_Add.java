@@ -1,30 +1,43 @@
 package com.sinprl.binq.pages.users;
 
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.sinprl.binq.R;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.pages.common.Reason_Display_Add;
 import com.sinprl.binq.pages.common.TimeSlot_Display_Add;
 import com.sinprl.binq.utils.Utils;
 import com.sinprl.binq.utils.Validations;
+import com.sinprl.binq.utils.comparators.Appointment_Comparator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class User_Appointment_Add extends AppCompatActivity {
 
     String token_number = "";
     FirebaseDatabase database;
     String userID, userName, userPhone;
+
+    List<Appointment> users_daily_appointments;
 
     int no_of_available_appointments;
 
@@ -44,6 +57,8 @@ public class User_Appointment_Add extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
         get_token_number();
+        users_daily_appointments = new ArrayList<>();
+        get_users_daily_appointments();
 
         Button but_cancel_appointment = findViewById(R.id.add_appointment_cancel);
         but_cancel_appointment.setOnClickListener(view -> finish());
@@ -90,15 +105,61 @@ public class User_Appointment_Add extends AppCompatActivity {
 
             if (Validations.is_not_blank_appointment(appointment) && no_of_available_appointments > 0) {
                 appointment.setUserID(userID);
-                Utils.add_appointment_to_database(appointment, no_of_available_appointments);
-                database.getReference("TokenNumber").setValue(Integer.parseInt(token_number) + 1);
-                finish();
+                if(!appointment_exists_for_day()){
+                    Utils.add_appointment_to_database(appointment, no_of_available_appointments);
+                    database.getReference("TokenNumber").setValue(Integer.parseInt(token_number) + 1);
+                    Toast.makeText(this, "Appointment Added", Toast.LENGTH_SHORT).show();
+                    finish();
+                }else{
+                    finish();
+                    Toast.makeText(this, "Appointment already exists for user", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 Toast.makeText(this, "Empty field found", Toast.LENGTH_SHORT).show();
             }
         }else {
             Toast.makeText(this, "InValid Phone Number", Toast.LENGTH_SHORT).show();
         }
+
+    }
+
+    private boolean appointment_exists_for_day() {
+        boolean appointment_exists_for_day = false;
+
+        for (Appointment appointment : users_daily_appointments){
+            if (appointment.getActive() == 1)
+            {
+                appointment_exists_for_day=true;
+                break;
+            }
+        }
+
+        return appointment_exists_for_day;
+    }
+
+    private void get_users_daily_appointments() {
+
+        DatabaseReference databaseReference = database.getReference("Users/Appointments/"+userID+"/" + Utils.get_current_date_ddmmyy());
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    users_daily_appointments.clear();
+                    for (DataSnapshot s : snapshot.getChildren()){
+                        Log.d("Regular", "" + s.getValue());
+                        Appointment appointment = s.getValue(Appointment.class);
+                        appointment.setId(s.getKey());
+                        users_daily_appointments.add(appointment);
+                    }
+                    users_daily_appointments.sort(new Appointment_Comparator());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 
