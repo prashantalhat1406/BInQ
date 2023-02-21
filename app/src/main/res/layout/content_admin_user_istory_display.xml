@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:backgroundTint="@color/teal_200"
+    android:background="@color/teal_200"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent" android:orientation="horizontal"
+        android:background="@drawable/round_corners"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_height="match_parent" android:layout_weight="0.9">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_weight="0.3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="10dp"
+            app:boxStrokeWidth="0dp"
+            android:gravity="center_vertical"
+            app:boxStrokeWidthFocused="0dp"
+            app:hintEnabled="false"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_user_history_search"
+                android:hint="Search using User Mobile"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
+                android:textAlignment="textStart"
+                android:inputType="phone"
+                android:layout_width="match_parent"
+                android:backgroundTint="@color/white"
+                android:layout_height="50dp"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_user_history_search"
+            android:background="@drawable/round_tealbutton"
+            android:backgroundTint="@color/teal_200"
+            android:layout_weight="0.7"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Search"
+
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent" android:orientation="vertical"
+        android:background="@drawable/round_corners"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_height="match_parent" android:layout_weight="0.1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_user_history" android:layout_weight="0.95"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:listitem="@layout/item_user" />
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

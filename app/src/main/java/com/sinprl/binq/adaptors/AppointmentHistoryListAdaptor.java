@@ -57,7 +57,7 @@ public class AppointmentHistoryListAdaptor extends RecyclerView.Adapter<Appointm
 
         try {
             String d = target_dateformat.format(source_dateformat.parse(appointment.getDate_of_appointment()));
-            holder.time.setText(d + " / " + appointment.getTime());
+            holder.time.setText(" "+d + " / " + appointment.getTime());
             holder.time.setTextAppearance(android.R.style.TextAppearance_Small);
         } catch (ParseException e) {
             throw new RuntimeException(e);
@@ -66,13 +66,16 @@ public class AppointmentHistoryListAdaptor extends RecyclerView.Adapter<Appointm
         //holder.time.setText(d + " / " + appointment.getTime());
 
         holder.reason.setText(appointment.getReason());
-        holder.phone.setText(appointment.getPhone());
+        holder.phone.setText(" "+appointment.getPhone());
 
         switch (appointment.getActive()){
             case 1 : holder.status.setText(R.string.appointment_active);holder.status.setTextColor(Color.BLUE);break;
             case 0 : holder.status.setText(R.string.appointment_cancel);holder.status.setTextColor(Color.RED);break;
             case 2 : holder.status.setText(R.string.appointment_done);holder.status.setTextColor(Color.GREEN);break;
         }
+
+        holder.action_done.setVisibility(View.GONE);
+        holder.action_cancel.setVisibility(View.GONE);
 
         holder.itemView.setOnClickListener(view -> mOnItemClickListener.onItemClick(view,position));
 
@@ -93,6 +96,9 @@ public class AppointmentHistoryListAdaptor extends RecyclerView.Adapter<Appointm
         public final TextView reason;
         public final TextView phone;
 
+        public final TextView action_done;
+        public final TextView action_cancel;
+
         public final CardView card;
 
         public ViewHolder(@NonNull View itemView) {
@@ -104,6 +110,8 @@ public class AppointmentHistoryListAdaptor extends RecyclerView.Adapter<Appointm
             reason =  itemView.findViewById(R.id.txt_apt_item_reason);
             phone =  itemView.findViewById(R.id.txt_apt_item_phone);
             card = itemView.findViewById(R.id.lay_appt_list_item);
+            action_done = itemView.findViewById(R.id.txt_appointment_item_done);
+            action_cancel = itemView.findViewById(R.id.txt_appointment_item_cancel);
         }
     }
 

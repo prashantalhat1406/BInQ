@@ -5,7 +5,7 @@
     tools:context="com.sinprl.binq.pages.admin.Admin_Appointment_Display">
 
     <item
-        android:id="@+id/menu_admin_history"
+        android:id="@+id/menu_admin_user_history"
         android:title="@string/user_menu_show_history"
         app:showAsAction="never" />
 
