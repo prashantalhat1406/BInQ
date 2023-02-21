@@ -129,9 +129,10 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
             startActivity(intent);
             finish();
         }
-        if(item.getItemId()==R.id.menu_admin_history){
-            Intent intent = new Intent(Admin_Appointment_Display.this, Admin_Appointment_History.class);
+        if(item.getItemId()==R.id.menu_admin_user_history){
+            Intent intent = new Intent(Admin_Appointment_Display.this, Admin_User_History_Display.class);
             startActivity(intent);
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

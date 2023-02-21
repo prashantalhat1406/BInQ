@@ -8,8 +8,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,6 +42,9 @@ public class Admin_User_History_Display extends AppCompatActivity implements OnI
 
     FirebaseDatabase database;
 
+    EditText user_search;
+    RecyclerView userhistory_recycle_view;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +52,46 @@ public class Admin_User_History_Display extends AppCompatActivity implements OnI
 
         database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
 
+        userhistory_recycle_view = findViewById(R.id.list_user_history);
+
         populateUsers();
+
+        user_search = findViewById(R.id.edt_user_history_search);
+        user_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                List<User> tempList = new ArrayList<>();
+
+
+                String searched_text = user_search.getText().toString().trim();
+                if (searched_text.length() == 0)
+                    tempList = users;
+                else {
+                    tempList.clear();
+                    for (User user : users) {
+                        try {
+                        if(user.getPhone().contains(searched_text))
+                                tempList.add(user);
+                        }catch (Exception e) {
+                            Log.d("UserHistory", e.getMessage());
+                        }
+                    }
+                }
+                UserListAdaptor userAdaper = new UserListAdaptor(Admin_User_History_Display.this, tempList,Admin_User_History_Display.this);
+                userhistory_recycle_view.setAdapter(userAdaper);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     @Override
@@ -55,7 +103,7 @@ public class Admin_User_History_Display extends AppCompatActivity implements OnI
     }
 
     private void populateUsers() {
-        final RecyclerView userhistory_recycle_view = findViewById(R.id.list_user_history);
+
         final LinearLayoutManager userLayoutManager = new LinearLayoutManager(this);
         userhistory_recycle_view.setLayoutManager(userLayoutManager);
 
@@ -86,6 +134,10 @@ public class Admin_User_History_Display extends AppCompatActivity implements OnI
     @Override
     public void onItemClick(View view, int position) {
         //code to handle appointment display list click
+
+        String selected = ((TextView) view.findViewById(R.id.txt_user_item_user_name)).getText().toString();
+
+        Toast.makeText(this, ""+selected + " Clicked", Toast.LENGTH_SHORT).show();
 
     }
 }
