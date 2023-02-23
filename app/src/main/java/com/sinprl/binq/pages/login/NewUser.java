@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.NumberPicker;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +38,12 @@ public class NewUser extends AppCompatActivity {
 
     EditText edt_phone;
 
+    NumberPicker agepicker;
+
+    RadioGroup gender;
+    RadioButton male;
+    RadioButton female;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +57,15 @@ public class NewUser extends AppCompatActivity {
 
         all_users = new ArrayList<>();
         get_all_users_from_database();
+
+        agepicker = findViewById(R.id.num_register_age);
+        agepicker.setMinValue(1);
+        agepicker.setMaxValue(100);
+        agepicker.setValue(25);
+
+        gender = findViewById(R.id.rdgroup_register_gender);
+        male = findViewById(R.id.rdbutton_register_male);
+        female = findViewById(R.id.rdbutton_register_female);
 
         TextView txt_existinguser = findViewById(R.id.txt_register_existinguser);
         txt_existinguser.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +105,17 @@ public class NewUser extends AppCompatActivity {
         User user = new User(edt_user_name.getText().toString(),
                 edt_phone.getText().toString(),
                 edt_password.getText().toString());
+
+        user.setAge(agepicker.getValue());
+        user.setGender(0);
+
+        if(gender.getCheckedRadioButtonId() != -1)
+        {
+            if(female.isChecked())
+                user.setGender(2);
+            else
+                user.setGender(1);
+        }
 
         Validations validations = Validations.is_not_blank_user(user);
 

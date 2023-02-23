@@ -5,6 +5,9 @@ public class Appointment {
     String user_name;
     String time;
 
+    int age;
+    int gender;
+
     String date_of_appointment;
     String reason;
     String phone;
@@ -14,6 +17,35 @@ public class Appointment {
     String userID;
     int active;
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
+    public Appointment(String token, String user_name, String time, int age, int gender, String date_of_appointment, String reason, String phone, String id, String userID, int active) {
+        this.token = token;
+        this.user_name = user_name;
+        this.time = time;
+        this.age = age;
+        this.gender = gender;
+        this.date_of_appointment = date_of_appointment;
+        this.reason = reason;
+        this.phone = phone;
+        this.id = id;
+        this.userID = userID;
+        this.active = active;
+    }
 
     public String getDate_of_appointment() {
         return date_of_appointment;

@@ -71,6 +71,8 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
             intent.putExtra("userID", userID);
             intent.putExtra("userName", current_user.getName());
             intent.putExtra("userPhone", current_user.getPhone());
+            intent.putExtra("userAge", current_user.getAge());
+            intent.putExtra("userGender", current_user.getGender());
             startActivity(intent);
         });
 

@@ -10,7 +10,7 @@
         android:layout_width="match_parent" android:orientation="vertical"
         android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
-        android:layout_height="match_parent" android:layout_weight="0.8">
+        android:layout_height="match_parent" android:layout_weight="0.9">
 
         <TextView
             android:id="@+id/edt_home_welcome"
@@ -30,19 +30,19 @@
         android:layout_width="match_parent" android:orientation="vertical"
         android:background="@drawable/round_corners"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="50dp"
-        android:layout_height="match_parent" android:layout_weight="0.2">
+        android:layout_height="match_parent" android:layout_weight="0.1">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/round_corners"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             app:boxStrokeWidth="0dp"
             android:gravity="center_vertical"
             app:boxStrokeWidthFocused="0dp"
@@ -65,9 +65,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/round_corners"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp"
             app:hintEnabled="false"
@@ -93,9 +93,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/round_corners"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="0dp"
+            android:layout_marginBottom="10dp"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp"
             app:hintEnabled="false"
@@ -116,6 +116,109 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent" android:orientation="horizontal"
+            android:background="@drawable/round_corners"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="0dp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent" android:orientation="vertical"
+                android:layout_height="wrap_content" android:layout_weight="0.5">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:text="Select Age"
+                    />
+                <NumberPicker
+                    android:id="@+id/num_register_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="0dp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent" android:orientation="vertical"
+                android:layout_height="wrap_content" android:layout_weight="0.5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:text="Select Gender"
+                    />
+
+                <RadioGroup
+                    android:id="@+id/rdgroup_register_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:background="@drawable/radiobuttons_gender"
+                        android:id="@+id/rdbutton_register_male"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginBottom="10dp"
+                        android:button="@null"
+                        android:drawableTop="@drawable/male"
+                        android:text="M"
+                        android:gravity="center"
+                        />
+
+                    <RadioButton
+                        android:background="@drawable/radiobuttons_gender"
+                        android:id="@+id/rdbutton_register_female"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="F"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginBottom="10dp"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:drawableTop="@drawable/female"
+                        />
+
+
+
+
+                </RadioGroup>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <RelativeLayout android:id="@+id/layout_registerbutton_newuser"
             android:layout_width="fill_parent"

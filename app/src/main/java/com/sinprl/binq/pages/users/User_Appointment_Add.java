@@ -12,6 +12,9 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.NumberPicker;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +39,7 @@ public class User_Appointment_Add extends AppCompatActivity {
     String token_number = "";
     FirebaseDatabase database;
     String userID, userName, userPhone;
+    int userAge, userGender;
 
     List<Appointment> users_daily_appointments;
 
@@ -46,6 +50,12 @@ public class User_Appointment_Add extends AppCompatActivity {
     TextView edt_timeslot;
     EditText edt_phone;
 
+    NumberPicker agepicker;
+
+    RadioGroup gender;
+    RadioButton male;
+    RadioButton female;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +64,8 @@ public class User_Appointment_Add extends AppCompatActivity {
         userID = getIntent().getExtras().getString("userID","");
         userName = getIntent().getExtras().getString("userName","");
         userPhone = getIntent().getExtras().getString("userPhone","");
+        userAge = getIntent().getExtras().getInt("userAge");
+        userGender = getIntent().getExtras().getInt("userGender");
 
         database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
         get_token_number();
@@ -86,6 +98,22 @@ public class User_Appointment_Add extends AppCompatActivity {
         edt_phone = findViewById(R.id.add_appointment_phone);
         edt_phone.setText(userPhone);
 
+        agepicker = findViewById(R.id.add_appointment_age);
+        agepicker.setMinValue(1);
+        agepicker.setMaxValue(100);
+        agepicker.setValue(userAge);
+
+
+        gender = findViewById(R.id.rdgroup_gender);
+        male = findViewById(R.id.rdbutton_male);
+        female = findViewById(R.id.rdbutton_female);
+        if (userGender == 1)
+            male.setChecked(true);
+        else
+            female.setChecked(true);
+
+
+
     }
 
     private void add_appointment_to_database() {
@@ -101,21 +129,35 @@ public class User_Appointment_Add extends AppCompatActivity {
                 edt_reason.getText().toString(),
                 edt_phone.getText().toString());
 
-        if(Validations.is_valid_phone_number(appointment.getPhone())) {
+        appointment.setAge(agepicker.getValue());
+        appointment.setGender(0);
 
-            if (Validations.is_not_blank_appointment(appointment) && no_of_available_appointments > 0) {
-                appointment.setUserID(userID);
-                if(!appointment_exists_for_day()){
-                    Utils.add_appointment_to_database(appointment, no_of_available_appointments);
-                    database.getReference("TokenNumber").setValue(Integer.parseInt(token_number) + 1);
-                    Toast.makeText(this, "Appointment Added", Toast.LENGTH_SHORT).show();
-                    finish();
-                }else{
-                    finish();
-                    Toast.makeText(this, "Appointment already exists for user", Toast.LENGTH_SHORT).show();
+        if(gender.getCheckedRadioButtonId() != -1)
+        {
+            if(female.isChecked())
+                appointment.setGender(2);
+            else
+                appointment.setGender(1);
+        }
+
+        if(Validations.is_valid_phone_number(appointment.getPhone())) {
+            if(appointment.getGender() != 0){
+                if (Validations.is_not_blank_appointment(appointment) && no_of_available_appointments > 0) {
+                    appointment.setUserID(userID);
+                    if(!appointment_exists_for_day()){
+                        Utils.add_appointment_to_database(appointment, no_of_available_appointments);
+                        database.getReference("TokenNumber").setValue(Integer.parseInt(token_number) + 1);
+                        Toast.makeText(this, "Appointment Added", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }else{
+                        finish();
+                        Toast.makeText(this, "Appointment already exists for user", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this, "Empty field found", Toast.LENGTH_SHORT).show();
                 }
-            } else {
-                Toast.makeText(this, "Empty field found", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(this, "Gender not selected", Toast.LENGTH_SHORT).show();
             }
         }else {
             Toast.makeText(this, "InValid Phone Number", Toast.LENGTH_SHORT).show();

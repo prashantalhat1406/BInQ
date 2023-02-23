@@ -63,6 +63,11 @@ public class Validations {
 
         Validations validations = new Validations(true, "Valid User");
 
+        if (user. getGender() ==  0){
+            validations.setValid(false);
+            validations.setMessage("Gender not selected !!");
+        }
+
         if (user.getPassword().trim().length() < 4){
             validations.setValid(false);
             validations.setMessage("Password should be 4 digit !!");
@@ -83,6 +88,8 @@ public class Validations {
     public static Validations is_valid_user(List<User> all_users, User user) {
 
         user.setName("Temp");
+        user.setGender(5);
+        user.setAge(99);
         Validations validations = is_not_blank_user(user);
 
         if(validations.isValid()){

@@ -33,9 +33,13 @@ public class Admin_Appointment_Add extends AppCompatActivity  implements RadioGr
     EditText edt_user_name;
     TextView edt_reason;
     TextView edt_timeslot;
+
+    NumberPicker agepicker;
     EditText edt_phone;
 
     RadioGroup gender;
+    RadioButton male;
+    RadioButton female;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,19 +53,14 @@ public class Admin_Appointment_Add extends AppCompatActivity  implements RadioGr
         Button but_cancel_appointment = findViewById(R.id.add_appointment_cancel);
         but_cancel_appointment.setOnClickListener(view -> finish());
 
-        /*NumberPicker genderpicker = findViewById(R.id.add_appointment_gender);
-        genderpicker.setMinValue(0);
-        genderpicker.setMaxValue(2);
-        genderpicker.setDisplayedValues( new String[] { "Male", "Female", "Other" } );*/
-
-        NumberPicker agepicker = findViewById(R.id.add_appointment_age);
+        agepicker = findViewById(R.id.add_appointment_age);
         agepicker.setMinValue(1);
         agepicker.setMaxValue(100);
+        agepicker.setValue(25);
 
         gender = findViewById(R.id.rdgroup_gender);
-        //gender.setOnCheckedChangeListener(this);
-        
-
+        male = findViewById(R.id.rdbutton_male);
+        female = findViewById(R.id.rdbutton_female);
 
         Button but_add_appointment = findViewById(R.id.add_appointment_add);
         but_add_appointment.setOnClickListener(view -> add_appointment_to_database());
@@ -93,22 +92,40 @@ public class Admin_Appointment_Add extends AppCompatActivity  implements RadioGr
         edt_timeslot = findViewById(R.id.add_appointment_timeslot_display);
         edt_phone = findViewById(R.id.add_appointment_phone);
 
+
+
         get_token_number();
         Appointment appointment = new Appointment(token_number,
                 edt_user_name.getText().toString(),
                 edt_timeslot.getText().toString(),
                 edt_reason.getText().toString(), edt_phone.getText().toString());
 
+        appointment.setAge(agepicker.getValue());
+        appointment.setGender(0);
+
+        if(gender.getCheckedRadioButtonId() != -1)
+        {
+            if(female.isChecked())
+                appointment.setGender(2);
+            else
+                appointment.setGender(1);
+        }
+
         if(Validations.is_valid_phone_number(appointment.getPhone())){
-            if(Validations.is_not_blank_appointment(appointment) &&
-                    no_of_available_appointments > 0 ) {
-                appointment.setUserID("");
-                Utils.add_appointment_to_database(appointment,  no_of_available_appointments);
-                database.getReference("TokenNumber").setValue(Integer.parseInt(token_number) + 1);
-                finish();
-            }else {
-                Toast.makeText(this, "Empty field found", Toast.LENGTH_SHORT).show();
+            if(appointment.getGender() != 0){
+                if(Validations.is_not_blank_appointment(appointment) &&
+                        no_of_available_appointments > 0 ) {
+                    appointment.setUserID("");
+                    Utils.add_appointment_to_database(appointment,  no_of_available_appointments);
+                    database.getReference("TokenNumber").setValue(Integer.parseInt(token_number) + 1);
+                    finish();
+                }else {
+                    Toast.makeText(this, "Empty field found", Toast.LENGTH_SHORT).show();
+                }
+            }else{
+                Toast.makeText(this, "Gender not selected", Toast.LENGTH_SHORT).show();
             }
+
         }else {
             Toast.makeText(this, "InValid Phone Number", Toast.LENGTH_SHORT).show();
         }

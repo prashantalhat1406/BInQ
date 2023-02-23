@@ -5,6 +5,34 @@ public class User {
     String phone;
     String password;
 
+    int age;
+
+    int gender;
+
+    public User(String name, String phone, String password, int age, int gender) {
+        this.name = name;
+        this.phone = phone;
+        this.password = password;
+        this.age = age;
+        this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
     public String getPassword() {
         return password;
     }
