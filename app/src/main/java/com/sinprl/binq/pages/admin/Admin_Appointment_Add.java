@@ -5,10 +5,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.NumberPicker;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.firebase.database.FirebaseDatabase;
@@ -19,7 +23,7 @@ import com.sinprl.binq.pages.common.TimeSlot_Display_Add;
 import com.sinprl.binq.utils.Utils;
 import com.sinprl.binq.utils.Validations;
 
-public class Admin_Appointment_Add extends AppCompatActivity {
+public class Admin_Appointment_Add extends AppCompatActivity  implements RadioGroup.OnCheckedChangeListener {
 
     String token_number = "";
     FirebaseDatabase database;
@@ -30,6 +34,8 @@ public class Admin_Appointment_Add extends AppCompatActivity {
     TextView edt_reason;
     TextView edt_timeslot;
     EditText edt_phone;
+
+    RadioGroup gender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +48,20 @@ public class Admin_Appointment_Add extends AppCompatActivity {
 
         Button but_cancel_appointment = findViewById(R.id.add_appointment_cancel);
         but_cancel_appointment.setOnClickListener(view -> finish());
+
+        /*NumberPicker genderpicker = findViewById(R.id.add_appointment_gender);
+        genderpicker.setMinValue(0);
+        genderpicker.setMaxValue(2);
+        genderpicker.setDisplayedValues( new String[] { "Male", "Female", "Other" } );*/
+
+        NumberPicker agepicker = findViewById(R.id.add_appointment_age);
+        agepicker.setMinValue(1);
+        agepicker.setMaxValue(100);
+
+        gender = findViewById(R.id.rdgroup_gender);
+        //gender.setOnCheckedChangeListener(this);
+        
+
 
         Button but_add_appointment = findViewById(R.id.add_appointment_add);
         but_add_appointment.setOnClickListener(view -> add_appointment_to_database());
@@ -62,26 +82,7 @@ public class Admin_Appointment_Add extends AppCompatActivity {
         edt_reason = findViewById(R.id.add_appointment_reason_display);
         edt_timeslot = findViewById(R.id.add_appointment_timeslot_display);
 
-        /*Button but_add_appointment = findViewById(R.id.but_appt_add_add);
-        but_add_appointment.setOnClickListener(view -> add_appointment_to_database());
 
-        Button but_cancel_appointment = findViewById(R.id.but_appt_add_cancel);
-        but_cancel_appointment.setOnClickListener(view -> finish());
-
-        edt_reason = findViewById(R.id.edt_appt_add_reason);
-
-        edt_reason.setOnClickListener(view -> {
-            Intent intent = new Intent(Admin_Appointment_Add.this, Reason_Display_Add.class);
-            startActivityForResult(intent,100);
-        });
-
-        edt_timeslot = findViewById(R.id.edt_appt_add_time);
-
-        edt_timeslot.setOnClickListener(view -> {
-            Intent intent = new Intent(Admin_Appointment_Add.this, TimeSlot_Display_Add.class);
-            startActivityForResult(intent,200);
-
-        });*/
 
 
     }
@@ -140,5 +141,25 @@ public class Admin_Appointment_Add extends AppCompatActivity {
                 break;
             }
         }
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+//        RadioButton maleButton = (RadioButton) gender.findViewById(R.id.rdbutton_male);
+//        RadioButton femaleButton = (RadioButton) gender.findViewById(R.id.rdbutton_female);
+//        RadioButton otherButton = (RadioButton) gender.findViewById(R.id.rdbutton_other);
+//
+//        switch (i){
+//            case R.id.rdbutton_male:
+//                maleButton.setBackgroundColor(Color.BLUE);
+//                femaleButton.setBackgroundColor(Color.TRANSPARENT);
+//                otherButton.setBackgroundColor(Color.TRANSPARENT);
+//                break;
+//            case R.id.rdbutton_female:
+//                maleButton.setBackgroundColor(Color.TRANSPARENT);
+//                femaleButton.setBackgroundColor(Color.BLUE);
+//                otherButton.setBackgroundColor(Color.TRANSPARENT);
+//                break;
+//        }
     }
 }

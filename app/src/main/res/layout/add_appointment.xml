@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent" android:orientation="vertical"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="0dp" android:layout_gravity="center"
         android:layout_height="wrap_content" >
@@ -29,68 +29,74 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="0dp"
         android:layout_height="wrap_content" >
 
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/round_corners"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            app:boxStrokeWidth="0dp"
-            android:gravity="center_vertical"
-            app:boxStrokeWidthFocused="0dp"
-            app:hintEnabled="false"
-            >
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_corners"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                app:boxStrokeWidth="0dp"
+                android:gravity="center_vertical"
+                app:boxStrokeWidthFocused="0dp"
+                app:hintEnabled="false"
+                >
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add_appointment_username"
-                android:hint="Patient Name"
-                android:textColorHint="@color/black"
-                android:textColor="@color/black"
-                android:textAlignment="center"
-                android:inputType="textPersonName"
-                android:layout_width="match_parent" android:background="@drawable/round_corners"
-                android:layout_height="50dp"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/add_appointment_username"
+                    android:hint="Patient Name"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    android:inputType="textPersonName"
+                    android:layout_width="match_parent" android:background="@drawable/round_corners"
+                    android:layout_height="50dp"/>
 
-        </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/round_corners"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            app:boxStrokeWidth="0dp"
-            android:gravity="center_vertical"
-            app:boxStrokeWidthFocused="0dp"
-            app:hintEnabled="false"
-            >
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_corners"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                app:boxStrokeWidth="0dp"
+                android:gravity="center_vertical"
+                app:boxStrokeWidthFocused="0dp"
+                app:hintEnabled="false"
+                >
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add_appointment_phone"
-                android:hint="Mobile Number"
-                android:textColorHint="@color/black"
-                android:textColor="@color/black"
-                android:textAlignment="center"
-                android:ems="10"
-                android:maxLength="10"
-                android:inputType="phone"
-                android:layout_width="match_parent" android:background="@drawable/round_corners"
-                android:layout_height="50dp"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/add_appointment_phone"
+                    android:hint="Mobile Number"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    android:ems="10"
+                    android:maxLength="10"
+                    android:inputType="phone"
+                    android:layout_width="match_parent" android:background="@drawable/round_corners"
+                    android:layout_height="50dp"/>
 
-        </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent" android:orientation="horizontal"
             android:background="@drawable/round_corners"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:layout_height="wrap_content">
@@ -185,6 +191,124 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
                     />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent" android:orientation="horizontal"
+            android:background="@drawable/round_corners"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="0dp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent" android:orientation="vertical"
+                android:layout_height="wrap_content" android:layout_weight="0.5">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:text="Select Age"
+                    />
+                <NumberPicker
+                    android:id="@+id/add_appointment_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="0dp"
+                    />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent" android:orientation="vertical"
+                android:layout_height="wrap_content" android:layout_weight="0.5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:text="Select Gender"
+                    />
+
+                <!--<NumberPicker
+                    android:id="@+id/add_appointment_gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="0dp"
+                    />-->
+
+                <RadioGroup
+                    android:id="@+id/rdgroup_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:background="@drawable/radiobuttons_gender"
+                        android:id="@+id/rdbutton_male"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginBottom="10dp"
+                        android:button="@null"
+                        android:drawableTop="@drawable/male"
+                        android:text="M"
+                        android:gravity="center"
+                        />
+
+                    <RadioButton
+                        android:background="@drawable/radiobuttons_gender"
+                        android:id="@+id/rdbutton_female"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="F"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginBottom="10dp"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:drawableTop="@drawable/female"
+                        />
+
+
+
+
+                </RadioGroup>
+
+
             </LinearLayout>
 
         </LinearLayout>
