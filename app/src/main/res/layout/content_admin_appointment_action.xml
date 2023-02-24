@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+
+    android:background="@color/teal_200"
+    android:layout_height="match_parent" android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- <LinearLayout
+        android:layout_width="match_parent" android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:layout_height="match_parent" android:layout_weight="0.9">
+
+        <TextView
+            android:id="@+id/edt_home_welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:text="Appointment Details"
+            />
+
+    </LinearLayout> -->
+
+    <LinearLayout
+        android:layout_width="match_parent" android:orientation="vertical"
+        android:background="@drawable/round_corners"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_height="match_parent" android:layout_weight="0.1">
+
+        <LinearLayout
+            android:layout_width="match_parent" android:orientation="horizontal"
+
+            android:background="@drawable/round_corners"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="0dp"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/txt_apt_details_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Vikas Malhotra"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txt_apt_details_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="25"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/txt_apt_details_username"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/txt_apt_details_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="0dp"
+                    android:text="  9823956268"
+                    android:drawableStart="@drawable/userphone"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txt_apt_details_username"
+                    />
+
+                <TextView
+                    android:id="@+id/txt_apt_details_gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Male"
+                    android:drawableStart="@drawable/male"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/txt_apt_details_phone"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent" android:orientation="vertical"
+
+            android:background="@drawable/round_corners"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent" android:layout_weight="0.8"
+                android:layout_height="match_parent" android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Complaint : "
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/txt_apt_details_complaint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Weakness"
+                    android:gravity="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent" android:orientation="horizontal"
+                android:layout_weight="0.2"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.65"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Status : "
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RadioGroup
+                    android:id="@+id/rdgroup_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.33"
+                    android:gravity="center"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="0dp"
+                    android:background="@drawable/rectangle_corners"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:background="@drawable/radiobuttons_done"
+                        android:id="@+id/rdbutton_done"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:button="@null"
+                        android:text="Done"
+                        android:gravity="center"
+                        />
+
+                    <RadioButton
+                        android:background="@drawable/radiobuttons_cancel"
+                        android:id="@+id/rdbutton_cancel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cancel"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="4dp"
+                        android:button="@null"
+                        android:gravity="center"
+
+                        />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent" android:orientation="horizontal"
+                android:layout_weight="0.22"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent" android:layout_weight="0.8"
+                    android:layout_height="wrap_content" android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.65"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="Treatment Given :"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/treatmentgiven"
+                        android:background="@drawable/rectangle_corners"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:inputType="text|textMultiLine"
+                        />
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent" android:orientation="horizontal"
+                android:layout_weight="0.2"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent" android:layout_weight="0.8"
+                    android:layout_height="wrap_content" android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.65"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="Follow up Date : "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txt_followupdate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.33"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:textColor="@color/black"
+                        android:text=" 22FEB2023"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent" android:orientation="horizontal"
+                android:layout_weight="0.2"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.1"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Payment : "
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RadioGroup
+                    android:id="@+id/rdgroup_payment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:gravity="center"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="0dp"
+                    android:background="@drawable/rectangle_corners"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:background="@drawable/radiobuttons_blue"
+                        android:id="@+id/rdbutton_cash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:button="@null"
+                        android:text="Cash"
+                        android:gravity="center"
+                        />
+
+                    <RadioButton
+                        android:background="@drawable/radiobuttons_blue"
+                        android:id="@+id/rdbutton_online"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Online"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="4dp"
+                        android:button="@null"
+                        android:gravity="center"
+
+                        />
+
+
+
+
+                </RadioGroup>
+
+                <EditText
+                    android:id="@+id/appointment_amount"
+                    android:layout_width="match_parent" android:layout_weight="0.1"
+                    android:layout_gravity="center"
+                    android:inputType="number"
+                    android:hint="Amount"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:drawableStart="@drawable/rupee"
+                    android:gravity="center"
+                    android:layout_height="wrap_content" />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent" android:orientation="vertical"
+                android:layout_weight="0.8"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/button_appointment_details_save"
+                    android:background="@drawable/round_corners"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="wrap_content" android:text="Save"
+                    android:layout_height="match_parent" />
+
+
+
+            </LinearLayout>
+
+
+
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

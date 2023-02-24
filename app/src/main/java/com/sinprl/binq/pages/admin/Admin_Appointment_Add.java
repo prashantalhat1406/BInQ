@@ -1,6 +1,7 @@
 package com.sinprl.binq.pages.admin;
 
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,17 +16,27 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.sinprl.binq.R;
 import com.sinprl.binq.dataclasses.Appointment;
+import com.sinprl.binq.dataclasses.User;
 import com.sinprl.binq.pages.common.Reason_Display_Add;
 import com.sinprl.binq.pages.common.TimeSlot_Display_Add;
 import com.sinprl.binq.utils.Utils;
 import com.sinprl.binq.utils.Validations;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Admin_Appointment_Add extends AppCompatActivity  implements RadioGroup.OnCheckedChangeListener {
 
     String token_number = "";
+    List<User> all_users;
     FirebaseDatabase database;
 
     int no_of_available_appointments;
@@ -49,6 +60,8 @@ public class Admin_Appointment_Add extends AppCompatActivity  implements RadioGr
 
         database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
         get_token_number();
+        all_users = new ArrayList<>();
+        get_all_users_from_database();
 
         Button but_cancel_appointment = findViewById(R.id.add_appointment_cancel);
         but_cancel_appointment.setOnClickListener(view -> finish());
@@ -113,9 +126,14 @@ public class Admin_Appointment_Add extends AppCompatActivity  implements RadioGr
 
         if(Validations.is_valid_phone_number(appointment.getPhone())){
             if(appointment.getGender() != 0){
-                if(Validations.is_not_blank_appointment(appointment) &&
-                        no_of_available_appointments > 0 ) {
-                    appointment.setUserID("");
+                if(Validations.is_not_blank_appointment(appointment) && no_of_available_appointments > 0 ) {
+                    User user = new User(appointment.getUser_name(),appointment.getPhone(),"0000", appointment.getAge(), appointment.getGender());
+                    if(!is_existing_user(user))
+                    {
+                        DatabaseReference userprofilesref = database.getReference("Users/Profiles/");
+                        userprofilesref.child(edt_phone.getText().toString()).setValue(user);
+                    }
+                    appointment.setUserID(appointment.getPhone());
                     Utils.add_appointment_to_database(appointment,  no_of_available_appointments);
                     database.getReference("TokenNumber").setValue(Integer.parseInt(token_number) + 1);
                     finish();
@@ -136,8 +154,38 @@ public class Admin_Appointment_Add extends AppCompatActivity  implements RadioGr
 
     }
 
+    private boolean is_existing_user(User user) {
+        boolean user_exists = false;
+
+        for (User u: all_users) {
+            if(u.getPhone().equals(user.getPhone()))
+            {
+                user_exists = true; break;
+            }
+        }
+        return user_exists;
+    }
+
     private void get_token_number() {
         database.getReference("TokenNumber").get().addOnCompleteListener(task -> token_number = String.valueOf(task.getResult().getValue()));
+    }
+
+    private void get_all_users_from_database() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
+        DatabaseReference databaseReference = database.getReference("Users/Profiles/");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                all_users.clear();
+                for (DataSnapshot s : snapshot.getChildren()){
+                    User user = s.getValue(User.class);
+                    all_users.add(user);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
     @Override

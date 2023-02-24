@@ -16,7 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-
+import android.widget.TextView;
 
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -171,7 +171,20 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
     @Override
     public void onItemClick(View view, int position) {
         //code to handle appointment display list click
-        if(appointments.get(position).getActive() == 1) {
+
+        String userID = ((TextView) view.findViewById(R.id.txt_apt_item_phone)).getText().toString().trim();
+
+        Intent intent = new Intent(view.getContext(), Admin_Appointment_Action.class);
+        intent.putExtra("userID", userID);
+        intent.putExtra("appointmentID", appointments.get(position).getId());
+        intent.putExtra("username", appointments.get(position).getUser_name());
+        intent.putExtra("userage", appointments.get(position).getAge());
+        intent.putExtra("usergender", appointments.get(position).getGender());
+        intent.putExtra("userphone", appointments.get(position).getPhone());
+        intent.putExtra("reason", appointments.get(position).getReason());
+        startActivity(intent);
+        finish();
+        /*if(appointments.get(position).getActive() == 1) {
 
             final Dialog dialog = new Dialog(Admin_Appointment_Display.this);
             dialog.setContentView(R.layout.dialog_appointment_action);
@@ -192,6 +205,6 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
                 dialog.dismiss();
             });
             dialog.show();
-        }
+        }*/
     }
 }

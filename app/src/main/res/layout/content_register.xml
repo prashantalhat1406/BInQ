@@ -181,7 +181,7 @@
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:background="@drawable/radiobuttons_gender"
+                        android:background="@drawable/radiobuttons_blue"
                         android:id="@+id/rdbutton_register_male"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -196,7 +196,7 @@
                         />
 
                     <RadioButton
-                        android:background="@drawable/radiobuttons_gender"
+                        android:background="@drawable/radiobuttons_blue"
                         android:id="@+id/rdbutton_register_female"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

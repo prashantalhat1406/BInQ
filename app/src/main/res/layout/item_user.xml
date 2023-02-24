@@ -28,6 +28,7 @@
                 android:layout_marginBottom="8dp"
                 android:text="  Vikas Malhotra"
                 android:drawableStart="@drawable/person"
+                android:textColor="@color/black"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

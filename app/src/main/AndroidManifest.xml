@@ -13,9 +13,13 @@
         android:theme="@style/Theme.BInQ"
         tools:targetApi="31">
         <activity
+            android:name=".pages.admin.Admin_Appointment_Action"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name=".pages.admin.Admin_User_History_Display"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".pages.users.User_Appointment_History"
             android:exported="false" />

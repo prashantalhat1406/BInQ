@@ -8,6 +8,11 @@ public class Appointment {
     int age;
     int gender;
 
+    int amount;
+    String followupdate;
+    String treatment;
+    int paymentmethod;
+
     String date_of_appointment;
     String reason;
     String phone;
@@ -139,4 +144,35 @@ public class Appointment {
         this.reason = reason;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public String getFollowupdate() {
+        return followupdate;
+    }
+
+    public void setFollowupdate(String followupdate) {
+        this.followupdate = followupdate;
+    }
+
+    public String getTreatment() {
+        return treatment;
+    }
+
+    public void setTreatment(String treatment) {
+        this.treatment = treatment;
+    }
+
+    public int getPaymentmethod() {
+        return paymentmethod;
+    }
+
+    public void setPaymentmethod(int paymentmethod) {
+        this.paymentmethod = paymentmethod;
+    }
 }
