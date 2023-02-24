@@ -28,6 +28,7 @@ import com.sinprl.binq.adaptors.UserListAdaptor;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.dataclasses.User;
 import com.sinprl.binq.intefaces.OnItemClickListener;
+import com.sinprl.binq.pages.common.User_Appointment_Details_History;
 import com.sinprl.binq.pages.login.Home;
 import com.sinprl.binq.utils.Utils;
 import com.sinprl.binq.utils.comparators.Appointment_Comparator;
@@ -135,9 +136,14 @@ public class Admin_User_History_Display extends AppCompatActivity implements OnI
     public void onItemClick(View view, int position) {
         //code to handle appointment display list click
 
-        String selected = ((TextView) view.findViewById(R.id.txt_user_item_user_name)).getText().toString();
+        String selected = ((TextView) view.findViewById(R.id.txt_user_item_phone)).getText().toString();
 
-        Toast.makeText(this, ""+selected + " Clicked", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(view.getContext(), User_Appointment_Details_History.class);
+        intent.putExtra("userID", selected);
+        startActivity(intent);
+
+        //Toast.makeText(this, ""+selected + " Clicked", Toast.LENGTH_SHORT).show();
 
     }
 }

@@ -110,7 +110,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/item_appointment_detauls_queue" />
+            tools:listitem="@layout/item_appointment_details_queue" />
 
 
 

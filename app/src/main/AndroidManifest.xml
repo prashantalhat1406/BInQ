@@ -13,7 +13,7 @@
         android:theme="@style/Theme.BInQ"
         tools:targetApi="31">
         <activity
-            android:name=".User_Appointment_Details_History"
+            android:name=".pages.common.User_Appointment_Details_History"
             android:exported="false" />
         <activity
             android:name=".pages.admin.Admin_Appointment_Action"

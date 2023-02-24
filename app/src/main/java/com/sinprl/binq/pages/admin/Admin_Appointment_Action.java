@@ -159,6 +159,14 @@ public class Admin_Appointment_Action extends AppCompatActivity implements View.
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Admin_Appointment_Action.this, Admin_Appointment_Display.class);
+        startActivity(intent);
+        finish();
+        super.onBackPressed();
+    }
+
 
     @Override
     public void onClick(View view) {

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp"
+    android:layout_marginTop="18dp"
     android:layout_marginEnd="8dp"
     android:layout_marginBottom="8dp"
     >
@@ -60,7 +60,7 @@
                 android:layout_marginEnd="8dp"
                 android:text="  500 ( cash )"
                 android:drawableStart="@drawable/rupee"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txt_appointment_details_status"
                 />
@@ -101,7 +101,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp"
                 android:text="23FEB2023"
-
+                android:textColor="@color/black"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintStart_toEndOf="@id/txt_appointment_details_followupdate2"
                 app:layout_constraintTop_toBottomOf="@id/txt_appointment_details_amount"
@@ -109,11 +109,13 @@
 
             <TextView
                 android:id="@+id/txt_appointment_details_treatment"
+                android:background="@drawable/rectangle_corners"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp"
+                android:padding="8dp"
                 android:text="This is treatment given"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintStart_toStartOf="parent"
