@@ -178,9 +178,7 @@ public class Admin_Appointment_Action extends AppCompatActivity implements View.
             Intent intent = new Intent(Admin_Appointment_Action.this, Admin_Appointment_Display.class);
             startActivity(intent);
             finish();
-        }
-
-        if (done.isChecked()){
+        } else if (done.isChecked()){
             if(payment.getCheckedRadioButtonId() != -1){
                 if(amount.getText().toString().length() != 0){
                     if(treatmentgiven.getText().toString().trim().length() != 0){

@@ -51,14 +51,22 @@ public class AppointmentDetailsAdaptor extends RecyclerView.Adapter<AppointmentD
         Appointment appointment = appointments.get(position);
 
         holder.reason.setText(appointment.getReason());
+        if (appointment.getActive() == 2){
+            if(appointment.getPaymentmethod() == 1)
+                holder.amount.setText(" "+appointment.getAmount() + " (cash)");
+            else
+                holder.amount.setText(" "+appointment.getAmount() + " (online)");
+            holder.treatment.setText(" "+ appointment.getTreatment());
+            holder.followupdate.setText(" "+appointment.getFollowupdate() );
+        }else{
+            holder.amount.setVisibility(View.GONE);
+            holder.treatment.setVisibility(View.GONE);
+            holder.treatment_title.setVisibility(View.GONE);
+            holder.followupdate.setVisibility(View.GONE);
+            holder.followupdate_label.setVisibility(View.GONE);
+        }
 
-        if(appointment.getPaymentmethod() == 1)
-            holder.amount.setText(" "+appointment.getAmount() + " (cash)");
-        else
-            holder.amount.setText(" "+appointment.getAmount() + " (online)");
 
-        holder.treatment.setText(" "+ appointment.getTreatment());
-        holder.followupdate.setText(" "+appointment.getFollowupdate() );
 
         DateFormat source_dateformat = new SimpleDateFormat("yyyyddMM", Locale.US);
         DateFormat target_dateformat = new SimpleDateFormat("ddMMMyyyy", Locale.US);
@@ -95,7 +103,9 @@ public class AppointmentDetailsAdaptor extends RecyclerView.Adapter<AppointmentD
 
         public final TextView appointmentdate;
         public final TextView followupdate;
+        public final TextView followupdate_label;
         public final TextView treatment;
+        public final TextView treatment_title;
         public final TextView reason;
 
         public final TextView amount;
@@ -106,9 +116,11 @@ public class AppointmentDetailsAdaptor extends RecyclerView.Adapter<AppointmentD
             status =  itemView.findViewById(R.id.txt_appointment_details_status);
             reason =  itemView.findViewById(R.id.txt_appointment_details_reason);
             treatment =  itemView.findViewById(R.id.txt_appointment_details_treatment);
+            treatment_title =  itemView.findViewById(R.id.txt_appointment_details_treatment_title);
             appointmentdate =  itemView.findViewById(R.id.txt_appointment_details_appointmentdate);
             amount =  itemView.findViewById(R.id.txt_appointment_details_amount);
             followupdate =  itemView.findViewById(R.id.txt_appointment_details_followupdate);
+            followupdate_label =  itemView.findViewById(R.id.txt_appointment_details_followupdate2);
         }
     }
 

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -46,11 +47,13 @@ public class User_Appointment_Details_History extends AppCompatActivity implemen
 
         userID = getIntent().getExtras().getString("userID","");
 
+
+
         populateUserAppointmentsHistory();
 
 
 
-        Toast.makeText(this, "LOK", Toast.LENGTH_SHORT).show();
+
     }
 
     public void populateUserAppointmentsHistory() {
@@ -59,16 +62,10 @@ public class User_Appointment_Details_History extends AppCompatActivity implemen
         final LinearLayoutManager appointmentLayoutManager = new LinearLayoutManager(this);
         appointment_recycle_view.setLayoutManager(appointmentLayoutManager);
 
-
-        //user_appointments_history.add(new Appointment("21", "Pra A", "07:90 pm", "Pain", "1234567895"));
-        //DatabaseReference databaseReference = database.getReference("Appointment/");
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
         DatabaseReference databaseReference = database.getReference("Users/Appointments/"+userID.trim()+"/");//+ Utils.get_current_date_ddmmyy() +"/");
 
-        //Log.d("Appointments", "" + "Users/Appointments/"+userID+"/"+ Utils.get_current_date_ddmmyy() +"/");
 
-
-        //DatabaseReference databaseReference = database.getReference("Appointment/" + Utils.get_current_date_ddmmyy());
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -76,7 +73,6 @@ public class User_Appointment_Details_History extends AppCompatActivity implemen
 
                 for (DataSnapshot datewise_appointment_collection : snapshot.getChildren()) {
                     String appointment_date = datewise_appointment_collection.getKey();
-                    Log.d("DETAIL", ""+appointment_date);
                     for (DataSnapshot appointment_snapshot : datewise_appointment_collection.getChildren()) {
                         Appointment appointment = appointment_snapshot.getValue(Appointment.class);
                         appointment.setId(appointment_snapshot.getKey());
@@ -86,9 +82,26 @@ public class User_Appointment_Details_History extends AppCompatActivity implemen
                     user_appointments_history.sort(new Appointment_History_Comparator());
                     AppointmentDetailsAdaptor appointmentListAdaptor = new AppointmentDetailsAdaptor(User_Appointment_Details_History.this, user_appointments_history, User_Appointment_Details_History.this);
                     appointment_recycle_view.setAdapter(appointmentListAdaptor);
-                    Toast.makeText(User_Appointment_Details_History.this, "Data arrived", Toast.LENGTH_SHORT).show();
-
                 }
+                Appointment a = user_appointments_history.get(0);
+                TextView name = findViewById(R.id.txt_user_appointment_details_username);
+                name.setText(a.getUser_name());
+                TextView phone = findViewById(R.id.txt_user_appointment_details_phone);
+                phone.setText(" " + a.getPhone());
+                TextView age = findViewById(R.id.txt_user_appointment_details_age);
+                age.setText(""+a.getAge());
+                TextView gender = findViewById(R.id.txt_user_appointment_details_gender);
+
+                if(a.getGender() == 1){
+                    gender.setText("Male");
+                    gender.setCompoundDrawablesWithIntrinsicBounds(R.drawable.male, 0, 0, 0);
+
+                } else if (a.getGender() ==2) {
+                    gender.setText("Female");
+                    gender.setCompoundDrawablesWithIntrinsicBounds(R.drawable.female, 0, 0, 0);
+                }
+
+
             }
 
             @Override
@@ -97,31 +110,7 @@ public class User_Appointment_Details_History extends AppCompatActivity implemen
             }
         });
 
-        /*databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                user_appointments_history.clear();
-                for (DataSnapshot datewise_appointment_collection : snapshot.getChildren()) {
-                    String appointment_date = datewise_appointment_collection.getKey();
-                    for (DataSnapshot appointment_snapshot : datewise_appointment_collection.getChildren()) {
-                        Appointment appointment = appointment_snapshot.getValue(Appointment.class);
-                        appointment.setId(appointment_snapshot.getKey());
-                        appointment.setDate_of_appointment(appointment_date);
-                        user_appointments_history.add(appointment);
-                    }
-                    user_appointments_history.sort(new Appointment_History_Comparator());
-                    AppointmentHistoryListAdaptor appointmentListAdaptor = new AppointmentHistoryListAdaptor(User_Appointment_Details_History.this, user_appointments_history, User_Appointment_Details_History.this);
-                    appointment_recycle_view.setAdapter(appointmentListAdaptor);
-                    Toast.makeText(User_Appointment_Details_History.this, "Data arrived", Toast.LENGTH_SHORT).show();
 
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(User_Appointment_Details_History.this, "Data error" + error.toString(), Toast.LENGTH_SHORT).show();
-
-            }
-        });*/
     }
 
     @Override
