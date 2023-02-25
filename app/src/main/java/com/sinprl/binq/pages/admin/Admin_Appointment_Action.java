@@ -14,25 +14,14 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.firebase.database.FirebaseDatabase;
 import com.sinprl.binq.R;
-import com.sinprl.binq.dataclasses.Appointment;
-import com.sinprl.binq.dataclasses.User;
 import com.sinprl.binq.utils.Utils;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
 
 public class Admin_Appointment_Action extends AppCompatActivity implements View.OnClickListener {
 
-    User user;
-    List<User> all_users;
-    Appointment appointment;
-
-    FirebaseDatabase database;
     String userID,appointmentID,userphone,username,reason;
     int userage, usergender;
 
@@ -42,7 +31,7 @@ public class Admin_Appointment_Action extends AppCompatActivity implements View.
     RadioGroup payment;
     RadioButton cash, online, done, cancel;
     final Calendar myCalendar= Calendar.getInstance();
-    String myFormat="ddMMMYYYY";
+    final String myFormat="ddMMMYYYY";
     SimpleDateFormat dateFormat;
 
 
@@ -50,8 +39,6 @@ public class Admin_Appointment_Action extends AppCompatActivity implements View.
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_appointment_action);
-
-        database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
 
         userID = getIntent().getExtras().getString("userID","");
         appointmentID = getIntent().getExtras().getString("appointmentID","");
