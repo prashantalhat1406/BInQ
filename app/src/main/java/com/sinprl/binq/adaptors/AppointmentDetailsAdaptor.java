@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sinprl.binq.R;
@@ -52,7 +53,7 @@ public class AppointmentDetailsAdaptor extends RecyclerView.Adapter<AppointmentD
         Appointment appointment = appointments.get(position);
 
         holder.reason.setText(appointment.getReason());
-        if (appointment.getActive() == 2){
+        if (appointment.getActive() == 0){
             if(appointment.getPaymentmethod() == 1)
                 holder.amount.setText(" "+appointment.getAmount() + " (cash)");
             else
@@ -83,10 +84,16 @@ public class AppointmentDetailsAdaptor extends RecyclerView.Adapter<AppointmentD
             throw new RuntimeException(e);
         }
 
+//        switch (appointment.getActive()){
+//            case 1 : holder.status.setText(R.string.appointment_active);holder.status.setTextColor(Color.BLUE);break;
+//            case 0 : holder.status.setText(R.string.appointment_cancel);holder.status.setTextColor(Color.RED);break;
+//            case 2 : holder.status.setText(R.string.appointment_done);holder.status.setTextColor(Color.GREEN);break;
+//        }
+
         switch (appointment.getActive()){
-            case 1 : holder.status.setText(R.string.appointment_active);holder.status.setTextColor(Color.BLUE);break;
-            case 0 : holder.status.setText(R.string.appointment_cancel);holder.status.setTextColor(Color.RED);break;
-            case 2 : holder.status.setText(R.string.appointment_done);holder.status.setTextColor(Color.GREEN);break;
+            case 1 : holder.card.setBackgroundResource(R.drawable.appointment_active); break;
+            case 0 : holder.card.setBackgroundResource(R.drawable.appointment_done); break;
+            case 2 : holder.card.setBackgroundResource(R.drawable.appointment_cancel); break;
         }
 
         holder.itemView.setOnClickListener(view -> mOnItemClickListener.onItemClick(view,position));
@@ -102,7 +109,7 @@ public class AppointmentDetailsAdaptor extends RecyclerView.Adapter<AppointmentD
 
 
 
-        public final TextView status;
+        //public final TextView status;
 
         public final TextView appointmentdate;
         public final TextView followupdate;
@@ -113,10 +120,12 @@ public class AppointmentDetailsAdaptor extends RecyclerView.Adapter<AppointmentD
 
         public final TextView amount;
 
+        public final ConstraintLayout card;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            status =  itemView.findViewById(R.id.txt_appointment_details_status);
+            //status =  itemView.findViewById(R.id.txt_appointment_details_status);
             reason =  itemView.findViewById(R.id.txt_appointment_details_reason);
             treatment =  itemView.findViewById(R.id.txt_appointment_details_treatment);
             treatment_title =  itemView.findViewById(R.id.txt_appointment_details_treatment_title);
@@ -124,6 +133,7 @@ public class AppointmentDetailsAdaptor extends RecyclerView.Adapter<AppointmentD
             amount =  itemView.findViewById(R.id.txt_appointment_details_amount);
             followupdate =  itemView.findViewById(R.id.txt_appointment_details_followupdate);
             followupdate_label =  itemView.findViewById(R.id.txt_appointment_details_followupdate2);
+            card = itemView.findViewById(R.id.appointment_details_card);
         }
     }
 

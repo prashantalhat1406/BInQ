@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginBottom="4dp"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -21,18 +27,18 @@
                 android:id="@+id/txt_apt_item_token"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="02"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:background="@drawable/circle_textview"
                 android:gravity="center"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_apt_item_user_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 />
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/txt_appointment_item_status"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -82,13 +88,13 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/txt_appointment_item_cancel"
 
-                />
+                />-->
 
             <TextView
                 android:id="@+id/txt_apt_item_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
@@ -107,7 +113,7 @@
                 android:layout_marginEnd="8dp"
                 android:text="  07:15 PM"
                 android:drawableStart="@drawable/timeslot_icon"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/txt_apt_item_user_name"
                 app:layout_constraintBottom_toBottomOf="parent"/>
@@ -117,26 +123,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="High Feaver"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:layout_constraintStart_toEndOf="@id/txt_apt_item_token"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txt_apt_item_user_name" />
 
             <TextView
                 android:id="@+id/txt_apt_item_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="0dp"
                 android:text="  9823956268"
                 android:drawableStart="@drawable/userphone"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:layout_constraintStart_toEndOf="@id/txt_apt_item_token"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_apt_item_reason"
                 app:layout_constraintBottom_toBottomOf="parent"
                  />
 

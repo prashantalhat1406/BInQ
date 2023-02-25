@@ -69,13 +69,19 @@ public class AppointmentHistoryListAdaptor extends RecyclerView.Adapter<Appointm
         holder.phone.setText(" "+appointment.getPhone());
 
         switch (appointment.getActive()){
-            case 1 : holder.status.setText(R.string.appointment_active);holder.status.setTextColor(Color.BLUE);break;
-            case 0 : holder.status.setText(R.string.appointment_cancel);holder.status.setTextColor(Color.RED);break;
-            case 2 : holder.status.setText(R.string.appointment_done);holder.status.setTextColor(Color.GREEN);break;
+            case 1 : holder.card.setBackgroundResource(R.drawable.appointment_active); break;
+            case 0 : holder.card.setBackgroundResource(R.drawable.appointment_done); break;
+            case 2 : holder.card.setBackgroundResource(R.drawable.appointment_cancel); break;
         }
 
-        holder.action_done.setVisibility(View.GONE);
-        holder.action_cancel.setVisibility(View.GONE);
+//        switch (appointment.getActive()){
+//            case 1 : holder.status.setText(R.string.appointment_active);holder.status.setTextColor(Color.BLUE);break;
+//            case 0 : holder.status.setText(R.string.appointment_cancel);holder.status.setTextColor(Color.RED);break;
+//            case 2 : holder.status.setText(R.string.appointment_done);holder.status.setTextColor(Color.GREEN);break;
+//        }
+//
+//        holder.action_done.setVisibility(View.GONE);
+//        holder.action_cancel.setVisibility(View.GONE);
 
         holder.itemView.setOnClickListener(view -> mOnItemClickListener.onItemClick(view,position));
 
@@ -90,28 +96,28 @@ public class AppointmentHistoryListAdaptor extends RecyclerView.Adapter<Appointm
 
         public final TextView token;
 
-        public final TextView status;
+//        public final TextView status;
         public final TextView user_name;
         public final TextView time;
         public final TextView reason;
         public final TextView phone;
 
-        public final TextView action_done;
-        public final TextView action_cancel;
+//        public final TextView action_done;
+//        public final TextView action_cancel;
 
         public final CardView card;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             token =  itemView.findViewById(R.id.txt_apt_item_token);
-            status =  itemView.findViewById(R.id.txt_appointment_item_status);
+//            status =  itemView.findViewById(R.id.txt_appointment_item_status);
             user_name =  itemView.findViewById(R.id.txt_apt_item_user_name);
             time =  itemView.findViewById(R.id.txt_apt_item_time);
             reason =  itemView.findViewById(R.id.txt_apt_item_reason);
             phone =  itemView.findViewById(R.id.txt_apt_item_phone);
             card = itemView.findViewById(R.id.lay_appt_list_item);
-            action_done = itemView.findViewById(R.id.txt_appointment_item_done);
-            action_cancel = itemView.findViewById(R.id.txt_appointment_item_cancel);
+//            action_done = itemView.findViewById(R.id.txt_appointment_item_done);
+//            action_cancel = itemView.findViewById(R.id.txt_appointment_item_cancel);
         }
     }
 

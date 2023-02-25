@@ -61,9 +61,9 @@ public class Utils {
         DatabaseReference admin_appointment_ref = database.getReference("Appointment/" + Utils.get_current_date_ddmmyy() );
         DatabaseReference user_appointment_ref = database.getReference("Users/Appointments/" + userID + "/" + Utils.get_current_date_ddmmyy() );
 
-        admin_appointment_ref.child(appointmentID + "/active/").setValue(0);
+        admin_appointment_ref.child(appointmentID + "/active/").setValue(2);
         if(userID.length() != 0)
-            user_appointment_ref.child(appointmentID + "/active/").setValue(0);
+            user_appointment_ref.child(appointmentID + "/active/").setValue(2);
     }
 
     public static void mark_appointment_done(String appointmentID, String userID ){
@@ -71,9 +71,9 @@ public class Utils {
         DatabaseReference admin_appointment_ref = database.getReference("Appointment/" + Utils.get_current_date_ddmmyy() );
         DatabaseReference user_appointment_ref = database.getReference("Users/Appointments/" + userID + "/" + Utils.get_current_date_ddmmyy() );
 
-        admin_appointment_ref.child(appointmentID + "/active/").setValue(2);
+        admin_appointment_ref.child(appointmentID + "/active/").setValue(0);
         if(userID.length() != 0)
-            user_appointment_ref.child(appointmentID + "/active/").setValue(2);
+            user_appointment_ref.child(appointmentID + "/active/").setValue(0);
     }
 
     public static void mark_appointment_done(String appointmentID, String userID, int payment_method, int amount, String treatmentgiven, String followupdate ){
@@ -81,13 +81,13 @@ public class Utils {
         DatabaseReference admin_appointment_ref = database.getReference("Appointment/" + Utils.get_current_date_ddmmyy() );
         DatabaseReference user_appointment_ref = database.getReference("Users/Appointments/" + userID + "/" + Utils.get_current_date_ddmmyy() );
 
-        admin_appointment_ref.child(appointmentID + "/active/").setValue(2);
+        admin_appointment_ref.child(appointmentID + "/active/").setValue(0);
         admin_appointment_ref.child(appointmentID + "/amount/").setValue(amount);
         admin_appointment_ref.child(appointmentID + "/paymentmethod/").setValue(payment_method);
         admin_appointment_ref.child(appointmentID + "/treatment/").setValue(treatmentgiven);
         admin_appointment_ref.child(appointmentID + "/followupdate/").setValue(followupdate);
         if(userID.length() != 0) {
-            user_appointment_ref.child(appointmentID + "/active/").setValue(2);
+            user_appointment_ref.child(appointmentID + "/active/").setValue(0);
             user_appointment_ref.child(appointmentID + "/amount/").setValue(amount);
             user_appointment_ref.child(appointmentID + "/paymentmethod/").setValue(payment_method);
             user_appointment_ref.child(appointmentID + "/treatment/").setValue(treatmentgiven);
