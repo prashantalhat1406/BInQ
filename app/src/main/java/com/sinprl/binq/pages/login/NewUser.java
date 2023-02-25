@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sinprl.binq.R;
+import com.sinprl.binq.constants.Constants;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.dataclasses.User;
 import com.sinprl.binq.pages.users.User_Appointment_Display;
@@ -50,7 +51,7 @@ public class NewUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user);
 
-        database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
+        database = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE);
 
         but_register = findViewById(R.id.but_register_register);
         but_register.setOnClickListener(view -> add_user_details_to_database());
@@ -80,7 +81,7 @@ public class NewUser extends AppCompatActivity {
 
     private void get_all_users_from_database() {
 
-        DatabaseReference databaseReference = database.getReference("Users/Profiles/");
+        DatabaseReference databaseReference = database.getReference(Constants.USER_PROFILES_ENDPOINT);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -121,7 +122,7 @@ public class NewUser extends AppCompatActivity {
 
         if(validations.isValid()) {
             if(!user_exists_in_database(user)){
-                DatabaseReference databaseReference = database.getReference("Users/Profiles/");
+                DatabaseReference databaseReference = database.getReference(Constants.USER_PROFILES_ENDPOINT);
                 databaseReference.child(edt_phone.getText().toString()).setValue(user);
                 Intent intent = new Intent(NewUser.this, User_Appointment_Display.class);
                 intent.putExtra("userID", edt_phone.getText().toString());

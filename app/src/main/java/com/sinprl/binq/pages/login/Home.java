@@ -17,10 +17,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sinprl.binq.R;
+import com.sinprl.binq.constants.Constants;
 import com.sinprl.binq.dataclasses.TimeSlots;
 import com.sinprl.binq.dataclasses.User;
 import com.sinprl.binq.pages.admin.Admin_Appointment_Display;
 import com.sinprl.binq.pages.users.User_Appointment_Display;
+import com.sinprl.binq.utils.Utils;
 import com.sinprl.binq.utils.Validations;
 
 import java.util.ArrayList;
@@ -81,8 +83,10 @@ public class Home extends AppCompatActivity {
     }
 
     private void get_all_users_from_database() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
-        DatabaseReference databaseReference = database.getReference("Users/Profiles/");
+        //FirebaseDatabase database = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE);
+        //DatabaseReference databaseReference = database.getReference(Constants.USER_PROFILES_ENDPOINT);
+        DatabaseReference databaseReference = Utils.FIREBASEDATABASEINSTANCE.getReference(Constants.USER_PROFILES_ENDPOINT);
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -99,8 +103,8 @@ public class Home extends AppCompatActivity {
     }
 
     private void add_sample_data() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
-        DatabaseReference dbReference = database.getReference("Timeslots/");
+        FirebaseDatabase database = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE);
+        DatabaseReference dbReference = database.getReference(Constants.TIMESLOT_ENDPOINT);
 
         List<TimeSlots> timeSlots = new ArrayList<>();
 

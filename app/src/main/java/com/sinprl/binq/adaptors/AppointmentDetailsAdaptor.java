@@ -2,15 +2,12 @@ package com.sinprl.binq.adaptors;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
-import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,7 +18,6 @@ import com.sinprl.binq.intefaces.OnItemClickListener;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -132,7 +128,7 @@ public class AppointmentDetailsAdaptor extends RecyclerView.Adapter<AppointmentD
             appointmentdate =  itemView.findViewById(R.id.txt_appointment_details_appointmentdate);
             amount =  itemView.findViewById(R.id.txt_appointment_details_amount);
             followupdate =  itemView.findViewById(R.id.txt_appointment_details_followupdate);
-            followupdate_label =  itemView.findViewById(R.id.txt_appointment_details_followupdate2);
+            followupdate_label =  itemView.findViewById(R.id.txt_appointment_details_followupdate_label);
             card = itemView.findViewById(R.id.appointment_details_card);
         }
     }

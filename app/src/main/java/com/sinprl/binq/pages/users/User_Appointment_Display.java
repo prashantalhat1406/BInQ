@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sinprl.binq.R;
 import com.sinprl.binq.adaptors.AppointmentListAdaptor;
+import com.sinprl.binq.constants.Constants;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.dataclasses.User;
 import com.sinprl.binq.intefaces.OnItemClickListener;
@@ -47,6 +48,7 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
 
     User current_user;
     Button status;
+    boolean user_has_active_appointment;
     RecyclerView appointment_recycle_view;
 
 
@@ -55,11 +57,13 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_appointment_display);
 
-        database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
+        database = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE);
 
         userID = getIntent().getExtras().getString("userID","");
 
         appointment_recycle_view = findViewById(R.id.list_user_appointments);
+
+        user_has_active_appointment = false;
 
         fetch_current_user_details(userID);
         populateAppointments();
@@ -67,14 +71,19 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
 
         FloatingActionButton addAppointment = findViewById(R.id.fab_user_add_appointment);
         addAppointment.setOnClickListener(view -> {
+            if(!user_has_active_appointment) {
+                Intent intent = new Intent(User_Appointment_Display.this, User_Appointment_Add.class);
+                intent.putExtra("userID", userID);
+                intent.putExtra("userName", current_user.getName());
+                intent.putExtra("userPhone", current_user.getPhone());
+                intent.putExtra("userAge", current_user.getAge());
+                intent.putExtra("userGender", current_user.getGender());
+                startActivity(intent);
+            }else {
+                Toast.makeText(this, "Active appointment already exists for user", Toast.LENGTH_SHORT).show();
+            }
 
-            Intent intent = new Intent(User_Appointment_Display.this, User_Appointment_Add.class);
-            intent.putExtra("userID", userID);
-            intent.putExtra("userName", current_user.getName());
-            intent.putExtra("userPhone", current_user.getPhone());
-            intent.putExtra("userAge", current_user.getAge());
-            intent.putExtra("userGender", current_user.getGender());
-            startActivity(intent);
+
         });
 
         status_text = findViewById(R.id.txt_appointment_display_status);
@@ -87,7 +96,7 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
     }
 
     private void fetch_current_user_details(String userID) {
-        DatabaseReference databaseReference = database.getReference("Users/Profiles/"+userID);
+        DatabaseReference databaseReference = database.getReference(Constants.USER_PROFILES_ENDPOINT +userID);
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -124,7 +133,7 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
     }
 
     private void populate_allDay_Appointments() {
-        DatabaseReference databaseReference = database.getReference("Appointment/" + Utils.get_current_date_ddmmyy());
+        DatabaseReference databaseReference = database.getReference(Constants.APPOINTMENT_ENDPOINT + Utils.get_current_date_ddmmyy());
 
         all_day_appointments = new ArrayList<>();
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -193,7 +202,7 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
 
         userappointments = new ArrayList<>();
         userappointments.add(new Appointment("21", "Pra A", "07:90 pm", "Pain", "1234567895"));
-        DatabaseReference databaseReference = database.getReference("Users/Appointments/"+userID+"/" + Utils.get_current_date_ddmmyy());
+        DatabaseReference databaseReference = database.getReference(Constants.USER_APPOINTMENT_ENDPOINT +userID+"/" + Utils.get_current_date_ddmmyy());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -202,6 +211,8 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
                     Log.d("Regular", "" + s.getValue());
                     Appointment appointment = s.getValue(Appointment.class);
                     appointment.setId(s.getKey());
+                    if (appointment.getActive() == 1)
+                        user_has_active_appointment = true;
                     userappointments.add(appointment);
                 }
                 userappointments.sort(new Appointment_Comparator());

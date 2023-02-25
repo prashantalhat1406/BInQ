@@ -16,6 +16,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.sinprl.binq.R;
 import com.sinprl.binq.adaptors.AppointmentHistoryListAdaptor;
 import com.sinprl.binq.adaptors.AppointmentListAdaptor;
+import com.sinprl.binq.constants.Constants;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.intefaces.OnItemClickListener;
 import com.sinprl.binq.utils.Utils;
@@ -36,7 +37,7 @@ public class Admin_Appointment_History extends AppCompatActivity implements OnIt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_appointment_history);
 
-        database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
+        database = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE);
 
         populateAppointmentsHistory();
     }
@@ -55,7 +56,7 @@ public class Admin_Appointment_History extends AppCompatActivity implements OnIt
 
         appointments_history = new ArrayList<>();
         appointments_history.add(new Appointment("21", "Pra A", "07:90 pm", "Pain", "1234567895"));
-        DatabaseReference databaseReference = database.getReference("Appointment/");
+        DatabaseReference databaseReference = database.getReference(Constants.APPOINTMENT_ENDPOINT);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

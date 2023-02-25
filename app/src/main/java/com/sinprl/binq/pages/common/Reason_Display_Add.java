@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sinprl.binq.R;
 import com.sinprl.binq.adaptors.ReasonGridAdaptor;
+import com.sinprl.binq.constants.Constants;
 import com.sinprl.binq.dataclasses.Reason;
 import com.sinprl.binq.intefaces.OnItemClickListener;
 import java.util.ArrayList;
@@ -54,8 +55,8 @@ public class Reason_Display_Add extends AppCompatActivity implements OnItemClick
         reasons = new ArrayList<>();
         reasons.add(new Reason("Other"));
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
-        DatabaseReference databaseReference = database.getReference("Reasons/");
+    FirebaseDatabase database = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE);
+        DatabaseReference databaseReference = database.getReference(Constants.REASONS_ENDPOINT);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

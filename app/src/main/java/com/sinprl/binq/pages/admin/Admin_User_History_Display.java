@@ -25,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.sinprl.binq.R;
 import com.sinprl.binq.adaptors.AppointmentListAdaptor;
 import com.sinprl.binq.adaptors.UserListAdaptor;
+import com.sinprl.binq.constants.Constants;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.dataclasses.User;
 import com.sinprl.binq.intefaces.OnItemClickListener;
@@ -51,7 +52,7 @@ public class Admin_User_History_Display extends AppCompatActivity implements OnI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_user_history_display);
 
-        database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
+        database = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE);
 
         userhistory_recycle_view = findViewById(R.id.list_user_history);
 
@@ -108,11 +109,9 @@ public class Admin_User_History_Display extends AppCompatActivity implements OnI
         final LinearLayoutManager userLayoutManager = new LinearLayoutManager(this);
         userhistory_recycle_view.setLayoutManager(userLayoutManager);
 
-
-
         users = new ArrayList<>();
         users.add(new User("Temp","1234567890"));
-        DatabaseReference databaseReference = database.getReference("Users/Profiles/");
+        DatabaseReference databaseReference = database.getReference(Constants.USER_PROFILES_ENDPOINT);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -137,13 +136,8 @@ public class Admin_User_History_Display extends AppCompatActivity implements OnI
         //code to handle appointment display list click
 
         String selected = ((TextView) view.findViewById(R.id.txt_user_item_phone)).getText().toString();
-
-
         Intent intent = new Intent(view.getContext(), User_Appointment_Details_History.class);
         intent.putExtra("userID", selected);
         startActivity(intent);
-
-        //Toast.makeText(this, ""+selected + " Clicked", Toast.LENGTH_SHORT).show();
-
     }
 }

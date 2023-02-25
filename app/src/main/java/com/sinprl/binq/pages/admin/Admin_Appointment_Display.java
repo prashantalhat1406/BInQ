@@ -37,6 +37,7 @@ import java.util.List;
 
 import com.sinprl.binq.adaptors.AppointmentListAdaptor;
 import com.sinprl.binq.R;
+import com.sinprl.binq.constants.Constants;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.dataclasses.TimeSlots;
 import com.sinprl.binq.intefaces.OnItemClickListener;
@@ -61,7 +62,8 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_appointment_display);
-        database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
+        //database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
+        database = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE);
 
         appointment_recycle_view = findViewById(R.id.list_appointments);
         LinearLayoutManager appointmentLayoutManager = new LinearLayoutManager(this);
@@ -99,7 +101,7 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
 
         appointments.add(new Appointment("21", "Pra A", "07:90 pm", "Pain", "1234567895"));
         master_appointments.add(new Appointment("21", "Pra A", "07:90 pm", "Pain", "1234567895"));
-        DatabaseReference databaseReference = database.getReference("Appointment/" + Utils.get_current_date_ddmmyy());
+        DatabaseReference databaseReference = database.getReference(Constants.APPOINTMENT_ENDPOINT + Utils.get_current_date_ddmmyy());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -163,7 +165,7 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
     private void reset_appointment_slots() {
 
         for (TimeSlots timeslot: timeslots) {
-            DatabaseReference timeslot_ref = database.getReference("Timeslots/" + timeslot.getId() + "/" );
+            DatabaseReference timeslot_ref = database.getReference(Constants.TIMESLOT_ENDPOINT + timeslot.getId() + "/" );
             timeslot_ref.child("no_of_appointments/").setValue(3);
         }
     }
@@ -173,7 +175,7 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
         timeslots = new ArrayList<>();
         //timeslots.add(new TimeSlots("09:00AM", 3));
 
-        DatabaseReference databaseReference = database.getReference("Timeslots/");
+        DatabaseReference databaseReference = database.getReference(Constants.TIMESLOT_ENDPOINT);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

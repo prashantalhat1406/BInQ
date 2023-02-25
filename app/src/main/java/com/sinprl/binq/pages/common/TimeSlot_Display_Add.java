@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sinprl.binq.R;
 import com.sinprl.binq.adaptors.TimeSlotGridAdaptor;
+import com.sinprl.binq.constants.Constants;
 import com.sinprl.binq.dataclasses.TimeSlots;
 import com.sinprl.binq.intefaces.OnItemClickListener;
 import com.sinprl.binq.utils.Utils;
@@ -68,8 +69,8 @@ public class TimeSlot_Display_Add extends AppCompatActivity implements OnItemCli
         timeslots = new ArrayList<>();
         timeslots.add(new TimeSlots("09:00AM", 3));
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
-        DatabaseReference databaseReference = database.getReference("Timeslots/");
+        FirebaseDatabase database = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE);
+        DatabaseReference databaseReference = database.getReference(Constants.TIMESLOT_ENDPOINT);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

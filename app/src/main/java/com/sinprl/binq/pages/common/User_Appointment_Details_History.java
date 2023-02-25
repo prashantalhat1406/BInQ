@@ -5,12 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,12 +16,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sinprl.binq.R;
 import com.sinprl.binq.adaptors.AppointmentDetailsAdaptor;
-import com.sinprl.binq.adaptors.AppointmentHistoryListAdaptor;
+import com.sinprl.binq.constants.Constants;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.intefaces.OnItemClickListener;
-import com.sinprl.binq.pages.users.User_Appointment_Display;
-import com.sinprl.binq.pages.users.User_Appointment_History;
-import com.sinprl.binq.utils.Utils;
 import com.sinprl.binq.utils.comparators.Appointment_History_Comparator;
 
 import java.util.ArrayList;
@@ -43,17 +37,9 @@ public class User_Appointment_Details_History extends AppCompatActivity implemen
         setContentView(R.layout.activity_user_appointment_details_history);
 
         user_appointments_history = new ArrayList<>();
-
-
         userID = getIntent().getExtras().getString("userID","");
 
-
-
         populateUserAppointmentsHistory();
-
-
-
-
     }
 
     public void populateUserAppointmentsHistory() {
@@ -62,10 +48,8 @@ public class User_Appointment_Details_History extends AppCompatActivity implemen
         final LinearLayoutManager appointmentLayoutManager = new LinearLayoutManager(this);
         appointment_recycle_view.setLayoutManager(appointmentLayoutManager);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
-        DatabaseReference databaseReference = database.getReference("Users/Appointments/"+userID.trim()+"/");//+ Utils.get_current_date_ddmmyy() +"/");
-
-
+        FirebaseDatabase database = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE);
+        DatabaseReference databaseReference = database.getReference(Constants.USER_APPOINTMENT_ENDPOINT +userID.trim()+"/");//+ Utils.get_current_date_ddmmyy() +"/");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -101,12 +85,10 @@ public class User_Appointment_Details_History extends AppCompatActivity implemen
                     gender.setCompoundDrawablesWithIntrinsicBounds(R.drawable.female, 0, 0, 0);
                 }
 
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 
@@ -115,8 +97,6 @@ public class User_Appointment_Details_History extends AppCompatActivity implemen
 
     @Override
     public void onItemClick(View view, int position) {
-
-
 
     }
 }

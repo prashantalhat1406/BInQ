@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sinprl.binq.R;
+import com.sinprl.binq.constants.Constants;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.pages.common.Reason_Display_Add;
 import com.sinprl.binq.pages.common.TimeSlot_Display_Add;
@@ -67,7 +68,7 @@ public class User_Appointment_Add extends AppCompatActivity {
         userAge = getIntent().getExtras().getInt("userAge");
         userGender = getIntent().getExtras().getInt("userGender");
 
-        database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
+        database = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE);
         get_token_number();
         users_daily_appointments = new ArrayList<>();
         get_users_daily_appointments();
@@ -146,7 +147,7 @@ public class User_Appointment_Add extends AppCompatActivity {
                     appointment.setUserID(userID);
                     if(!appointment_exists_for_day()){
                         Utils.add_appointment_to_database(appointment, no_of_available_appointments);
-                        database.getReference("TokenNumber").setValue(Integer.parseInt(token_number) + 1);
+                        database.getReference(Constants.TOKEN_NUMBER_ENDPOINT).setValue(Integer.parseInt(token_number) + 1);
                         Toast.makeText(this, "Appointment Added", Toast.LENGTH_SHORT).show();
                         finish();
                     }else{
@@ -181,7 +182,7 @@ public class User_Appointment_Add extends AppCompatActivity {
 
     private void get_users_daily_appointments() {
 
-        DatabaseReference databaseReference = database.getReference("Users/Appointments/"+userID+"/" + Utils.get_current_date_ddmmyy());
+        DatabaseReference databaseReference = database.getReference(Constants.USER_APPOINTMENT_ENDPOINT +userID+"/" + Utils.get_current_date_ddmmyy());
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

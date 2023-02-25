@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sinprl.binq.R;
+import com.sinprl.binq.constants.Constants;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.dataclasses.User;
 import com.sinprl.binq.pages.common.Reason_Display_Add;
@@ -33,7 +34,7 @@ import com.sinprl.binq.utils.Validations;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Admin_Appointment_Add extends AppCompatActivity  implements RadioGroup.OnCheckedChangeListener {
+public class Admin_Appointment_Add extends AppCompatActivity   {
 
     String token_number = "";
     List<User> all_users;
@@ -58,7 +59,7 @@ public class Admin_Appointment_Add extends AppCompatActivity  implements RadioGr
         setContentView(R.layout.activity_admin_appointment_add);
 
 
-        database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
+        database = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE);
         get_token_number();
         all_users = new ArrayList<>();
         get_all_users_from_database();
@@ -130,12 +131,12 @@ public class Admin_Appointment_Add extends AppCompatActivity  implements RadioGr
                     User user = new User(appointment.getUser_name(),appointment.getPhone(),"0000", appointment.getAge(), appointment.getGender());
                     if(!is_existing_user(user))
                     {
-                        DatabaseReference userprofilesref = database.getReference("Users/Profiles/");
+                        DatabaseReference userprofilesref = database.getReference(Constants.USER_PROFILES_ENDPOINT);
                         userprofilesref.child(edt_phone.getText().toString()).setValue(user);
                     }
                     appointment.setUserID(appointment.getPhone());
                     Utils.add_appointment_to_database(appointment,  no_of_available_appointments);
-                    database.getReference("TokenNumber").setValue(Integer.parseInt(token_number) + 1);
+                    database.getReference(Constants.TOKEN_NUMBER_ENDPOINT).setValue(Integer.parseInt(token_number) + 1);
                     finish();
                 }else {
                     Toast.makeText(this, "Empty field found", Toast.LENGTH_SHORT).show();
@@ -167,12 +168,12 @@ public class Admin_Appointment_Add extends AppCompatActivity  implements RadioGr
     }
 
     private void get_token_number() {
-        database.getReference("TokenNumber").get().addOnCompleteListener(task -> token_number = String.valueOf(task.getResult().getValue()));
+        database.getReference(Constants.TOKEN_NUMBER_ENDPOINT).get().addOnCompleteListener(task -> token_number = String.valueOf(task.getResult().getValue()));
     }
 
     private void get_all_users_from_database() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
-        DatabaseReference databaseReference = database.getReference("Users/Profiles/");
+        FirebaseDatabase database = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE);
+        DatabaseReference databaseReference = database.getReference(Constants.USER_PROFILES_ENDPOINT);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -206,25 +207,5 @@ public class Admin_Appointment_Add extends AppCompatActivity  implements RadioGr
                 break;
             }
         }
-    }
-
-    @Override
-    public void onCheckedChanged(RadioGroup radioGroup, int i) {
-//        RadioButton maleButton = (RadioButton) gender.findViewById(R.id.rdbutton_male);
-//        RadioButton femaleButton = (RadioButton) gender.findViewById(R.id.rdbutton_female);
-//        RadioButton otherButton = (RadioButton) gender.findViewById(R.id.rdbutton_other);
-//
-//        switch (i){
-//            case R.id.rdbutton_male:
-//                maleButton.setBackgroundColor(Color.BLUE);
-//                femaleButton.setBackgroundColor(Color.TRANSPARENT);
-//                otherButton.setBackgroundColor(Color.TRANSPARENT);
-//                break;
-//            case R.id.rdbutton_female:
-//                maleButton.setBackgroundColor(Color.TRANSPARENT);
-//                femaleButton.setBackgroundColor(Color.BLUE);
-//                otherButton.setBackgroundColor(Color.TRANSPARENT);
-//                break;
-//        }
     }
 }
