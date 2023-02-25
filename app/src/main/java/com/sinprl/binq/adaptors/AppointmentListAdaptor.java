@@ -51,8 +51,11 @@ public class AppointmentListAdaptor extends RecyclerView.Adapter<AppointmentList
         holder.reason.setText(appointment.getReason());
         holder.phone.setText("  "+appointment.getPhone());
 
-//        if(!is_Admin)
-//            holder.action_done.setVisibility(View.GONE);
+        if(!is_Admin)
+        {
+            holder.user_name.setVisibility(View.GONE);
+            holder.reason.setTextAppearance(androidx.appcompat.R.style.TextAppearance_AppCompat_Large);
+        }
 
 //        switch (appointment.getActive()){
 //            case 1 : holder.status.setText(R.string.appointment_active);holder.status.setTextColor(Color.BLUE);break;

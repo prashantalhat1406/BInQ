@@ -28,6 +28,7 @@ import com.sinprl.binq.adaptors.AppointmentListAdaptor;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.dataclasses.User;
 import com.sinprl.binq.intefaces.OnItemClickListener;
+import com.sinprl.binq.pages.common.User_Appointment_Details_History;
 import com.sinprl.binq.pages.login.Home;
 import com.sinprl.binq.utils.Utils;
 import com.sinprl.binq.utils.comparators.Appointment_Comparator;
@@ -177,7 +178,7 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
             finish();
         }
         if(item.getItemId() == R.id.menu_user_show_history){
-            Intent intent = new Intent(User_Appointment_Display.this, User_Appointment_History.class);
+            Intent intent = new Intent(User_Appointment_Display.this, User_Appointment_Details_History.class);
             intent.putExtra("userID", userID);
             startActivity(intent);
         }
