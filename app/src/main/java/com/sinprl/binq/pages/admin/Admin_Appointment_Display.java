@@ -16,7 +16,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -43,17 +46,37 @@ import com.sinprl.binq.utils.comparators.Appointment_Comparator;
 import com.sinprl.binq.utils.Utils;
 
 
-public class Admin_Appointment_Display extends AppCompatActivity implements OnItemClickListener {
+public class Admin_Appointment_Display extends AppCompatActivity implements OnItemClickListener, RadioGroup.OnCheckedChangeListener {
 
-    List<Appointment> appointments;
+    List<Appointment> appointments, master_appointments;
     List<TimeSlots> timeslots;
     FirebaseDatabase database;
+    RadioGroup appointment_filter_group;
+    RadioButton appointment_all,appointment_active,appointment_done,appointment_cancel;
+    RecyclerView appointment_recycle_view;
+    AppointmentListAdaptor appointmentListAdaptor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_appointment_display);
         database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
+
+        appointment_recycle_view = findViewById(R.id.list_appointments);
+        LinearLayoutManager appointmentLayoutManager = new LinearLayoutManager(this);
+        appointment_recycle_view.setLayoutManager(appointmentLayoutManager);
+        appointments = new ArrayList<>();
+        master_appointments = new ArrayList<>();
+        appointmentListAdaptor = new AppointmentListAdaptor(Admin_Appointment_Display.this,appointments, Admin_Appointment_Display.this,true);
+        appointment_recycle_view.setAdapter(appointmentListAdaptor);
+
+        appointment_filter_group = findViewById(R.id.rdgroup_appointment_filter);
+        appointment_filter_group.setOnCheckedChangeListener(this);
+        appointment_all = findViewById(R.id.rdbutton_appointment_filter_all);
+        appointment_active = findViewById(R.id.rdbutton_appointment_filter_active);
+        appointment_done = findViewById(R.id.rdbutton_appointment_filter_done);
+        appointment_cancel = findViewById(R.id.rdbutton_appointment_filter_cancel);
 
         populateAppointments();
         fetch_timeslots_from_database();
@@ -71,19 +94,17 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
 
     private void populateAppointments() {
 
-        final RecyclerView appointment_recycle_view = findViewById(R.id.list_appointments);
-        final LinearLayoutManager appointmentLayoutManager = new LinearLayoutManager(this);
-        appointment_recycle_view.setLayoutManager(appointmentLayoutManager);
 
 
 
-        appointments = new ArrayList<>();
         appointments.add(new Appointment("21", "Pra A", "07:90 pm", "Pain", "1234567895"));
+        master_appointments.add(new Appointment("21", "Pra A", "07:90 pm", "Pain", "1234567895"));
         DatabaseReference databaseReference = database.getReference("Appointment/" + Utils.get_current_date_ddmmyy());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 appointments.clear();
+                master_appointments.clear();
                 for (DataSnapshot s : snapshot.getChildren()){
                     Appointment appointment = s.getValue(Appointment.class);
                     appointment.setId(s.getKey());
@@ -91,8 +112,10 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
                 }
 
                 appointments.sort(new Appointment_Comparator());
-                AppointmentListAdaptor appointmentListAdaptor = new AppointmentListAdaptor(Admin_Appointment_Display.this,appointments, Admin_Appointment_Display.this,true);
-                appointment_recycle_view.setAdapter(appointmentListAdaptor);
+                master_appointments.addAll(appointments);
+                appointmentListAdaptor.notifyDataSetChanged();
+
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -171,7 +194,6 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
     @Override
     public void onItemClick(View view, int position) {
         //code to handle appointment display list click
-
         if(appointments.get(position).getActive() == 1) {
 
             String userID = ((TextView) view.findViewById(R.id.txt_apt_item_phone)).getText().toString().trim();
@@ -187,27 +209,35 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
             startActivity(intent);
             finish();
         }
-        /*if(appointments.get(position).getActive() == 1) {
 
-            final Dialog dialog = new Dialog(Admin_Appointment_Display.this);
-            dialog.setContentView(R.layout.dialog_appointment_action);
-            dialog.setCancelable(true);
+    }
 
-            dialog.getWindow().setLayout(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT);
-
-
-            Button cancel = dialog.findViewById(R.id.appointment_cancel);
-            cancel.setOnClickListener(v -> {
-                Utils.cancel_appointment(appointments.get(position).getId(), appointments.get(position).getUserID());
-                dialog.dismiss();
-            });
-
-            Button done = dialog.findViewById(R.id.appointment_done);
-            done.setOnClickListener(v -> {
-                Utils.mark_appointment_done(appointments.get(position).getId(), appointments.get(position).getUserID());
-                dialog.dismiss();
-            });
-            dialog.show();
-        }*/
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+        appointments.clear();
+        switch (i){
+            case R.id.rdbutton_appointment_filter_all:
+                appointments.addAll(master_appointments);
+                break;
+            case R.id.rdbutton_appointment_filter_active:
+                for (Appointment appointment: master_appointments) {
+                    if(appointment.getActive() == 1)
+                        appointments.add(appointment);
+                }
+                break;
+            case R.id.rdbutton_appointment_filter_done:
+                for (Appointment appointment: master_appointments) {
+                    if(appointment.getActive() == 0)
+                        appointments.add(appointment);
+                }
+                break;
+            case R.id.rdbutton_appointment_filter_cancel:
+                for (Appointment appointment: master_appointments) {
+                    if(appointment.getActive() == 2)
+                        appointments.add(appointment);
+                }
+                break;
+        }
+        appointmentListAdaptor.notifyDataSetChanged();
     }
 }

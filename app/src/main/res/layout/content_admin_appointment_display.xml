@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:backgroundTint="@color/teal_200"
+    android:background="@color/teal_200"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent" android:orientation="horizontal"
+        android:layout_weight="0.9"
+        android:background="@drawable/round_corners"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_height="match_parent">
+
+        <!--<TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.65"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Appointments"
+            android:textColor="@color/black"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" /> -->
+
+        <RadioGroup
+            android:id="@+id/rdgroup_appointment_filter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.33"
+            android:gravity="center"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="0dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rdbutton_appointment_filter_all"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:background="@drawable/appointment_filter_all"
+                android:layout_weight="0.1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="All"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"
+                android:button="@null"
+                android:gravity="center"
+                android:textColor="@color/black"
+                />
+
+            <RadioButton
+                android:id="@+id/rdbutton_appointment_filter_done"
+                android:background="@drawable/appointment_filter_done"
+                android:layout_weight="0.1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                android:button="@null"
+                android:text="Done"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/black"
+                />
+
+            <RadioButton
+                android:id="@+id/rdbutton_appointment_filter_cancel"
+                android:background="@drawable/appointment_filter_cancel"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:layout_weight="0.1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"
+                android:button="@null"
+                android:gravity="center"
+                android:textColor="@color/black"
+                />
+
+            <RadioButton
+                android:id="@+id/rdbutton_appointment_filter_active"
+                android:background="@drawable/appointment_filter_active"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:layout_weight="0.1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Active"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"
+                android:button="@null"
+                android:gravity="center"
+                android:textColor="@color/black"
+                />
+
+
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent" android:orientation="vertical"
+        android:layout_weight="0.1"
+        android:background="@drawable/round_corners"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_height="match_parent" >
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_weight="0.95"
+            android:id="@+id/list_appointments"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/item_appointment_queue_redesigned" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_weight="0.05"
+            android:id="@+id/fab_add_appointment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_gravity="center"
+            android:src="@android:drawable/ic_menu_add"
+            />
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

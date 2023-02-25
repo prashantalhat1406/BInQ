@@ -6,6 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".pages.admin.Admin_User_History_Display">
 
-    <include layout="@layout/content_admin_user_istory_display" />
+    <include layout="@layout/content_admin_user_display" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
