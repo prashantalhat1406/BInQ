@@ -3,6 +3,7 @@ package com.sinprl.binq.adaptors;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +57,9 @@ public class AppointmentDetailsAdaptor extends RecyclerView.Adapter<AppointmentD
                 holder.amount.setText(" "+appointment.getAmount() + " (cash)");
             else
                 holder.amount.setText(" "+appointment.getAmount() + " (online)");
+
             holder.treatment.setText(" "+ appointment.getTreatment());
+
             holder.followupdate.setText(" "+appointment.getFollowupdate() );
         }else{
             holder.amount.setVisibility(View.GONE);

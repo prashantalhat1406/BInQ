@@ -9,14 +9,6 @@
     android:layout_marginBottom="10dp"
     >
 
-    <!--<androidx.cardview.widget.CardView
-        android:id="@+id/lay_appt_list_item"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="2dp"
-        app:cardUseCompatPadding="true"
-        app:contentPadding="4dp">-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -36,6 +28,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="Weakness"
+                android:textColor="@color/black"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -49,6 +42,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="1dp"
                 android:text="A"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:gravity="right"
@@ -64,6 +58,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp"
                 android:text="  500 ( cash )"
+                android:textColor="@color/black"
                 android:drawableStart="@drawable/rupee"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 app:layout_constraintStart_toStartOf="parent"
@@ -78,6 +73,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp"
                 android:text="  20FEB2023"
+                android:textColor="@color/black"
                 android:drawableStart="@drawable/timeslot_icon"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -92,6 +88,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp"
                 android:text="Followup : "
+                android:textColor="@color/black"
                 android:gravity="center|center_vertical"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 app:layout_constraintStart_toStartOf="parent"
@@ -120,26 +117,39 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp"
                 android:text="Trement Given :"
+                android:textColor="@color/black"
                 android:gravity="center|center_vertical"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 app:layout_constraintTop_toBottomOf="@id/txt_appointment_details_followupdate"
                 app:layout_constraintStart_toStartOf="parent"
                 />
 
-            <TextView
-                android:id="@+id/txt_appointment_details_treatment"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="10dp"
-                android:padding="8dp"
-                android:text="This is treatment given"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_appointment_details_treatment_title"
-                />
+
+                    <TextView
+                        android:id="@+id/txt_appointment_details_treatment"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="10dp"
+                        android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:text="This is treatment given"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_appointment_details_treatment_title"
+
+                        />
+
+
+
+
+
+
+
+
 
             <!--<View
                 android:layout_width="match_parent"

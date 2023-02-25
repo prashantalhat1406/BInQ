@@ -1,30 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-
     android:background="@color/teal_200"
     android:layout_height="match_parent" android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <!-- <LinearLayout
-        android:layout_width="match_parent" android:orientation="vertical"
-        android:layout_gravity="center_vertical"
-        android:gravity="center_vertical"
-        android:layout_height="match_parent" android:layout_weight="0.9">
-
-        <TextView
-            android:id="@+id/edt_home_welcome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:text="Appointment Details"
-            />
-
-    </LinearLayout> -->
 
     <LinearLayout
         android:layout_width="match_parent" android:orientation="vertical"
@@ -62,6 +41,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="Vikas Malhotra"
+                    android:textColor="@color/black"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -74,6 +54,7 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginEnd="8dp"
                     android:text="25"
+                    android:textColor="@color/black"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toRightOf="@id/txt_apt_details_username"
@@ -88,6 +69,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="0dp"
                     android:text="  9823956268"
+                    android:textColor="@color/black"
                     android:drawableStart="@drawable/userphone"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     app:layout_constraintStart_toStartOf="parent"
@@ -103,6 +85,7 @@
                     android:layout_marginEnd="8dp"
                     android:text="Male"
                     android:drawableStart="@drawable/male"
+                    android:textColor="@color/black"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toRightOf="@id/txt_apt_details_phone"
@@ -139,6 +122,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="Complaint : "
+                    android:textColor="@color/black"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -152,6 +136,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="Weakness"
+                    android:textColor="@color/black"
                     android:gravity="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textStyle="bold"
@@ -179,6 +164,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="Status : "
+                    android:textColor="@color/black"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -208,6 +194,7 @@
                         android:button="@null"
                         android:text="Done"
                         android:gravity="center"
+                        android:textColor="@color/black"
                         />
 
                     <RadioButton
@@ -222,6 +209,7 @@
                         android:layout_marginBottom="4dp"
                         android:button="@null"
                         android:gravity="center"
+                        android:textColor="@color/black"
 
                         />
 
@@ -252,6 +240,7 @@
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="4dp"
                         android:text="Treatment Given :"
+                        android:textColor="@color/black"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -260,8 +249,14 @@
                         android:id="@+id/treatmentgiven"
                         android:background="@drawable/rectangle_corners"
                         android:layout_width="match_parent"
+                        android:textColor="@color/black"
                         android:layout_height="150dp"
                         android:inputType="text|textMultiLine"
+                        android:layout_gravity="start|top"
+                        android:gravity="top|start"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:hint="Enter treatment details"
+                        android:textColorHint="@color/black"
                         />
 
                 </LinearLayout>
@@ -292,6 +287,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
+                        android:textColor="@color/black"
                         android:text="Follow up Date : "
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         app:layout_constraintStart_toStartOf="parent"
@@ -332,7 +328,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="0.1"
+                    android:textColor="@color/black"
+                    android:layout_weight="0.13"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="8dp"
@@ -346,7 +343,7 @@
                     android:id="@+id/rdgroup_payment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.1"
+                    android:layout_weight="0.09"
                     android:gravity="center"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="0dp"
@@ -358,12 +355,14 @@
                     <RadioButton
                         android:background="@drawable/radiobuttons_blue"
                         android:id="@+id/rdbutton_cash"
-                        android:layout_width="wrap_content"
+                        android:layout_weight="0.5"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
+                        android:layout_marginStart="2dp"
                         android:layout_marginTop="4dp"
-                        android:layout_marginEnd="4dp"
+                        android:layout_marginEnd="2dp"
                         android:layout_marginBottom="4dp"
+                        android:textColor="@color/black"
                         android:button="@null"
                         android:text="Cash"
                         android:gravity="center"
@@ -372,16 +371,17 @@
                     <RadioButton
                         android:background="@drawable/radiobuttons_blue"
                         android:id="@+id/rdbutton_online"
-                        android:layout_width="wrap_content"
+                        android:textColor="@color/black"
+                        android:layout_weight="0.5"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Online"
-                        android:layout_marginStart="4dp"
+                        android:layout_marginStart="2dp"
                         android:layout_marginTop="4dp"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="2dp"
                         android:layout_marginBottom="4dp"
                         android:button="@null"
                         android:gravity="center"
-
                         />
 
 
@@ -391,10 +391,12 @@
 
                 <EditText
                     android:id="@+id/appointment_amount"
-                    android:layout_width="match_parent" android:layout_weight="0.1"
+                    android:layout_width="match_parent" android:layout_weight="0.11"
                     android:layout_gravity="center"
                     android:inputType="number"
                     android:hint="Amount"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:drawableStart="@drawable/rupee"
                     android:gravity="center"
