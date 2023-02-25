@@ -2,7 +2,6 @@ package com.sinprl.binq.pages.admin;
 
 import static java.lang.Integer.*;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -10,26 +9,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.sinprl.binq.R;
 import com.sinprl.binq.dataclasses.Appointment;
 import com.sinprl.binq.dataclasses.User;
-import com.sinprl.binq.pages.login.Home;
 import com.sinprl.binq.utils.Utils;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -44,7 +36,7 @@ public class Admin_Appointment_Action extends AppCompatActivity implements View.
     String userID,appointmentID,userphone,username,reason;
     int userage, usergender;
 
-    TextView followupdate;
+    TextView followupdate, treatment_label, followup_label, payment_label;
     EditText treatmentgiven;
     EditText amount;
     RadioGroup payment;
@@ -76,6 +68,9 @@ public class Admin_Appointment_Action extends AppCompatActivity implements View.
         online = findViewById(R.id.rdbutton_online);
 
         payment = findViewById(R.id.rdgroup_payment);
+        treatment_label = findViewById(R.id.appointment_action_treatment_label);
+        followup_label = findViewById(R.id.appointment_action_followup_label);
+        payment_label = findViewById(R.id.appointment_action_payment_label);
 
         treatmentgiven = findViewById(R.id.treatmentgiven);
         amount = findViewById(R.id.appointment_amount);
@@ -122,6 +117,10 @@ public class Admin_Appointment_Action extends AppCompatActivity implements View.
             payment.setVisibility(View.GONE);
             cash.setVisibility(View.GONE);
             online.setVisibility(View.GONE);
+            payment_label.setVisibility(View.GONE);
+            treatment_label.setVisibility(View.GONE);
+            followup_label.setVisibility(View.GONE);
+
         }else{
             amount.setVisibility(View.VISIBLE);
             followupdate.setVisibility(View.VISIBLE);
@@ -129,6 +128,9 @@ public class Admin_Appointment_Action extends AppCompatActivity implements View.
             payment.setVisibility(View.VISIBLE);
             cash.setVisibility(View.VISIBLE);
             online.setVisibility(View.VISIBLE);
+            payment_label.setVisibility(View.VISIBLE);
+            treatment_label.setVisibility(View.VISIBLE);
+            followup_label.setVisibility(View.VISIBLE);
         }
 
     }

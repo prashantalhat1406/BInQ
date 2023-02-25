@@ -66,34 +66,22 @@ public class AppointmentDetailsAdaptor extends RecyclerView.Adapter<AppointmentD
             holder.followupdate_label.setVisibility(View.GONE);
         }
 
-
-
         DateFormat source_dateformat = new SimpleDateFormat("yyyyddMM", Locale.US);
         DateFormat target_dateformat = new SimpleDateFormat("ddMMMyyyy", Locale.US);
 
         try {
-            String d = target_dateformat.format(source_dateformat.parse(appointment.getDate_of_appointment()));
-            holder.appointmentdate.setText(" "+d );
-
-
+            String appointment_date = target_dateformat.format(source_dateformat.parse(appointment.getDate_of_appointment()));
+            holder.appointmentdate.setText(" " + appointment_date );
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-
-//        switch (appointment.getActive()){
-//            case 1 : holder.status.setText(R.string.appointment_active);holder.status.setTextColor(Color.BLUE);break;
-//            case 0 : holder.status.setText(R.string.appointment_cancel);holder.status.setTextColor(Color.RED);break;
-//            case 2 : holder.status.setText(R.string.appointment_done);holder.status.setTextColor(Color.GREEN);break;
-//        }
 
         switch (appointment.getActive()){
             case 1 : holder.card.setBackgroundResource(R.drawable.appointment_active); break;
             case 0 : holder.card.setBackgroundResource(R.drawable.appointment_done); break;
             case 2 : holder.card.setBackgroundResource(R.drawable.appointment_cancel); break;
         }
-
         holder.itemView.setOnClickListener(view -> mOnItemClickListener.onItemClick(view,position));
-
     }
 
     @Override
@@ -102,26 +90,17 @@ public class AppointmentDetailsAdaptor extends RecyclerView.Adapter<AppointmentD
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-
-
-
-        //public final TextView status;
-
         public final TextView appointmentdate;
         public final TextView followupdate;
         public final TextView followupdate_label;
         public final TextView treatment;
         public final TextView treatment_title;
         public final TextView reason;
-
         public final TextView amount;
-
         public final ConstraintLayout card;
-
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            //status =  itemView.findViewById(R.id.txt_appointment_details_status);
             reason =  itemView.findViewById(R.id.txt_appointment_details_reason);
             treatment =  itemView.findViewById(R.id.txt_appointment_details_treatment);
             treatment_title =  itemView.findViewById(R.id.txt_appointment_details_treatment_title);

@@ -31,4 +31,6 @@
     <string name="forgot_password"><u>Forgot Password ?</u></string>
     <string name="existing_user"><u>Already have account? SignIn !!</u></string>
     <string name="no_active_appointment">""No Active appointment for today"</string>
+    <string name="one_space">" "</string>
+    <string name="two_space">"  "</string>
 </resources>
