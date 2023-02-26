@@ -193,6 +193,12 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
             intent.putExtra("userID", userID);
             startActivity(intent);
         }
+
+        if(item.getItemId() == R.id.menu_user_reset_password){
+            Intent intent = new Intent(User_Appointment_Display.this, User_Password_Reset.class);
+            intent.putExtra("userID", userID);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 

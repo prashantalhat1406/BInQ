@@ -13,6 +13,9 @@
         android:theme="@style/Theme.BInQ"
         tools:targetApi="31">
         <activity
+            android:name=".pages.users.User_Password_Reset"
+            android:exported="false" />
+        <activity
             android:name=".pages.common.User_Appointment_Details_History"
             android:exported="false" />
         <activity

@@ -10,6 +10,11 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/menu_user_reset_password"
+        android:title="@string/user_menu_reset_password"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/menu_user_logout"
         android:title="@string/logout"
         app:showAsAction="never" />

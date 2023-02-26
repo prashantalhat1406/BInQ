@@ -99,6 +99,14 @@ public class Utils {
         }
     }
 
+    public static void update_user_password(String password, String userID ){
+        FirebaseDatabase database = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE);
+        DatabaseReference user_profiles_ref = database.getReference(Constants.USER_PROFILES_ENDPOINT + userID + "/");
+        user_profiles_ref.child( "password/").setValue(password);
+
+
+    }
+
 
 
 }
