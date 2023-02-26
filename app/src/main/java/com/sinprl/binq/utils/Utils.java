@@ -1,5 +1,7 @@
 package com.sinprl.binq.utils;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DatabaseReference;
@@ -15,9 +17,12 @@ import java.util.Locale;
 public class Utils {
 
     public static final FirebaseDatabase FIREBASEDATABASEINSTANCE = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE);
+    public static final String TIMEFORMAT = "hh:mm a";
+
 
     public static String get_current_date_ddmmyy(){
         return new SimpleDateFormat("yyyyddMM").format(new Date());
+        //Log.d("Previous Day", "" + new SimpleDateFormat("yyyyddMM").format(new Date(System.currentTimeMillis() - 24*60*60*1000)));
     }
 
     public static Date parseDate(String date) {

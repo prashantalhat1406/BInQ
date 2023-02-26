@@ -22,6 +22,7 @@
     <string name="appointment_cancel">"C"</string>
     <string name="appointment_active">"A"</string>
     <string name="appointment_done">"D"</string>
+    <string name="admin_menu_clean_Appointment">"Auto Cancel Appointments"</string>
     <string name="admin_menu_reset_token">"Reset Token"</string>
     <string name="admin_menu_reset_timeslot">"Reset Timeslot"</string>
     <string name="user_menu_show_history">"Show User History"</string>

@@ -7,6 +7,6 @@
     tools:context=".pages.users.User_Appointment_Display">
 
     <!--<include layout="@layout/content_user_appointment_display" />-->
-    <include layout="@layout/content_user_appointment_redesign" />
+    <include layout="@layout/content_user_appointment_display" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

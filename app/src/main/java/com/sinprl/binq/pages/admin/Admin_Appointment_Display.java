@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -32,8 +33,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import com.sinprl.binq.adaptors.AppointmentListAdaptor;
 import com.sinprl.binq.R;
@@ -51,7 +56,7 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
 
     List<Appointment> appointments, master_appointments;
     List<TimeSlots> timeslots;
-    FirebaseDatabase database;
+    //FirebaseDatabase database;
     RadioGroup appointment_filter_group;
     RadioButton appointment_all,appointment_active,appointment_done,appointment_cancel;
     RecyclerView appointment_recycle_view;
@@ -63,7 +68,8 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_appointment_display);
         //database = FirebaseDatabase.getInstance("https://binq-1171a-default-rtdb.asia-southeast1.firebasedatabase.app");
-        database = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE);
+        //database = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE);
+
 
         appointment_recycle_view = findViewById(R.id.list_appointments);
         LinearLayoutManager appointmentLayoutManager = new LinearLayoutManager(this);
@@ -82,7 +88,6 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
 
         populateAppointments();
         fetch_timeslots_from_database();
-        //showreason();
 
         FloatingActionButton addAppointment = findViewById(R.id.fab_add_appointment);
         addAppointment.setOnClickListener(view -> {
@@ -96,12 +101,9 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
 
     private void populateAppointments() {
 
-
-
-
         appointments.add(new Appointment("21", "Pra A", "07:90 pm", "Pain", "1234567895"));
         master_appointments.add(new Appointment("21", "Pra A", "07:90 pm", "Pain", "1234567895"));
-        DatabaseReference databaseReference = database.getReference(Constants.APPOINTMENT_ENDPOINT + Utils.get_current_date_ddmmyy());
+        DatabaseReference databaseReference = Utils.FIREBASEDATABASEINSTANCE.getReference(Constants.APPOINTMENT_ENDPOINT + Utils.get_current_date_ddmmyy());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -112,12 +114,9 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
                     appointment.setId(s.getKey());
                     appointments.add(appointment);
                 }
-
                 appointments.sort(new Appointment_Comparator());
                 master_appointments.addAll(appointments);
                 appointmentListAdaptor.notifyDataSetChanged();
-
-
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -144,7 +143,7 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId()==R.id.menu_admin_reset_token){
-            database.getReference("TokenNumber").setValue(1);
+            Utils.FIREBASEDATABASEINSTANCE.getReference("TokenNumber").setValue(1);
         }
         if (item.getItemId()==R.id.menu_admin_reset_timeslot){
             reset_appointment_slots();
@@ -159,13 +158,36 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
             startActivity(intent);
             finish();
         }
+
+        if(item.getItemId()==R.id.menu_admin_clean_up_appointments){
+            auto_cancel_1hr_old_appointments();
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void auto_cancel_1hr_old_appointments() {
+        master_appointments.sort(new Appointment_Comparator());
+        SimpleDateFormat time_parser = new SimpleDateFormat(Utils.TIMEFORMAT, Locale.US);
+
+        try {
+            Date currenttime = time_parser.parse(time_parser.format(new Date()));
+            for (Appointment appointment : master_appointments) {
+                if(appointment.getActive() == 1) {
+                    Date appointmenttime = time_parser.parse(appointment.getTime());
+                    if (appointmenttime.before(currenttime))
+                        Utils.cancel_appointment(appointment.getId(), appointment.getUserID());
+                }
+            }
+        }catch (ParseException pe){
+            Log.d("ParseException", pe.getMessage());
+        }
+
     }
 
     private void reset_appointment_slots() {
 
         for (TimeSlots timeslot: timeslots) {
-            DatabaseReference timeslot_ref = database.getReference(Constants.TIMESLOT_ENDPOINT + timeslot.getId() + "/" );
+            DatabaseReference timeslot_ref = Utils.FIREBASEDATABASEINSTANCE.getReference(Constants.TIMESLOT_ENDPOINT + timeslot.getId() + "/" );
             timeslot_ref.child("no_of_appointments/").setValue(3);
         }
     }
@@ -173,9 +195,7 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
     private void fetch_timeslots_from_database() {
 
         timeslots = new ArrayList<>();
-        //timeslots.add(new TimeSlots("09:00AM", 3));
-
-        DatabaseReference databaseReference = database.getReference(Constants.TIMESLOT_ENDPOINT);
+        DatabaseReference databaseReference = Utils.FIREBASEDATABASEINSTANCE.getReference(Constants.TIMESLOT_ENDPOINT);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -197,9 +217,7 @@ public class Admin_Appointment_Display extends AppCompatActivity implements OnIt
     public void onItemClick(View view, int position) {
         //code to handle appointment display list click
         if(appointments.get(position).getActive() == 1) {
-
             String userID = ((TextView) view.findViewById(R.id.txt_apt_item_phone)).getText().toString().trim();
-
             Intent intent = new Intent(view.getContext(), Admin_Appointment_Action.class);
             intent.putExtra("userID", userID);
             intent.putExtra("appointmentID", appointments.get(position).getId());

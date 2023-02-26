@@ -20,6 +20,11 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/menu_admin_clean_up_appointments"
+        android:title="@string/admin_menu_clean_Appointment"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/menu_admin_logout"
         android:title="@string/logout"
         app:showAsAction="never" />

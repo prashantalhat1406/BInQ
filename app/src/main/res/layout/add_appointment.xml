@@ -219,6 +219,7 @@
                     android:textColor="@color/black"
                     android:text="Select Age"
                     />
+
                 <NumberPicker
                     android:id="@+id/add_appointment_age"
                     android:layout_width="wrap_content"
@@ -229,8 +230,6 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="0dp"
                     />
-
-
 
             </LinearLayout>
 
@@ -250,17 +249,6 @@
                     android:textColor="@color/black"
                     android:text="Select Gender"
                     />
-
-                <!--<NumberPicker
-                    android:id="@+id/add_appointment_gender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="0dp"
-                    />-->
 
                 <RadioGroup
                     android:id="@+id/rdgroup_gender"
@@ -285,6 +273,7 @@
                         android:button="@null"
                         android:drawableTop="@drawable/male"
                         android:text="M"
+                        android:textColor="@color/black"
                         android:gravity="center"
                         />
 
@@ -294,6 +283,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="F"
+                        android:textColor="@color/black"
                         android:layout_marginStart="4dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="4dp"
@@ -307,7 +297,6 @@
 
 
                 </RadioGroup>
-
 
             </LinearLayout>
 

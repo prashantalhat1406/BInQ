@@ -93,6 +93,7 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
 
 
 
+
     }
 
     private void fetch_current_user_details(String userID) {
@@ -110,7 +111,7 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
 
     }
 
-    private void calalculate_current_status() {
+    void calalculate_current_status() {
         int counter = 0;
         boolean active_appointment = false;
         for (Appointment appointment: all_day_appointments) {
@@ -146,6 +147,7 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
                     all_day_appointments.add(appointment);
                 }
                 all_day_appointments.sort(new Appointment_Comparator());
+                calalculate_current_status();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -230,6 +232,7 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
 
                 AppointmentListAdaptor appointmentListAdaptor = new AppointmentListAdaptor(User_Appointment_Display.this,userappointments, User_Appointment_Display.this,false);
                 appointment_recycle_view.setAdapter(appointmentListAdaptor);
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -253,7 +256,9 @@ public class User_Appointment_Display extends AppCompatActivity implements OnIte
 
             Button cancel = dialog.findViewById(R.id.appointment_cancel);
             cancel.setOnClickListener(v -> {
-                Utils.cancel_appointment(userappointments.get(position).getId(), userappointments.get(position).getUserID());
+                Appointment appointment = userappointments.get(position);
+                Utils.cancel_appointment(appointment.getId(), appointment.getUserID());
+                user_has_active_appointment = false;
                 dialog.dismiss();
             });
 

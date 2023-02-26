@@ -31,7 +31,7 @@ public class Admin_Appointment_Action extends AppCompatActivity implements View.
     RadioGroup payment;
     RadioButton cash, online, done, cancel;
     final Calendar myCalendar= Calendar.getInstance();
-    final String myFormat="ddMMMYYYY";
+    final String myFormat="dd-MMM-yyyy";
     SimpleDateFormat dateFormat;
 
 
